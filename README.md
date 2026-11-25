@@ -6,7 +6,7 @@ A Hinglish satire website where an engineer ragebaits a doctor. It looks like a 
 
 > Satire hai. Doctors, aap bhi great ho. Bas handwriting…
 
-**Live site:** https://aadeshthe-coder.github.io/doctormads/ (once GitHub Pages is switched on, see [Deploy](#deploy))
+**Live site:** https://drmads.netlify.app/
 
 ## What's on the page
 
