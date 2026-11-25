@@ -1,0 +1,2844 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Engineer vs Doctor</title>
+<meta name="description" content="Engineer Mission Control: engineers are mission control, doctors are the failed spacecraft. Hinglish satire, a live launch, memes, 3D scroll aur doctor sahab ka live BP.">
+<meta property="og:title" content="Engineer vs Doctor">
+<meta property="og:description" content="Engineer Mission Control: engineers are mission control, doctors are the failed spacecraft. Hinglish satire, a live launch, memes, 3D scroll aur doctor sahab ka live BP.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23E0006A'/%3E%3Cpath d='M32 10c-7 8-10 17-10 27v13h20V37c0-10-3-19-10-27z' fill='%23FFFFFF'/%3E%3Ccircle cx='32' cy='30' r='4' fill='%23E0006A'/%3E%3Cpath d='M27 50h10l-2 6h-6z' fill='%23FFD0E3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Kalam:wght@700&family=Unbounded:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0}
+img{max-width:100%}
+/* Engineer Mission Control: white + pink. Engineers run mission control; doctors are the failed spacecraft.
+   Layout: a clean white control room. Wide Unbounded headlines, Plex Mono telemetry, pink signal lines,
+   and a 3D orbit scene behind the page. */
+:root{
+  color-scheme:light;
+  --bg:#FFFFFF; --bg-2:#FFF6FA; --bg-3:#FFEAF3; --bg-4:#FFD9EA;
+  --ink:#2B0F20; --muted:#6E5262; --dim:#846676;
+  --pink:#FF2E7E; --pink-hi:#FF7AB0; --pink-lo:#D4005E; --pink-btn:#E0006A; --pink-50:#FFF0F6; --pink-100:#FFE3EE;
+  --line:rgba(224,0,106,.14); --line-2:rgba(224,0,106,.26); --line-3:rgba(224,0,106,.5);
+  --alarm:#E5484D; --alarm-ink:#C2272D; --ok:#D4005E;
+  --grad:linear-gradient(100deg,#FF7AB0 0%,#FF2E7E 45%,#D4005E 100%);
+  --shadow:0 24px 60px rgba(212,0,94,.10);
+  --f-display:Unbounded,"Arial Black",system-ui,sans-serif;
+  --f-ui:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --f-meme:Anton,Impact,"Arial Narrow",sans-serif;
+  --f-hand:Kalam,"Comic Sans MS",cursive;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+  --gl:max(clamp(16px,4vw,48px),env(safe-area-inset-left,0px));
+  --gr:max(clamp(16px,4vw,48px),env(safe-area-inset-right,0px));
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+html.menu-open{overflow:hidden}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--f-ui);overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:49;background:var(--bg)}
+p,h1,h2,h3,figure,dl,dd{margin:0}
+img,svg{max-width:100%}
+a{color:var(--pink-lo)}
+button{font:inherit}
+:focus-visible{outline:2px solid var(--pink-btn);outline-offset:3px}
+[tabindex="-1"]:focus{outline:none}
+::selection{background:var(--pink);color:#FFFFFF}
+.sr{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+.defs{position:absolute;width:0;height:0;overflow:hidden}
+.skip{position:fixed;z-index:120;left:var(--gl);top:calc(env(safe-area-inset-top,0px) + 10px);padding:10px 16px;border-radius:999px;background:var(--pink-btn);color:#FFFFFF;font-weight:700;text-decoration:none;transform:translateY(-200%);transition:transform .3s var(--ease)}
+.skip:focus{transform:none}
+@keyframes blinkdot{50%{opacity:.2}}
+
+/* ---------- Fixed layers ---------- */
+#bg3d{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;pointer-events:none}
+.vignette{position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(130% 100% at 72% 34%,rgba(255,255,255,0) 0%,rgba(255,246,250,.35) 55%,rgba(255,246,250,.9) 100%),linear-gradient(90deg,rgba(255,255,255,.94) 0%,rgba(255,255,255,.55) 42%,rgba(255,255,255,0) 70%)}
+.rage{position:fixed;inset:0;z-index:25;pointer-events:none;opacity:0;will-change:opacity;background:radial-gradient(ellipse at 50% 50%,transparent 58%,rgba(229,40,60,.28) 84%,rgba(220,24,48,.55) 100%)}
+.progress{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);z-index:60;height:3px;background:var(--grad);transform-origin:0 50%;transform:scaleX(0);will-change:transform;pointer-events:none}
+
+/* Cursor ring + click sparks (fine pointers only; JS switches it on) */
+.cursor{position:fixed;left:0;top:0;z-index:90;width:38px;height:38px;margin:-19px 0 0 -19px;border:1.5px solid var(--pink);border-radius:50%;pointer-events:none;opacity:0;display:grid;place-items:center;
+  transition:width .35s var(--ease),height .35s var(--ease),margin .35s var(--ease),background-color .3s,border-color .3s,opacity .3s}
+.cursor.on{opacity:1}
+.cursor.hover{width:58px;height:58px;margin:-29px 0 0 -29px;background:rgba(255,46,126,.08)}
+.cursor.big{width:86px;height:86px;margin:-43px 0 0 -43px;background:rgba(255,46,126,.14);border-color:var(--pink-lo)}
+.cursor.down{width:24px;height:24px;margin:-12px 0 0 -12px}
+.cursor.text{opacity:0}
+.cursor-label{font:600 10px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--pink-lo);opacity:0;transition:opacity .2s}
+.cursor.big .cursor-label{opacity:1}
+.spark{position:fixed;z-index:89;width:0;height:0;pointer-events:none}
+.spark i{position:absolute;left:-1px;top:-4px;width:2px;height:8px;border-radius:1px;background:var(--pink);animation:spark .55s var(--ease) forwards}
+@keyframes spark{from{transform:rotate(var(--a)) translateY(-6px) scaleY(1);opacity:1}to{transform:rotate(var(--a)) translateY(-28px) scaleY(.2);opacity:0}}
+
+/* Preloader: a countdown; hides itself after ~4s even if no script runs */
+.pre{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:var(--bg);clip-path:inset(0 0 0 0);animation:pre-auto .6s 3.6s forwards}
+.pre.done{animation:none;clip-path:inset(0 0 100% 0);transition:clip-path .8s var(--ease)}
+@keyframes pre-auto{to{opacity:0;visibility:hidden}}
+.pre-in{display:grid;justify-items:center;gap:16px}
+.pre-mark{width:min(420px,84vw);height:auto;overflow:visible}
+.pre-mark text{font-family:var(--f-display);font-size:34px;font-weight:700;letter-spacing:.02em;fill:transparent;stroke:var(--pink);stroke-width:1;stroke-dasharray:300;stroke-dashoffset:0;animation:pre-draw 1.3s var(--ease) both}
+@keyframes pre-draw{0%{stroke-dashoffset:300;fill:rgba(212,0,94,0)}70%{fill:rgba(212,0,94,0)}100%{stroke-dashoffset:0;fill:var(--pink-lo)}}
+.pre-line{display:flex;align-items:baseline;gap:10px;font:500 12px/1 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.pre-line b{min-width:7ch;font-weight:600;color:var(--pink-lo);font-variant-numeric:tabular-nums}
+.pre-bar{display:block;width:min(240px,60vw);height:2px;border-radius:2px;background:var(--pink-100);overflow:hidden}
+.pre-bar i{display:block;height:100%;background:var(--grad);transform-origin:0 50%;animation:pre-fill 1.2s var(--ease) both}
+@keyframes pre-fill{from{transform:scaleX(0)}}
+
+/* ---------- Buttons + labels ---------- */
+.btn{--bh:52px;position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:var(--bh);padding:0 26px;
+  font:600 15px/1.15 var(--f-ui);letter-spacing:.02em;text-align:center;color:var(--ink);text-decoration:none;
+  background:#FFFFFF;border:1.5px solid var(--ink);border-radius:999px;cursor:pointer;overflow:hidden;isolation:isolate;
+  transition:color .35s,border-color .35s,box-shadow .35s}
+.btn::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:var(--grad);transform:scaleY(0);transform-origin:50% 100%;transition:transform .5s var(--ease)}
+@media (hover: hover){
+  .btn:hover{color:#FFFFFF;border-color:var(--pink-btn);box-shadow:0 12px 30px rgba(224,0,106,.25)}
+  .btn:hover::before{transform:scaleY(1)}
+}
+.btn:active::before{transform:scaleY(1)}
+.btn:active{color:#FFFFFF}
+.btn-pink{color:#FFFFFF;border-color:transparent;background:var(--pink-btn);box-shadow:0 10px 26px rgba(224,0,106,.28)}
+.btn-pink::before{background:var(--ink)}
+.btn-pink::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.5) 50%,transparent 70%);transform:translateX(-120%);animation:glint 4.8s var(--ease) infinite}
+@keyframes glint{0%,60%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+.btn-doc{color:var(--alarm-ink);border-color:rgba(229,72,77,.6)}
+.btn-doc::before{background:linear-gradient(100deg,#FF6B70,#C2272D)}
+@media (hover: hover){ .btn-doc:hover{color:#FFFFFF;border-color:var(--alarm);box-shadow:0 12px 30px rgba(229,72,77,.25);animation:nervous .28s linear infinite} }
+@keyframes nervous{0%,100%{rotate:0deg}25%{rotate:-2.6deg}75%{rotate:2.6deg}}
+.btn-sm{--bh:42px;padding:0 18px;font-size:13.5px}
+.btn:disabled{opacity:.5;cursor:default;pointer-events:none}
+.kicker{display:inline-flex;align-items:center;gap:12px;font:600 12px/1.2 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--pink-lo)}
+.kicker::before{content:"";flex:none;width:28px;height:2px;border-radius:2px;background:currentColor}
+.live-dot{flex:none;width:9px;height:9px;border-radius:50%;background:var(--pink);animation:livepulse 1.6s ease-out infinite}
+.hero-kicker::before{display:none}
+@keyframes livepulse{0%{box-shadow:0 0 0 0 rgba(255,46,126,.5)}70%{box-shadow:0 0 0 10px rgba(255,46,126,0)}100%{box-shadow:0 0 0 0 rgba(255,46,126,0)}}
+
+/* ---------- Nav + mobile menu ---------- */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:env(safe-area-inset-top,0px);border-bottom:1px solid transparent;
+  transition:transform .5s var(--ease),background-color .4s,border-color .4s}
+.nav.solid{background:rgba(255,255,255,.86);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom-color:var(--line)}
+.nav.hide{transform:translateY(-110%)}
+.menu-open .nav{transform:none}
+.nav-in{max-width:1320px;margin-inline:auto;display:flex;align-items:center;gap:26px;padding-block:14px;padding-left:var(--gl);padding-right:var(--gr)}
+.brand{display:flex;align-items:center;gap:12px;margin-right:auto;color:var(--ink);text-decoration:none;min-width:0}
+.brand-mark{position:relative;flex:none;display:flex;align-items:center;justify-content:center;width:50px;height:50px;border-radius:14px;background:var(--pink-btn);color:#FFFFFF;font:800 13px/1 var(--f-display);letter-spacing:.02em;box-shadow:0 8px 20px rgba(224,0,106,.25)}
+.brand-mark::after{content:"";position:absolute;inset:4px;border-radius:10px;border:1px solid rgba(255,255,255,.45)}
+.brand-text{display:flex;flex-direction:column;gap:4px;line-height:1.1;min-width:0}
+.brand-text b{font:700 14px/1.15 var(--f-display);letter-spacing:-.01em}
+.brand-text small{font:600 10px/1.1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--pink-lo)}
+.nav-links{display:flex;gap:26px}
+.nav-links a{position:relative;padding:6px 0;font-size:14px;font-weight:600;letter-spacing:.02em;color:var(--muted);text-decoration:none;transition:color .3s}
+.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;border-radius:2px;background:var(--pink);transform:scaleX(0);transform-origin:100% 50%;transition:transform .45s var(--ease)}
+.nav-links a:hover,.nav-links a.on{color:var(--ink)}
+.nav-links a:hover::after,.nav-links a.on::after{transform:scaleX(1);transform-origin:0 50%}
+.menu-btn{display:none;position:relative;flex:none;width:48px;height:48px;padding:0;border:1.5px solid var(--ink);border-radius:50%;background:#FFFFFF;cursor:pointer}
+.menu-btn i{position:absolute;left:13px;right:13px;height:2px;border-radius:2px;background:var(--ink);transition:transform .4s var(--ease),top .4s var(--ease)}
+.menu-btn i:first-child{top:18px}
+.menu-btn i:last-child{top:26px}
+.menu-btn[aria-expanded="true"] i:first-child{top:22px;transform:rotate(45deg)}
+.menu-btn[aria-expanded="true"] i:last-child{top:22px;transform:rotate(-45deg)}
+.menu{position:fixed;inset:0;z-index:48;display:flex;flex-direction:column;justify-content:center;gap:40px;background:var(--bg);
+  padding-block:calc(env(safe-area-inset-top,0px) + 96px) calc(env(safe-area-inset-bottom,0px) + 40px);padding-left:var(--gl);padding-right:var(--gr);
+  clip-path:inset(0 0 100% 0);transition:clip-path .7s var(--ease)}
+.menu.open{clip-path:inset(0 0 0 0)}
+.menu-links{display:flex;flex-direction:column;gap:8px}
+.menu-links a{font:700 clamp(1.7rem,7.5vw,2.8rem)/1.15 var(--f-display);letter-spacing:-.02em;color:var(--ink);text-decoration:none;opacity:0;transform:translateY(28px);transition:opacity .5s,transform .7s var(--ease),color .3s}
+.menu-links a:hover{color:var(--pink-lo)}
+.menu.open .menu-links a{opacity:1;transform:none}
+.menu.open .menu-links a:nth-child(2){transition-delay:.05s}
+.menu.open .menu-links a:nth-child(3){transition-delay:.1s}
+.menu.open .menu-links a:nth-child(4){transition-delay:.15s}
+.menu.open .menu-links a:nth-child(5){transition-delay:.2s}
+.menu.open .menu-links a:nth-child(6){transition-delay:.25s}
+.menu.open .menu-links a:nth-child(7){transition-delay:.3s}
+.menu-foot{font:600 11px/1.4 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* ---------- Page scaffolding ---------- */
+main{position:relative;z-index:5}
+.wrap{width:100%;max-width:1240px;margin-inline:auto;padding-left:var(--gl);padding-right:var(--gr)}
+.sec{position:relative;padding-block:clamp(90px,12vw,150px);
+  background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,.93) 140px,rgba(255,255,255,.93) calc(100% - 140px),rgba(255,255,255,0))}
+.sec-head{display:grid;gap:18px;max-width:900px;margin-bottom:clamp(36px,5vw,64px)}
+.sec-head.center{margin-inline:auto;text-align:center;justify-items:center}
+.sec-title{font:600 clamp(1.8rem,4.1vw,3.4rem)/1.1 var(--f-display);letter-spacing:-.025em;text-wrap:balance}
+.sec-sub{max-width:52ch;font-size:17px;color:var(--muted)}
+
+/* Split text (motion.js wraps words in .w > .wi, hero letters in .c) */
+.split .w{display:inline-block;vertical-align:top;overflow:hidden;padding:.06em .08em .14em;margin:-.06em -.08em -.14em}
+.split .wi{display:inline-block}
+.hero-title.split .w{overflow:visible}
+.hero-title .c{display:inline-block}
+.hero-title em,.sec-title em{font-style:normal;color:var(--pink-lo)}
+.hero-title:not(.split) em,.sec-title:not(.split) em,.hero-title em .wi,.sec-title em .wi{
+  background:var(--grad);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.hero-title em .wi,.sec-title em .wi{padding:0 .06em .08em 0;margin:0 -.06em -.08em 0}
+.hero-title em .wi{animation:shimmer 5s linear infinite}
+@keyframes shimmer{0%,100%{background-position:0 0}50%{background-position:100% 0}}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;z-index:2;overflow:hidden;min-height:88vh;min-height:88svh;display:flex;flex-direction:column;justify-content:center;padding-block:calc(env(safe-area-inset-top,0px) + 124px) 120px}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(560px circle at var(--sx,30%) var(--sy,45%),rgba(255,46,126,.10),transparent 62%)}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.8;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(ellipse 62% 58% at 28% 46%,#000 0%,transparent 72%);mask-image:radial-gradient(ellipse 62% 58% at 28% 46%,#000 0%,transparent 72%)}
+.hero-in{position:relative;z-index:1;width:100%;max-width:1240px;margin-inline:auto;padding-left:var(--gl);padding-right:var(--gr);display:grid;gap:24px;justify-items:start}
+.hero-title{max-width:min(100%,940px);font:700 clamp(2rem,4.6vw,4rem)/1.08 var(--f-display);letter-spacing:-.03em;text-wrap:balance}
+.hero-title .hl{display:block}
+.hero-sub{max-width:40ch;font-size:clamp(17px,1.5vw,20px);font-weight:500;color:var(--muted)}
+.hero-status{display:flex;flex-wrap:wrap;gap:8px}
+.st{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border:1px solid var(--line-2);border-radius:999px;background:rgba(255,255,255,.85);font:600 11.5px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.st-go,.st-bad{gap:9px}
+.st-go::before,.st-bad::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.st-go{color:var(--pink-lo);border-color:rgba(224,0,106,.35)}
+.st-go::before{box-shadow:0 0 0 4px rgba(255,46,126,.16)}
+.st-bad{color:var(--alarm-ink);border-color:rgba(229,72,77,.4)}
+.st-bad::before{animation:blinkdot 1s steps(2,start) infinite}
+.st-clock b{font-weight:600;font-variant-numeric:tabular-nums}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:4px}
+.hero-notes{position:absolute;z-index:1;left:0;right:0;bottom:34px;max-width:1240px;margin-inline:auto;padding-left:var(--gl);padding-right:var(--gr);
+  display:flex;justify-content:space-between;gap:20px;font:500 11px/1.4 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);pointer-events:none}
+.scroll-cue{position:absolute;z-index:2;left:50%;bottom:26px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;
+  font:600 11px/1 var(--f-mono);letter-spacing:.22em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s}
+.scroll-cue:hover{color:var(--pink-lo)}
+.scroll-cue i{display:block;width:2px;height:44px;border-radius:2px;background:linear-gradient(var(--pink),transparent);transform-origin:50% 0;animation:cue 2.2s var(--ease) infinite}
+@keyframes cue{0%{transform:scaleY(0);opacity:1}60%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1);opacity:0}}
+
+@media (max-width: 960px){
+  .nav-links{display:none}
+  .menu-btn{display:block}
+  .vignette{background:radial-gradient(120% 90% at 60% 30%,rgba(255,255,255,.6),rgba(255,255,255,.92))}
+}
+@media (max-width: 760px){ .hero-notes{display:none} }
+@media (max-width: 560px){
+  .nav-in{gap:12px}
+  .nav-cta,.brand-text small{display:none}
+  .brand-text b{font-size:12.5px}
+  .hero{padding-block:calc(env(safe-area-inset-top,0px) + 108px) 110px}
+  .hero-cta .btn{flex:1 1 auto}
+}
+/* Touch phones: no live blur, and solid pink for the headline words (gradient text on moving words can vanish in iOS Safari). */
+@media (pointer: coarse){
+  .nav.solid{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(255,255,255,.97)}
+  .hero-title em .wi,.sec-title em .wi{background:none;color:var(--pink-lo);-webkit-text-fill-color:currentColor;animation:none}
+}
+/* Still motion only when the visitor switched animations off with the footer button
+   (data-motion is set by the inline script at the top of the body). */
+:root[data-motion="off"] *,:root[data-motion="off"] *::before,:root[data-motion="off"] *::after{animation-duration:.001ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.001ms!important;transition-delay:0s!important}
+:root[data-motion="off"] .pre,:root[data-motion="off"] .cursor{display:none}
+
+/* Components: mission stats + partner marquee, ground-support cards (tilt + flip), big scrolling lines,
+   the pinned 3D go/no-go ring, rescue packages, the anomaly desk and the mission log in the footer. */
+
+/* ---------- Mission stats + marquee ---------- */
+.proof{position:relative;padding-block:clamp(56px,8vw,96px);border-block:1px solid var(--line);background:linear-gradient(180deg,rgba(255,246,250,.75),rgba(255,246,250,.96))}
+.stats{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.stat{display:grid;align-content:start;gap:8px;padding:6px clamp(14px,2.4vw,32px);border-left:1px solid var(--line-2);min-width:0}
+.stat:first-child{border-left:0;padding-left:0}
+.stat-n{position:relative;display:block;font:700 clamp(2.4rem,5vw,4.4rem)/1 var(--f-display);letter-spacing:-.04em;color:var(--pink-lo);font-variant-numeric:tabular-nums}
+.inf-8{position:absolute;left:0;top:0;opacity:0;display:inline-block;transform-origin:50% 55%}
+.inf-sym{display:inline-block}
+.stat-l{font-weight:700;font-size:15px;line-height:1.35}
+.stat-s{font:600 11px/1.3 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+.marquee-k{margin-top:clamp(48px,7vw,80px)}
+.marquee{display:grid;gap:6px;margin-top:18px}
+.mq{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.mq-track{display:flex;width:max-content;animation:mq 42s linear infinite}
+.mq-rev .mq-track{animation-direction:reverse;animation-duration:50s}
+.mq-g{display:flex}
+.mq-g > span{display:inline-flex;align-items:center;gap:clamp(18px,3vw,36px);padding-right:clamp(18px,3vw,36px);white-space:nowrap;font:700 clamp(1.5rem,3.4vw,2.8rem)/1.25 var(--f-display);letter-spacing:-.02em;color:var(--ink)}
+.mq-g > span::after{content:"✦";font-size:.42em;color:var(--pink)}
+.mq-g > span:nth-child(even){color:transparent;-webkit-text-stroke:1.2px var(--pink)}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ---------- Ground support: hover tilt + tap to flip ---------- */
+.svc-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,22px)}
+.svc-grid li{display:flex;min-width:0}
+.svc{position:relative;flex:1;display:grid;min-height:290px;padding:0;margin:0;border:0;background:none;color:inherit;text-align:left;cursor:pointer;perspective:1100px;-webkit-tap-highlight-color:transparent}
+.svc-tilt{position:relative;display:grid;transform-style:preserve-3d;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .6s var(--ease)}
+.svc.tilting .svc-tilt{transition:transform .12s linear}
+.svc-in{position:relative;display:grid;transform-style:preserve-3d;transition:transform .9s var(--ease)}
+.svc[aria-pressed="true"] .svc-in{transform:rotateY(180deg)}
+.svc-face{grid-area:1/1;display:flex;flex-direction:column;gap:12px;padding:26px 24px 22px;border:1px solid var(--line-2);border-radius:16px;
+  background:#FFFFFF;box-shadow:0 14px 40px rgba(212,0,94,.07);-webkit-backface-visibility:hidden;backface-visibility:hidden;transition:border-color .3s,box-shadow .3s}
+.svc-back{transform:rotateY(180deg);justify-content:center;border-color:var(--line-3);background:linear-gradient(160deg,#FFF0F6,#FFE3EE)}
+@media (hover: hover){ .svc:hover .svc-face{border-color:var(--line-3);box-shadow:var(--shadow)} .svc:hover .svc-hint{color:var(--pink-lo)} }
+.svc-ic{width:42px;height:42px;padding:8px;border-radius:12px;background:var(--pink-50);fill:none;stroke:var(--pink-lo);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.svc-t{margin-top:auto;font:700 clamp(1.05rem,1.6vw,1.3rem)/1.2 var(--f-display);letter-spacing:-.02em;color:var(--ink)}
+.svc-d{font-size:15.5px;line-height:1.5;color:var(--muted)}
+.svc-hint{margin-top:4px;font:600 11px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);transition:color .3s}
+.svc-k{font:600 11px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--pink-lo)}
+.svc-q{font:700 clamp(1.15rem,1.8vw,1.5rem)/1.25 var(--f-display);letter-spacing:-.02em;color:var(--ink);overflow-wrap:anywhere}
+.svc-glare{position:absolute;inset:0;border-radius:16px;pointer-events:none;opacity:0;transition:opacity .3s;
+  background:radial-gradient(420px circle at var(--gx,50%) var(--gy,50%),rgba(255,46,126,.12),transparent 45%)}
+.svc.tilting .svc-glare{opacity:1}
+
+/* ---------- Big scrolling lines ---------- */
+.bigline{position:relative;z-index:5;display:grid;gap:4px;padding-block:clamp(36px,6vw,80px);overflow:hidden;border-block:1px solid var(--line);background:rgba(255,246,250,.8);pointer-events:none}
+.bl-row{display:flex;align-items:center;gap:.45em;width:max-content;white-space:nowrap;font:800 clamp(2.6rem,8vw,7.5rem)/1.08 var(--f-display);letter-spacing:-.04em;text-transform:uppercase}
+.bl-row span{color:transparent;-webkit-text-stroke:1.5px var(--pink)}
+.bl-row em{font-style:normal;color:var(--pink-lo)}
+.bl-row i{font-style:normal;font-size:.3em;color:var(--pink)}
+
+/* ---------- Go / No-go: grid at rest, a pinned 3D ring when motion.js adds .is-3d ---------- */
+.why{padding-block:0;background:none}
+.why-stage{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;overflow:hidden;padding-block:calc(env(safe-area-inset-top,0px) + 96px) 48px;
+  background:radial-gradient(120% 90% at 50% 52%,rgba(255,255,255,.95) 34%,rgba(255,255,255,.7) 72%,rgba(255,255,255,.4))}
+.why-in{display:grid;justify-items:center;gap:clamp(18px,3vw,34px);text-align:center}
+.why-head{margin:0;justify-items:center}
+.ring-wrap{width:100%;perspective:1500px;perspective-origin:50% 40%}
+.ring{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;text-align:left}
+.rc{position:relative;display:flex;flex-direction:column;gap:10px;min-height:220px;padding:24px 22px;border:1px solid var(--line-2);border-radius:18px;background:#FFFFFF;box-shadow:0 14px 40px rgba(212,0,94,.08)}
+.rc-n{font:600 12px/1 var(--f-mono);letter-spacing:.2em;color:var(--pink-lo)}
+.rc-t{margin-top:auto;font:700 clamp(1.5rem,2.6vw,2.1rem)/1.05 var(--f-display);letter-spacing:-.03em;color:var(--ink)}
+.rc-d{font-size:15px;line-height:1.45;color:var(--muted)}
+.rc-poll{display:flex;flex-wrap:wrap;gap:6px}
+.rc-poll b,.rc-poll i{padding:4px 9px;border-radius:999px;font:600 10.5px/1 var(--f-mono);letter-spacing:.1em;font-style:normal}
+.rc-poll b{background:var(--pink-btn);color:#FFFFFF}
+.rc-poll i{background:#FDECEC;color:var(--alarm-ink)}
+.ring.is-3d{display:block;position:relative;height:var(--ch,250px);transform-style:preserve-3d;transform:translateZ(calc(var(--R,320px) * -1)) rotateX(var(--tilt,0deg)) rotateY(var(--a,0deg))}
+.ring.is-3d .rc{position:absolute;left:50%;top:0;width:var(--cw,300px);height:var(--ch,250px);min-height:0;margin-left:calc(var(--cw,300px) / -2);
+  transform:rotateY(calc(var(--i,0) * 60deg)) translateZ(var(--R,320px));-webkit-backface-visibility:hidden;backface-visibility:hidden;transition:border-color .45s,box-shadow .45s}
+.ring.is-3d .rc::after{content:"";position:absolute;inset:0;border-radius:inherit;background:rgba(255,255,255,.62);pointer-events:none;transition:opacity .45s}
+.ring.is-3d .rc.front{border-color:var(--pink);box-shadow:0 30px 70px rgba(212,0,94,.18),0 0 0 4px rgba(255,46,126,.08)}
+.ring.is-3d .rc.front::after{opacity:0}
+.ring.is-3d .rc.front .rc-t{color:var(--pink-lo)}
+.ring-ui{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px 26px}
+.ring-count{font:600 13px/1 var(--f-mono);letter-spacing:.18em;color:var(--dim)}
+.ring-count b{font-weight:600;color:var(--pink-lo)}
+.ring-dots{display:flex;gap:8px}
+.ring-dots i{width:22px;height:3px;border-radius:3px;background:var(--pink-100);transition:background-color .3s,width .4s var(--ease)}
+.ring-dots i.on{width:40px;background:var(--pink)}
+.ring-wrap:has(.ring:not(.is-3d)) + .ring-ui .ring-count,.ring-wrap:has(.ring:not(.is-3d)) + .ring-ui .ring-dots{display:none}
+
+/* ---------- Rescue packages ---------- */
+.pkg-top{display:flex;justify-content:center;margin-bottom:clamp(40px,5vw,60px)}
+.bill{position:relative;display:inline-grid;grid-template-columns:1fr 1fr;padding:4px;border:1.5px solid var(--line-2);border-radius:999px;background:#FFFFFF;isolation:isolate}
+.bill-opt{position:relative;z-index:1;min-height:42px;padding:0 22px;border:0;border-radius:999px;background:none;font:700 14px/1 var(--f-ui);letter-spacing:.02em;color:var(--muted);cursor:pointer;transition:color .35s}
+.bill-opt[aria-pressed="true"]{color:#FFFFFF}
+.bill-pill{position:absolute;z-index:0;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:999px;background:var(--pink-btn);transition:transform .55s var(--spring)}
+.bill[data-bill="ego"] .bill-pill{transform:translateX(100%)}
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,24px);align-items:stretch}
+.plan{position:relative;display:flex;flex-direction:column;gap:18px;min-width:0;padding:34px 26px 26px;border:1px solid var(--line-2);border-radius:20px;background:#FFFFFF;
+  box-shadow:0 14px 40px rgba(212,0,94,.07);transition:border-color .3s,box-shadow .4s}
+@media (hover: hover){ .plan:hover{border-color:var(--line-3);box-shadow:var(--shadow)} }
+.plan-hot{top:-14px;border-color:transparent;background:linear-gradient(170deg,#FFF6FA,#FFFFFF 40%);isolation:isolate}
+.plan-hot::before{content:"";position:absolute;inset:-1px;z-index:-1;padding:2px;border-radius:inherit;pointer-events:none;
+  background:conic-gradient(from var(--ang),#FF7AB0,#E0006A,#FFD0E3,#FF2E7E 40%,#FF7AB0 60%,#D4005E 80%,#FF7AB0);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:spin-ang 5s linear infinite}
+@property --ang{syntax:"<angle>";inherits:false;initial-value:0deg}
+@keyframes spin-ang{to{--ang:360deg}}
+.plan-badge{position:absolute;left:50%;top:0;transform:translate(-50%,-50%);padding:7px 14px;border-radius:999px;background:var(--pink-btn);color:#FFFFFF;white-space:nowrap;font:600 11px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase}
+.plan-name{font:700 1.3rem/1.15 var(--f-display);letter-spacing:-.02em}
+.plan-price{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px;min-height:3.8rem;font-family:var(--f-display);color:var(--ink);perspective:400px}
+.plan-price .cur{font-size:1.4rem;font-weight:600;color:var(--pink-lo)}
+.plan-price .amt{display:inline-block;font-size:clamp(2.4rem,3.8vw,3.3rem);font-weight:700;line-height:1;letter-spacing:-.04em;font-variant-numeric:tabular-nums;transform-origin:50% 60%;transition:transform .22s,opacity .22s}
+.plan-price .amt-word{font-size:clamp(2rem,3.2vw,2.6rem);color:var(--pink-lo)}
+.plan-price .per{font:600 13px/1 var(--f-mono);letter-spacing:.04em;color:var(--dim);transition:opacity .22s}
+.plan-price .out{transform:rotateX(90deg);opacity:0}
+.plan-list{list-style:none;margin:0;padding:0;display:grid;gap:12px;font-size:15.5px;color:var(--muted)}
+.plan-list li{display:flex;gap:12px;align-items:baseline}
+.plan-list li::before{content:"";flex:none;width:11px;height:6px;border-left:2px solid var(--pink);border-bottom:2px solid var(--pink);transform:rotate(-45deg) translateY(-3px)}
+.plan-cta{width:100%;margin-top:auto}
+.plan.shake{animation:shake-x .45s}
+@keyframes shake-x{20%{translate:-8px 0}40%{translate:7px 0}60%{translate:-4px 0}80%{translate:2px 0}}
+
+/* ---------- Anomaly desk ---------- */
+.appeal{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:center}
+.appeal-l .sec-head{margin-bottom:28px}
+.appeal-form{display:grid;gap:14px}
+.appeal-form.shake{animation:shake-x .45s}
+.appeal-form textarea{width:100%;min-height:140px;resize:vertical;padding:18px 20px;font:400 17px/1.5 var(--f-ui);color:var(--ink);background:#FFFFFF;
+  border:1.5px solid var(--line-2);border-radius:16px;transition:border-color .3s,box-shadow .3s}
+.appeal-form textarea::placeholder{color:var(--dim)}
+.appeal-form textarea:focus{outline:none;border-color:var(--pink);box-shadow:0 0 0 4px rgba(255,46,126,.14)}
+.appeal-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px}
+.appeal-count{font:600 12px/1 var(--f-mono);letter-spacing:.08em;color:var(--dim)}
+.verdict{position:relative;display:grid;align-content:start;gap:14px;padding:28px 26px;border:1px solid var(--line-2);border-radius:20px;background:#FFFFFF;box-shadow:var(--shadow)}
+.verdict-k{font:600 11px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.verdict-q{font:700 1.25rem/1.4 var(--f-hand);color:var(--muted);transform:rotate(-1deg);overflow-wrap:anywhere}
+.verdict-a{font:700 clamp(1.1rem,1.8vw,1.45rem)/1.3 var(--f-display);letter-spacing:-.02em;color:var(--ink)}
+.verdict-foot{font:600 11px/1.4 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.stamp{justify-self:end;display:inline-block;padding:6px 16px 5px;border:3px solid var(--alarm);border-radius:8px;color:var(--alarm);font:400 1.7rem/1 var(--f-meme);letter-spacing:.12em;text-transform:uppercase;transform:rotate(-8deg);opacity:.92}
+.verdict.slam .stamp{animation:slam .55s var(--spring) both}
+.verdict.slam{animation:thud .35s .25s}
+@keyframes slam{from{transform:rotate(-8deg) scale(3);opacity:0}to{transform:rotate(-8deg) scale(1);opacity:.92}}
+@keyframes thud{35%{translate:3px -2px}70%{translate:-2px 2px}}
+
+/* ---------- Footer + mission log ---------- */
+.foot{position:relative;z-index:5;padding-block:clamp(80px,12vw,140px) calc(44px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:linear-gradient(180deg,rgba(255,246,250,.8),var(--bg-2) 40%)}
+.foot-big{font:800 clamp(2.4rem,9.5vw,8.6rem)/1 var(--f-display);letter-spacing:-.05em;text-align:center;text-transform:uppercase;text-wrap:balance;color:transparent;-webkit-text-stroke:1.5px var(--pink)}
+.foot-big em{font-style:normal;color:var(--pink-lo);-webkit-text-stroke:0}
+.tblock{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:clamp(40px,6vw,70px);border:1px solid var(--line-2);border-radius:16px;background:#FFFFFF;overflow:hidden}
+.tblock div{display:grid;gap:5px;min-width:0;padding:12px 14px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.tblock div:nth-child(4n){border-right:0}
+.tblock div:nth-child(n+5){border-bottom:0}
+.tblock dt{font:600 10px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.tblock dd{font:600 14px/1.3 var(--f-mono);color:var(--ink);overflow-wrap:anywhere}
+.foot-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;margin-top:28px}
+.foot-note{color:var(--muted)}
+.foot-btns{display:flex;flex-wrap:wrap;gap:10px}
+
+@media (max-width: 980px){
+  .svc-grid,.ring{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .plans{grid-template-columns:minmax(0,1fr);max-width:520px;margin-inline:auto}
+  .plan-hot{top:0}
+  .appeal{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width: 760px){
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:34px}
+  .stat:nth-child(3){border-left:0;padding-left:0}
+}
+@media (max-width: 620px){
+  .svc-grid,.ring{grid-template-columns:minmax(0,1fr)}
+  .svc{min-height:240px}
+  .why-stage{padding-block:calc(env(safe-area-inset-top,0px) + 88px) 104px;align-items:flex-start}
+  .tblock{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tblock div:nth-child(4n){border-right:1px solid var(--line)}
+  .tblock div:nth-child(2n){border-right:0}
+  .tblock div:nth-child(n+5){border-bottom:1px solid var(--line)}
+  .tblock div:nth-child(n+7){border-bottom:0}
+}
+
+/* Launch pad: two telemetry displays. Engineer-1 flies a clean gravity turn to orbit; Doctor-1 coughs,
+   flames out and tips over. launch.js (GSAP) moves the ships and the numbers; CSS draws flames and smoke. */
+.pad{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,2vw,24px)}
+.bay{position:relative;display:flex;flex-direction:column;min-width:0;overflow:hidden;border:1px solid var(--line-2);border-radius:20px;background:#FFFFFF;box-shadow:var(--shadow)}
+.bay-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.bay-name{font:600 13px/1 var(--f-mono);letter-spacing:.16em}
+.tag{display:inline-flex;align-items:center;gap:7px;padding:5px 10px;border-radius:999px;font:600 11px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.tag::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.tag-go{color:var(--pink-lo);background:var(--pink-50)}
+.tag-bad{color:var(--alarm-ink);background:#FDECEC}
+.tag-bad::before{animation:blinkdot 1s steps(2,start) infinite}
+.tag-done{color:#FFFFFF;background:var(--pink-btn)}
+.tag-dead{color:#FFFFFF;background:var(--alarm-ink)}
+
+.bay-sky{position:relative;height:clamp(300px,34vw,400px);overflow:hidden;background-color:#FFFFFF;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px),linear-gradient(180deg,#FFE3EE 0%,#FFF6FA 45%,#FFFFFF 80%);
+  background-size:100% 44px,44px 100%,100% 100%}
+.pad[data-state="launch"] .bay-sky{animation:rumble .1s linear 10}
+@keyframes rumble{25%{transform:translate(1px,-1px)}75%{transform:translate(-1px,1px)}}
+.scale{list-style:none;margin:0;padding:0;position:absolute;left:12px;top:14px;bottom:52px;display:flex;flex-direction:column;justify-content:space-between;font:600 10px/1 var(--f-mono);color:var(--dim);pointer-events:none}
+.scale li::before{content:"";display:inline-block;width:8px;height:1px;margin-right:6px;vertical-align:middle;background:var(--line-3)}
+.ground{position:absolute;left:0;right:0;bottom:0;height:40px;background:linear-gradient(180deg,#FFD0E3,#FFC2DA);border-top:2px solid var(--pink)}
+.tower{position:absolute;bottom:40px;left:calc(50% - 54px);width:12px;height:116px;border:2px solid var(--ink);border-bottom:0;
+  background:repeating-linear-gradient(45deg,transparent 0 6px,rgba(43,15,32,.5) 6px 7.5px),repeating-linear-gradient(-45deg,transparent 0 6px,rgba(43,15,32,.5) 6px 7.5px)}
+.tower::after{content:"";position:absolute;left:100%;top:24px;width:16px;height:3px;background:var(--ink)}
+.ship{position:absolute;left:50%;bottom:40px;z-index:2;width:52px;margin-left:-26px;transform-origin:50% 100%;will-change:transform}
+.ship svg{display:block;width:100%;height:auto;overflow:visible}
+.flame{position:absolute;left:50%;top:88%;width:20px;height:44px;margin-left:-10px;border-radius:50% 50% 50% 50%/34% 34% 66% 66%;transform-origin:50% 0;opacity:0;transform:scaleY(.2);
+  background:radial-gradient(ellipse at 50% 18%,#FFFFFF 0%,#FFD0E3 24%,#FF4F93 58%,rgba(255,79,147,0) 74%)}
+.pad[data-state="countdown"] .flame{opacity:.55;transform:scaleY(.45);transition:opacity .4s,transform .4s}
+.pad[data-state="launch"] .flame{opacity:1;transform:scaleY(1);animation:flicker .09s ease-in-out infinite alternate}
+@keyframes flicker{from{transform:scaleY(.92) scaleX(1)}to{transform:scaleY(1.14) scaleX(.9)}}
+.pad[data-state="launch"] .bay-doc .flame{animation:sputter .5s steps(1) infinite}
+@keyframes sputter{0%{opacity:1;transform:scaleY(1)}20%{opacity:.2;transform:scaleY(.5)}35%{opacity:1;transform:scaleY(1.15)}55%{opacity:0;transform:scaleY(.3)}70%{opacity:.8;transform:scaleY(.8)}85%{opacity:.1;transform:scaleY(.4)}}
+.bay-doc.flameout .flame{opacity:0!important;animation:none!important}
+.puff{position:absolute;left:50%;top:92%;width:22px;height:22px;margin-left:-11px;border-radius:50%;opacity:0;pointer-events:none;background:radial-gradient(circle,rgba(150,130,140,.75),rgba(150,130,140,0) 70%)}
+.pad[data-state="launch"] .bay-doc:not(.failed) .puff{animation:puff 1.3s ease-out infinite}
+.pad[data-state="launch"] .bay-doc:not(.failed) .puff.p2{animation-delay:.32s}
+.pad[data-state="launch"] .bay-doc:not(.failed) .puff.p3{animation-delay:.65s}
+.pad[data-state="launch"] .bay-doc:not(.failed) .puff.p4{animation-delay:.97s}
+.p1{--px:-22px}.p2{--px:14px}.p3{--px:-8px}.p4{--px:24px}
+@keyframes puff{0%{opacity:.85;transform:translate(0,0) scale(.4)}100%{opacity:0;transform:translate(var(--px),40px) scale(2.6)}}
+.crash{position:absolute;left:50%;bottom:26px;z-index:3;width:190px;height:96px;margin-left:-60px;border-radius:50%;pointer-events:none;opacity:0;transform:scale(.3);
+  background:radial-gradient(ellipse at 30% 60%,rgba(140,120,130,.55),transparent 60%),radial-gradient(ellipse at 70% 55%,rgba(140,120,130,.5),transparent 60%),radial-gradient(ellipse at 50% 40%,rgba(170,150,160,.55),transparent 62%)}
+.bay-doc.failed .crash{animation:cloud 1.4s var(--ease) forwards}
+@keyframes cloud{0%{opacity:0;transform:scale(.3)}25%{opacity:1}100%{opacity:.8;transform:scale(1.15) translateY(-6px)}}
+.fail-stamp{position:absolute;left:50%;top:24%;z-index:4;padding:6px 14px 5px;border:3px solid var(--alarm);border-radius:8px;color:var(--alarm);background:rgba(255,255,255,.88);
+  font:400 clamp(1.3rem,2.6vw,1.9rem)/1 var(--f-meme);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;pointer-events:none;opacity:0;transform:translateX(-50%) rotate(-10deg) scale(2.4)}
+.bay-doc.failed .fail-stamp{opacity:1;transform:translateX(-50%) rotate(-10deg) scale(1);transition:transform .5s var(--spring),opacity .25s}
+.orbit-ok{position:absolute;left:50%;top:16px;z-index:4;padding:7px 14px;border-radius:999px;background:var(--pink-btn);color:#FFFFFF;font:600 11.5px/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;opacity:0;transform:translate(-50%,-10px)}
+.bay-eng.orbit .orbit-ok{opacity:1;transform:translate(-50%,0);transition:opacity .4s,transform .5s var(--spring)}
+.pad[data-state="done"] .bay-eng.orbit .ship{opacity:0;transition:opacity .4s}
+.pad.static .bay-doc.failed .ship{transform:translate(30px,0) rotate(92deg)}
+.traj{position:absolute;inset:0;z-index:1;width:100%;height:100%;overflow:visible;pointer-events:none}
+.traj-line{fill:none;stroke:var(--pink);stroke-width:2.5;stroke-linecap:round}
+.bay-doc .traj-line{stroke:var(--alarm);stroke-dasharray:5 6;opacity:0;transition:opacity .6s}
+.bay-doc.failed .traj-line{opacity:.85}
+
+.tele{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--line)}
+.tele div{display:grid;gap:4px;min-width:0;padding:10px 14px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.tele div:nth-child(2n){border-right:0}
+.tele div:nth-child(n+3){border-bottom:0}
+.tele dt{font:600 10px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.tele dd{font:600 15px/1.3 var(--f-mono);color:var(--ink);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.tele dd.bad{color:var(--alarm-ink)}
+.tele dd.good{color:var(--pink-lo)}
+
+.pad-ctl{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px;margin-top:22px}
+.countdown{font:600 14px/1.3 var(--f-mono);letter-spacing:.1em;color:var(--ink);font-variant-numeric:tabular-nums}
+.countdown.hot{color:var(--pink-lo)}
+.mlog{list-style:none;margin:16px 0 0;padding:14px 16px;height:200px;overflow-y:auto;overscroll-behavior:contain;border-radius:16px;background:#2B0F20;color:#FFE3EE;font:400 13px/1.7 var(--f-mono)}
+.mlog li{animation:logline .35s var(--ease) both}
+@keyframes logline{from{opacity:0;transform:translateX(-6px)}}
+.mlog time{display:inline-block;min-width:8.5ch;margin-right:10px;color:#FF7AB0}
+.mlog .bad{color:#FF9C9C}
+.mlog .bad time{color:#FF6B70}
+
+@media (max-width: 760px){
+  .pad{grid-template-columns:minmax(0,1fr)}
+  .bay-sky{height:290px}
+  .mlog{height:180px;font-size:12.5px}
+}
+
+/* Memes: classic internet formats redrawn in-house (no borrowed photos), each with its own small animation.
+   Text inside a meme scales with the card (cqi units, the card is the size container) with px fallbacks. */
+.mfilter{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:clamp(26px,4vw,40px)}
+.chip{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 18px;border:1.5px solid var(--line-2);border-radius:999px;background:#FFFFFF;color:var(--muted);font:700 14px/1 var(--f-ui);cursor:pointer;transition:color .3s,border-color .3s,background-color .3s}
+.chip span{font:600 11px/1 var(--f-mono);color:var(--dim)}
+@media (hover: hover){ .chip:hover{color:var(--ink);border-color:var(--line-3)} }
+.chip[aria-pressed="true"]{background:var(--pink-btn);border-color:transparent;color:#FFFFFF}
+.chip[aria-pressed="true"] span{color:rgba(255,255,255,.8)}
+.mgrid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.2vw,28px)}
+.meme{min-width:0}
+.meme.gone{display:none}
+.meme.pop .mcard{animation:pop .55s var(--spring) var(--pd,0s) both}
+@keyframes pop{from{opacity:0;transform:scale(.92) translateY(16px)}}
+.mcard{display:flex;flex-direction:column;height:100%;container-type:inline-size;overflow:hidden;border:1px solid var(--line-2);border-radius:18px;background:#FFFFFF;box-shadow:0 14px 40px rgba(212,0,94,.07);transition:border-color .3s,box-shadow .4s}
+@media (hover: hover){ .mcard:hover{border-color:var(--line-3);box-shadow:var(--shadow)} }
+.mc{position:relative;width:100%;max-width:100%;aspect-ratio:4/5;overflow:hidden;background:#FFFFFF;color:var(--ink);font-family:var(--f-ui)}
+.meme.off .mc *,.meme.off .mc *::before,.meme.off .mc *::after{animation-play-state:paused}
+.mfoot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border-top:1px solid var(--line)}
+.mformat{min-width:0;font:600 11px/1.3 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.lol{position:relative;flex:none;display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 12px;border:1.5px solid var(--line-2);border-radius:999px;background:#FFFFFF;color:var(--ink);font:700 14px/1 var(--f-ui);cursor:pointer;
+  transition:border-color .3s,background-color .3s,transform .2s var(--spring)}
+@media (hover: hover){ .lol:hover{border-color:var(--pink);background:var(--pink-50)} }
+.lol:active{transform:scale(.9)}
+.lol b{min-width:1ch;font-weight:700;font-variant-numeric:tabular-nums}
+.lol .plus{position:absolute;left:50%;top:-2px;font:600 13px/1 var(--f-mono);color:var(--pink-lo);pointer-events:none;animation:plus .8s var(--ease) forwards}
+@keyframes plus{from{transform:translate(-50%,0);opacity:1}to{transform:translate(-50%,-30px);opacity:0}}
+
+/* 1. Nahi / Haan */
+.m-drake{display:grid;grid-template-rows:repeat(2,minmax(0,1fr));gap:2px;background:var(--pink-100)}
+.dk-row{display:grid;grid-template-columns:44% 56%;min-height:0}
+.dk-pic{position:relative;display:grid;place-items:center;overflow:hidden;font-size:60px;font-size:23cqi;line-height:1}
+.dk-no .dk-pic{background:radial-gradient(circle at 50% 40%,#F4E6EC,#E6D3DC 75%)}
+.dk-yes .dk-pic{background:radial-gradient(circle at 50% 40%,#FFD0E3,#FF9CC4 75%)}
+.dk-e{display:inline-block}
+.dk-no .dk-e{transform-origin:50% 80%;animation:dk-no 2.6s ease-in-out infinite}
+.dk-yes .dk-e{animation:dk-yes 2.6s ease-in-out infinite}
+.dk-pic i{position:absolute;right:6%;bottom:14%;font-style:normal;font-size:.42em;animation:dk-point 1.3s ease-in-out infinite}
+@keyframes dk-no{0%,100%{transform:rotate(0)}12%{transform:rotate(-14deg) translateX(-4%)}24%{transform:rotate(0)}}
+@keyframes dk-yes{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-4%) scale(1.04)}}
+@keyframes dk-point{0%,100%{transform:translateX(0)}50%{transform:translateX(14%)}}
+.dk-t{display:flex;align-items:center;padding:0 7cqi;background:#FFFFFF;color:var(--ink);font-weight:800;font-size:17px;font-size:6.2cqi;line-height:1.2;letter-spacing:-.01em}
+
+/* 2. Nobody */
+.m-nobody{display:flex;flex-direction:column;gap:2.4cqi;padding:9cqi 8cqi 8cqi;background:#FFFFFF}
+.nb-l{font-weight:800;font-size:19px;font-size:7.2cqi;line-height:1.18}
+.nb-who{color:var(--pink-lo)}
+.nb-scribble{display:block;width:100%;height:auto;margin-top:2cqi;overflow:visible}
+.nb-scribble path{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.nb-scribble path + path{stroke:var(--pink)}
+.draw{stroke-dasharray:var(--len,none);stroke-dashoffset:0;animation:scrib 4.4s var(--ease) infinite}
+.nb-scribble .draw + .draw{animation:scrib 4.4s var(--ease) .5s infinite backwards}
+@keyframes scrib{0%{stroke-dashoffset:var(--len,0px);opacity:1}55%,86%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+.nb-cap{margin-top:auto;font:700 17px/1.25 var(--f-hand);font-size:6.2cqi;color:var(--pink-lo);transform:rotate(-2deg);transform-origin:0 50%}
+
+/* 3. Expanding brain */
+.m-brain{display:grid;grid-template-rows:repeat(4,minmax(0,1fr));gap:2px;background:var(--pink-100)}
+.br-row{display:grid;grid-template-columns:52% 48%;min-height:0}
+.br-row p{display:flex;align-items:center;padding:0 5cqi;background:#FFFFFF;color:var(--ink);font-weight:800;font-size:15px;font-size:5.4cqi;line-height:1.15}
+.br-row:nth-child(4) p{background:linear-gradient(100deg,#FFFFFF,#FFE3EE)}
+.br-pic{position:relative;display:grid;place-items:center;overflow:hidden;background:#F4EEF1}
+.br-pic svg{position:relative;width:58%;height:auto;fill:#C9BCC3;stroke:#9C8A94;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.br-row:nth-child(2) .br-pic{background:#FCE8F0}
+.br-row:nth-child(2) .br-pic svg{fill:#FFC7DC;stroke:#E0709E}
+.br-row:nth-child(3) .br-pic{background:radial-gradient(circle,#FFD0E3,#FCE8F0 70%)}
+.br-row:nth-child(3) .br-pic svg{fill:#FF7AB0;stroke:#D4005E;filter:drop-shadow(0 0 6px rgba(255,46,126,.5));animation:pulse-b 2.4s ease-in-out infinite}
+.br-row:nth-child(4) .br-pic{background:radial-gradient(circle,#5A1240,#2B0F20 70%)}
+.br-row:nth-child(4) .br-pic::before{content:"";position:absolute;inset:-50%;background:repeating-conic-gradient(rgba(255,122,176,.35) 0deg 6deg,transparent 6deg 18deg);animation:rays 10s linear infinite}
+.br-row:nth-child(4) .br-pic svg{fill:#FFE3EE;stroke:#FF7AB0;filter:drop-shadow(0 0 8px #FF7AB0) drop-shadow(0 0 20px rgba(255,46,126,.85));animation:pulse-b 1.6s ease-in-out infinite}
+@keyframes pulse-b{50%{transform:scale(1.08)}}
+@keyframes rays{to{transform:rotate(360deg)}}
+
+/* 4. Two buttons (the credit button runs away; see features.js) */
+.m-buttons{display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:2cqi;padding:7cqi 6cqi 6cqi;text-align:center;background:radial-gradient(circle at 50% 28%,#FFE3EE,#FFFFFF 72%)}
+.bt-panel{display:flex;justify-content:center;gap:5cqi;width:100%;padding:5cqi;background:#FFFFFF;border:1.5px solid var(--line-2);border-radius:5cqi;box-shadow:inset 0 -1.2cqi 0 rgba(224,0,106,.08)}
+.bt{flex:1 1 0;min-width:0;max-width:100%;aspect-ratio:1/1;display:grid;place-items:center;padding:3cqi;border:0;border-radius:50%;cursor:pointer;
+  font-weight:800;font-size:12px;font-size:4.4cqi;line-height:1.15;box-shadow:0 2.2cqi 0 rgba(43,15,32,.25),inset 0 -1.2cqi 0 rgba(0,0,0,.15);transition:transform .45s var(--spring),box-shadow .15s}
+.bt:active{box-shadow:0 .6cqi 0 rgba(43,15,32,.25),inset 0 -.6cqi 0 rgba(0,0,0,.15)}
+.bt-a{position:relative;z-index:2;background:radial-gradient(circle at 35% 30%,#FFB3D1,#FF2E7E 46%,#B8004F);color:#FFFFFF}
+.bt-b{background:radial-gradient(circle at 35% 30%,#8E6A80,#4A1A36 46%,#2B0F20);color:#FFFFFF}
+.bt-a.won{animation:won .6s var(--spring)}
+@keyframes won{40%{scale:1.15}}
+.bt-guy{position:relative;font-size:58px;font-size:22cqi;line-height:1}
+.bt-face{display:inline-block;animation:sweat-shake .3s linear infinite}
+@keyframes sweat-shake{50%{transform:translateX(2%)}}
+.drop{position:absolute;top:18%;width:3.2cqi;height:4.4cqi;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:#7CC4FF;opacity:0;animation:drop 1.4s ease-in infinite}
+.drop.d1{left:-6%}
+.drop.d2{right:-4%;animation-delay:.5s}
+.drop.d3{right:14%;top:2%;animation-delay:.9s}
+@keyframes drop{0%{opacity:0;transform:translateY(0)}15%{opacity:1}100%{opacity:0;transform:translateY(14cqi)}}
+.bt-label{font-weight:800;font-size:15px;font-size:5.4cqi;line-height:1.2}
+.bt-out{min-height:2.6em;font:700 14px/1.3 var(--f-hand);font-size:5cqi;color:var(--pink-lo)}
+
+/* 5. Always has been (space stays dark) */
+.m-always{background:radial-gradient(ellipse at 70% 80%,#4A1236,#1A0612 60%)}
+.al-stars{position:absolute;inset:0;animation:twinkle 2.4s ease-in-out infinite alternate;
+  background-image:radial-gradient(1.2px 1.2px at 12% 18%,#FFF 50%,transparent 51%),radial-gradient(1px 1px at 72% 12%,#FFF 50%,transparent 51%),radial-gradient(1.4px 1.4px at 36% 8%,#FFB3D1 50%,transparent 51%),
+  radial-gradient(1px 1px at 88% 34%,#FFF 50%,transparent 51%),radial-gradient(1.2px 1.2px at 8% 52%,#FFF 50%,transparent 51%),radial-gradient(1px 1px at 52% 30%,#FFF 50%,transparent 51%),
+  radial-gradient(1.3px 1.3px at 24% 84%,#FFB3D1 50%,transparent 51%),radial-gradient(1px 1px at 64% 46%,#FFF 50%,transparent 51%),radial-gradient(1px 1px at 94% 8%,#FFF 50%,transparent 51%)}
+@keyframes twinkle{to{opacity:.45}}
+.al-planet{position:absolute;right:-20%;bottom:-18%;width:80%;aspect-ratio:1;border-radius:50%;overflow:hidden;background:radial-gradient(circle at 32% 30%,#FFE3EE,#FF7AB0 34%,#C2185B 68%,#4A0B2A);box-shadow:0 0 12cqi rgba(255,46,126,.4)}
+.al-planet::before{content:"";position:absolute;top:0;bottom:0;left:0;width:200%;background:repeating-linear-gradient(100deg,transparent 0 6%,rgba(120,10,60,.25) 6% 10%,transparent 10% 16%);animation:drift 14s linear infinite}
+.al-planet::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:inset -7cqi -6cqi 12cqi rgba(0,0,0,.5)}
+@keyframes drift{to{transform:translateX(-50%)}}
+.al-planet b{position:absolute;left:30%;top:22%;font:900 56px/1 var(--f-ui);font-size:22cqi;color:#FFFFFF;text-shadow:0 0 2cqi rgba(255,46,126,.6)}
+.al-a1,.al-a2{position:absolute;height:auto}
+.al-a1{left:30%;top:40%;width:30%;fill:#FFFFFF;rotate:10deg;animation:float 5s ease-in-out infinite}
+.al-a2{left:3%;top:12%;width:22%;fill:#EADBE2;rotate:-12deg;animation:float 6s ease-in-out -2s infinite}
+@keyframes float{50%{translate:0 -4%}}
+.al-t1,.al-t2{position:absolute;font:400 17px/1.04 var(--f-meme);font-size:6.6cqi;text-transform:uppercase;letter-spacing:.01em;color:#FFFFFF;
+  text-shadow:.05em .05em 0 #000,-.05em .05em 0 #000,.05em -.05em 0 #000,-.05em -.05em 0 #000,0 0 .3em rgba(0,0,0,.8)}
+.al-t1{left:30%;right:4%;top:5%;text-align:center}
+.al-t2{left:3%;top:47%;width:30%;color:#FFB3D1}
+
+/* 6. Deewaar dialogue (film stills stay dark) */
+.m-deewaar{display:grid;grid-template-rows:repeat(2,minmax(0,1fr));gap:1.6cqi;padding-block:3cqi;background:#14070F}
+.dw-frame{position:relative;overflow:hidden;display:flex;align-items:flex-end;justify-content:center;background:radial-gradient(ellipse at 66% 30%,#C2477E,#4A1236 52%,#16060F)}
+.dw-2{background:radial-gradient(ellipse at 34% 30%,#4B76A0,#1A2C3C 52%,#080D12)}
+.dw-frame::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 3px);animation:flick 3.2s steps(1) infinite}
+@keyframes flick{0%,100%{opacity:1}31%{opacity:.6}33%{opacity:1}71%{opacity:.75}73%{opacity:1}}
+.dw-fig{position:absolute;bottom:0;width:48%;height:auto;fill:#14070F}
+.dw-1 .dw-fig{left:4%}
+.dw-2 .dw-fig{right:4%;fill:#05080B}
+.dw-who{position:absolute;z-index:3;left:4cqi;top:3cqi;font:500 11px/1 var(--f-mono);font-size:max(11px,3cqi);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.75)}
+.dw-sub{position:relative;z-index:3;margin-bottom:3.4cqi;padding-inline:5cqi;text-align:center;font-weight:700;font-size:13px;font-size:4.7cqi;line-height:1.32;color:#FFE6F0;
+  text-shadow:.06em 0 0 #000,-.06em 0 0 #000,0 .06em 0 #000,0 -.06em 0 #000,0 0 .3em #000}
+.dw-2 .dw-sub{font-size:16px;font-size:5.8cqi}
+.dw-type.typing::after{content:"";display:inline-block;width:.45em;height:1em;margin-left:2px;vertical-align:-.15em;background:currentColor;animation:blinkc .8s steps(2) infinite}
+@keyframes blinkc{50%{opacity:0}}
+
+/* 7. They don't know (night party) */
+.m-party{display:flex;flex-direction:column;background:#2A0A1C}
+.pt-cap{position:relative;z-index:2;padding:4cqi 5cqi;background:#FFFFFF;color:var(--ink);font-weight:800;font-size:15px;font-size:5.6cqi;line-height:1.2}
+.pt-scene{position:relative;flex:1;overflow:hidden;background:radial-gradient(circle at 38% 12%,rgba(255,122,176,.35),transparent 42%),radial-gradient(circle at 70% 80%,rgba(124,196,255,.16),transparent 50%),#2A0A1C}
+.pt-scene::before{content:"";position:absolute;left:-72%;top:-98%;width:220%;height:220%;animation:rays 7s linear infinite;
+  background:conic-gradient(transparent 0 20deg,rgba(255,122,176,.16) 20deg 30deg,transparent 30deg 100deg,rgba(124,196,255,.12) 100deg 110deg,transparent 110deg 200deg,rgba(255,122,176,.14) 200deg 212deg,transparent 212deg)}
+.pt-ball{position:absolute;left:32%;top:4%;width:13%;aspect-ratio:1;border-radius:50%;background:conic-gradient(#FFFFFF,#FF7AB0,#FFFFFF,#C2185B,#FFFFFF,#FF7AB0,#FFFFFF);box-shadow:0 0 6cqi rgba(255,122,176,.7);animation:rays 3s linear infinite}
+.pt-doc,.pt-eng{position:absolute;bottom:5%;width:15%;height:auto;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+.pt-doc{fill:#FFFFFF;stroke:#FFFFFF;transform-origin:50% 100%;animation:dance .5s ease-in-out infinite alternate}
+.pd1{left:5%}
+.pd2{left:22%;animation-delay:-.18s}
+.pd3{left:39%;animation-delay:-.33s}
+@keyframes dance{from{transform:rotate(-9deg)}to{transform:rotate(9deg) translateY(-5%)}}
+.pt-eng{right:6%;fill:#B9A6B1;stroke:#B9A6B1}
+.pt-think{position:absolute;z-index:2;right:4%;top:34%;width:50%;padding:3cqi 3.6cqi;border-radius:5cqi;background:#FFFFFF;color:var(--ink);font-weight:700;font-size:12px;font-size:4.5cqi;line-height:1.25}
+.pt-think::before,.pt-think::after{content:"";position:absolute;border-radius:50%;background:#FFFFFF}
+.pt-think::before{right:20%;bottom:-5.5cqi;width:4.4cqi;height:4.4cqi}
+.pt-think::after{right:14%;bottom:-10cqi;width:2.6cqi;height:2.6cqi}
+
+/* 8. Rishtedaar logic */
+.m-rel{display:grid;grid-template-rows:minmax(0,1fr) minmax(0,1.25fr);gap:2px;background:var(--pink-100)}
+.rl-row{position:relative;display:flex;flex-direction:column;justify-content:center;gap:2cqi;padding:5cqi 6cqi;overflow:hidden}
+.rl-1{background:#FFFFFF}
+.rl-2{background:linear-gradient(160deg,#FFE3EE,#FFC7DC)}
+.rl-q{position:relative;z-index:2;font:600 10px/1.3 var(--f-mono);font-size:3.5cqi;letter-spacing:.06em;text-transform:uppercase;color:var(--pink-lo)}
+.rl-a{position:relative;z-index:2;max-width:72%;font-weight:800;font-size:16px;font-size:6.2cqi;line-height:1.2;color:var(--ink)}
+.rl-2 .rl-a{max-width:100%;text-shadow:0 0 .6em #FFE3EE}
+.rl-ic{position:absolute;right:6cqi;bottom:3cqi;font-size:40px;font-size:16cqi;line-height:1;transform-origin:50% 12%;animation:knee 1.8s ease-in-out infinite}
+@keyframes knee{50%{transform:rotate(-16deg)}}
+.rl-rain{position:absolute;inset:0;z-index:1;pointer-events:none}
+.rl-rain i{position:absolute;top:-12cqi;font-style:normal;font-size:22px;font-size:8cqi;line-height:1;opacity:.55;animation:fall 3s linear infinite}
+.rl-rain i:nth-child(1){left:6%}
+.rl-rain i:nth-child(2){left:22%;animation-delay:-.7s}
+.rl-rain i:nth-child(3){left:38%;animation-delay:-1.6s}
+.rl-rain i:nth-child(4){left:54%;animation-delay:-.3s}
+.rl-rain i:nth-child(5){left:70%;animation-delay:-2.2s}
+.rl-rain i:nth-child(6){left:86%;animation-delay:-1.1s}
+@keyframes fall{to{transform:translateY(95cqi) rotate(260deg)}}
+
+/* 9. Prescription CAPTCHA */
+.m-cap{display:flex;flex-direction:column;padding:4cqi;background:#FFF6FA;color:var(--ink)}
+.m-cap.shake{animation:shake-x .45s}
+.cp-head{display:grid;gap:.8cqi;padding:4cqi 4.5cqi;border-radius:2.4cqi;background:linear-gradient(135deg,#FF2E7E,#D4005E);color:#FFFFFF}
+.cp-head span{font-weight:600;font-size:12px;font-size:3.8cqi}
+.cp-head b{font:700 22px/1 var(--f-display);font-size:7.2cqi;letter-spacing:-.02em}
+.cp-head small{font:500 10px/1.2 var(--f-mono);font-size:max(10px,2.8cqi);letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+.cp-grid{flex:1;min-height:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:1.4cqi;padding-block:1.4cqi}
+.cp-t{position:relative;display:grid;place-items:center;min-height:0;padding:0;border:1px solid var(--line);border-radius:1.6cqi;background:#FFFFFF;cursor:pointer;transition:transform .25s var(--spring),background-color .2s}
+.cp-t svg{width:84%;height:auto;fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.cp-t.v2 svg{transform:scaleX(-1)}
+.cp-t.v3 svg{transform:rotate(-9deg) scale(.92)}
+@media (hover: hover){ .cp-t:hover{background:var(--pink-50)} }
+.cp-t[aria-pressed="true"]{transform:scale(.86);background:var(--pink-50)}
+.cp-t[aria-pressed="true"]::after{content:"✓";position:absolute;left:4%;top:4%;width:7cqi;height:7cqi;display:grid;place-items:center;border-radius:50%;background:var(--pink-btn);color:#FFFFFF;font:700 11px/1 var(--f-ui);font-size:4.2cqi}
+.cp-foot{display:flex;align-items:center;justify-content:space-between;gap:3cqi;padding-top:1.4cqi;border-top:1px solid var(--line)}
+.cp-msg{min-width:0;font-size:11px;font-size:3.6cqi;line-height:1.3;color:var(--muted)}
+.cp-msg.bad{color:var(--alarm-ink)}
+.cp-msg.good{color:var(--pink-lo);font-weight:700}
+.cp-go{flex:none;min-height:9.4cqi;padding:0 5cqi;border:0;border-radius:999px;background:var(--pink-btn);color:#FFFFFF;cursor:pointer;font-weight:700;font-size:11px;font-size:3.8cqi;letter-spacing:.06em;text-transform:uppercase;transition:background-color .2s}
+@media (hover: hover){ .cp-go:hover{background:var(--ink)} }
+
+@media (max-width: 980px){ .mgrid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width: 620px){ .mgrid{grid-template-columns:minmax(0,1fr)} }
+
+/* Play: the comms chat + roast meter, the 404 dialog, Doctor-1's crew-vitals monitor and toasts. */
+
+/* ---------- Comms chat ---------- */
+.bahas{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:24px;align-items:start}
+.chat{display:flex;flex-direction:column;min-width:0;overflow:hidden;border:1px solid var(--line-2);border-radius:20px;background:#FFFFFF;box-shadow:var(--shadow)}
+.chat-head{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);background:var(--pink-50)}
+.chat-av{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--pink-btn);color:#FFFFFF;font:700 .95rem/1 var(--f-display)}
+.chat-who{display:flex;flex-direction:column;min-width:0;line-height:1.3}
+.chat-name{font-weight:700;font-size:15.5px}
+.chat-status{font-size:13px;font-weight:600;color:var(--pink-lo)}
+.chat-status.typing{font-style:italic;color:var(--muted)}
+.chat-status.gone{color:var(--dim)}
+.chat-log{height:clamp(300px,52vh,420px);overflow-y:auto;overscroll-behavior:contain;padding:16px;display:flex;flex-direction:column;gap:10px;
+  background-image:linear-gradient(rgba(224,0,106,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(224,0,106,.05) 1px,transparent 1px);background-size:44px 44px}
+.msg{max-width:84%;padding:9px 13px 8px;border-radius:16px;font-size:15.5px;line-height:1.45;overflow-wrap:anywhere}
+.msg-doc{align-self:flex-start;background:#F6EEF2;border:1px solid rgba(43,15,32,.08);border-top-left-radius:4px}
+.msg-eng{align-self:flex-end;background:var(--pink-100);border:1px solid rgba(224,0,106,.3);border-top-right-radius:4px}
+.msg .tick{display:inline-block;margin-left:8px;font-size:11px;letter-spacing:-.12em;color:var(--dim);vertical-align:1px;transition:color .3s}
+.msg .tick.read{color:var(--pink)}
+.msg-sys{align-self:center;max-width:100%;padding:4px 12px;border-radius:999px;background:#FFFFFF;border:1px solid var(--line);text-align:center;font:600 11.5px/1.4 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.msg-doc,.msg-eng,.msg-sys{animation:msgin .34s var(--spring) both}
+@keyframes msgin{from{opacity:0;transform:translateY(10px) scale(.96)}}
+.msg-typing{display:flex;gap:5px;padding:13px 14px}
+.msg-typing span{width:7px;height:7px;border-radius:50%;background:var(--pink);animation:tdot 1s ease-in-out infinite}
+.msg-typing span:nth-child(2){animation-delay:.15s}
+.msg-typing span:nth-child(3){animation-delay:.3s}
+@keyframes tdot{0%,60%,100%{opacity:.35;transform:none}30%{opacity:1;transform:translateY(-4px)}}
+.chat-replies{display:flex;flex-direction:column;gap:8px;min-height:74px;padding:14px 16px 16px;border-top:1px solid var(--line)}
+.chat-replies .btn{align-self:flex-start}
+.reply{padding:11px 14px;font-size:15px;line-height:1.4;text-align:left;color:var(--ink);background:#FFFFFF;border:1.5px solid var(--line-2);border-radius:14px;cursor:pointer;
+  transition:transform .25s var(--spring),border-color .2s,color .2s,background-color .2s}
+@media (hover: hover){ .reply:hover{border-color:var(--pink);color:var(--pink-lo);background:var(--pink-50);transform:translateX(4px)} }
+.reply:active{transform:scale(.98)}
+.reply:disabled{opacity:.45;cursor:default;transform:none;border-color:var(--line-2);color:var(--ink);background:#FFFFFF}
+.roast{display:flex;flex-direction:column;gap:12px;padding:24px 22px;border:1px solid var(--line-2);border-radius:20px;background:#FFFFFF;box-shadow:var(--shadow)}
+.roast-score{display:flex;align-items:baseline;gap:8px;font-family:var(--f-display);line-height:.9}
+.roast-score #roastNow{font-size:4.6rem;font-weight:700;letter-spacing:-.05em;color:var(--pink-lo);font-variant-numeric:tabular-nums}
+.roast-of{font-size:1.5rem;font-weight:600;color:var(--dim)}
+.roast-bar{height:8px;border-radius:8px;background:var(--pink-100);overflow:hidden}
+.roast-bar i{display:block;width:0;height:100%;border-radius:inherit;background:var(--grad);transition:width .6s var(--ease)}
+.roast-round{font:600 12px/1.2 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.roast-rank{color:var(--muted)}
+.roast-rank strong{font-weight:700;color:var(--ink)}
+
+/* ---------- The 404 ---------- */
+.e404{width:min(620px,calc(100vw - 32px));max-width:none;max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);padding:0;border:0;overflow:auto;overscroll-behavior:contain;background:transparent;color:var(--ink)}
+.e404::backdrop{background:rgba(43,15,32,.45);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.e404-box{display:flex;flex-direction:column;align-items:center;gap:14px;padding:30px 28px 24px;text-align:center;border:1px solid var(--line-3);border-radius:24px;background:linear-gradient(170deg,#FFF0F6,#FFFFFF 55%);box-shadow:0 40px 100px rgba(43,15,32,.3)}
+.e404[open] .e404-box{animation:e404in .55s var(--spring) both}
+@keyframes e404in{from{opacity:0;transform:perspective(900px) scale(.82) rotateX(26deg)}}
+.e404-k{font:600 11px/1 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:var(--alarm-ink)}
+.e404-code{padding-top:.04em;font:800 clamp(5rem,20vw,8rem)/.85 var(--f-display);letter-spacing:-.06em;color:var(--pink-lo);text-shadow:5px 0 rgba(0,190,255,.35),-5px 0 rgba(255,46,126,.45);animation:glitch 2.6s steps(1) infinite}
+@keyframes glitch{0%,100%{transform:none}88%{transform:translateX(3px) skewX(-8deg);text-shadow:-8px 2px rgba(0,190,255,.4),8px -2px rgba(255,46,126,.5)}91%{transform:translateX(-4px)}94%{transform:none}}
+.e404-title{font:700 clamp(1.4rem,4.4vw,1.9rem)/1.1 var(--f-display);letter-spacing:-.02em}
+.e404-sub{max-width:44ch;color:var(--muted)}
+.e404-sub strong{font-weight:700;color:var(--pink-lo)}
+.e404-log{align-self:stretch;min-height:8.4em;padding:12px 14px;text-align:left;overflow-wrap:anywhere;font:400 13px/1.65 var(--f-mono);color:#FFE3EE;background:#2B0F20;border-radius:12px}
+.e404-log .l-in{color:#C9A9BA}
+.e404-log .l-bad{color:#FF8F8F;font-weight:600}
+.e404-bar{align-self:stretch;height:5px;border-radius:5px;background:var(--pink-100);overflow:hidden}
+.e404-bar i{display:block;width:0;height:100%;border-radius:inherit;background:var(--pink);transition:width 1.4s var(--ease),background-color .3s}
+.e404-bar.fail i{background:var(--alarm)}
+.e404-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.e404-foot{font:600 11px/1.4 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+
+/* ---------- Crew vitals monitor ---------- */
+.monitor{--mon-trace:#E0006A;--mon-amber:#E07800;--mon-red:#D92D35;
+  position:fixed;z-index:40;right:max(20px,calc(env(safe-area-inset-right,0px) + 12px));bottom:calc(20px + env(safe-area-inset-bottom,0px));
+  width:268px;display:grid;grid-template-columns:minmax(0,1fr);gap:9px;padding:12px 14px 13px;color:var(--ink);font-family:var(--f-mono);
+  background:rgba(255,255,255,.94);border:1px solid var(--line-2);border-radius:18px;box-shadow:0 18px 50px rgba(43,15,32,.14);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.mon-top{display:flex;justify-content:space-between;align-items:center;gap:8px;font-weight:600;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.mon-pt{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.06em}
+.mon-btns{flex:none;display:flex;gap:6px}
+.mon-btn{padding:4px 8px;font:600 10.5px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink);background:#FFFFFF;border:1px solid var(--line-2);border-radius:999px;cursor:pointer;transition:border-color .2s,color .2s}
+@media (hover: hover){ .mon-btn:hover{border-color:var(--pink);color:var(--pink-lo)} }
+#ecg{display:block;width:100%;height:46px;border-radius:8px;background:var(--pink-50)}
+.mon-read{display:flex;justify-content:space-between;align-items:flex-end;gap:10px}
+.mon-label{display:block;margin-bottom:3px;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.mon-val{display:block;font:700 34px/.95 var(--f-display);letter-spacing:-.04em;font-variant-numeric:tabular-nums;transition:color .4s}
+.mon-hr{text-align:right}
+.mon-hr .mon-val{font-size:28px;color:var(--mon-trace)}
+.mon-side{display:grid;gap:6px;justify-items:start}
+.mon-status{padding:3px 9px;border-radius:999px;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;border:1px solid currentColor;color:var(--mon-trace)}
+.mon-note{font:500 13px/1.4 var(--f-ui);color:var(--muted)}
+.monitor[data-level="1"] .mon-status,.monitor[data-level="2"] .mon-status,.monitor[data-level="1"] .mon-bp .mon-val,.monitor[data-level="2"] .mon-bp .mon-val{color:var(--mon-amber)}
+.monitor[data-level="3"] .mon-status,.monitor[data-level="3"] .mon-bp .mon-val,.monitor[data-level="4"] .mon-bp .mon-val,
+.monitor[data-level="3"] .mon-hr .mon-val,.monitor[data-level="4"] .mon-hr .mon-val{color:var(--mon-red)}
+.monitor[data-level="4"] .mon-status{color:#FFFFFF;background:var(--mon-red);border-color:var(--mon-red);animation:blinkdot 1s steps(2,start) infinite}
+.monitor[data-level="4"]{border-color:rgba(217,45,53,.6);animation:mon-shake .5s linear infinite}
+@keyframes mon-shake{25%{translate:1px -1px}75%{translate:-1px 1px}}
+.monitor.min #ecg,.monitor.min .mon-note,.monitor.min .mon-hr{display:none}
+/* Netlify's badge owns the bottom-right corner: lift the desktop monitor above it. */
+@media (min-width: 641px){ .has-badge .monitor{bottom:calc(76px + env(safe-area-inset-bottom,0px))} }
+@media (pointer: coarse){ .monitor{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(255,255,255,.98)} }
+
+/* ---------- #debug readout (open the page with #debug at the end of the link) ---------- */
+.debug-box{position:fixed;z-index:130;left:8px;right:8px;top:calc(env(safe-area-inset-top,0px) + 8px);margin:0;padding:10px 12px;border-radius:12px;
+  background:rgba(43,15,32,.94);color:#FFE3EE;font:500 11.5px/1.55 var(--f-mono);white-space:pre-wrap;overflow-wrap:anywhere;pointer-events:none}
+.foot-build{margin-top:14px;font:600 11px/1.4 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+
+/* ---------- Toasts ---------- */
+.toasts{position:fixed;z-index:65;left:50%;top:calc(env(safe-area-inset-top,0px) + 86px);transform:translateX(-50%);width:min(calc(100vw - 32px),460px);display:grid;gap:8px;justify-items:center;pointer-events:none}
+.toast{padding:12px 18px;border-radius:16px;text-align:center;font-weight:600;font-size:14.5px;line-height:1.4;color:var(--ink);background:#FFFFFF;border:1px solid var(--line-3);box-shadow:0 16px 40px rgba(43,15,32,.16);animation:toast-in .5s var(--spring) both}
+.toast.out{animation:toast-out .4s var(--ease) forwards}
+@keyframes toast-in{from{opacity:0;transform:translateY(-14px) scale(.96)}}
+@keyframes toast-out{to{opacity:0;transform:translateY(-10px)}}
+
+@media (max-width: 980px){
+  .bahas{grid-template-columns:minmax(0,1fr)}
+  .roast{order:-1;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:6px 18px;padding:16px 18px}
+  .roast > *{grid-column:2}
+  .roast > .roast-score{grid-column:1;grid-row:1 / span 4}
+  .roast-score #roastNow{font-size:3.4rem}
+}
+@media (max-width: 640px){
+  body{padding-bottom:100px}
+  .chat-log{padding:12px;height:clamp(240px,42vh,360px)}
+  .msg{max-width:90%}
+  .e404-box{padding:24px 18px 20px}
+  /* Phone bar: controls on the top row, readings bottom-left, so the bottom-right stays free for Netlify's badge. */
+  .monitor{left:0;right:0;bottom:0;width:auto;border-width:1px 0 0;border-radius:18px 18px 0 0;align-items:center;gap:8px 10px;
+    padding:8px var(--gr) calc(8px + env(safe-area-inset-bottom,0px)) var(--gl);
+    grid-template-columns:minmax(40px,1fr) auto auto;grid-template-areas:"ecg status btns" "read read read"}
+  .has-badge .monitor{row-gap:12px}
+  .has-badge .mon-hr{display:none}
+  .mon-top,.mon-side{display:contents}
+  .mon-pt,.mon-note{display:none}
+  .mon-btns{grid-area:btns;gap:4px}
+  .mon-btn{padding:5px 7px;font-size:10px}
+  #ecg{grid-area:ecg;height:22px}
+  .mon-read{grid-area:read;justify-content:flex-start;align-items:flex-end;gap:20px}
+  .mon-hr{text-align:left}
+  .mon-status{grid-area:status;min-width:0;max-width:100%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:10px;letter-spacing:.05em;padding:3px 7px}
+  .mon-val{font-size:26px}
+  .mon-hr .mon-val{font-size:22px}
+}
+</style>
+</head>
+<body>
+<canvas id="bg3d" aria-hidden="true"></canvas>
+<script>try{var em=localStorage.getItem('emc-motion');if(!em&&location.hash==='#motion-off')em='off';if(em)document.documentElement.setAttribute('data-motion',em)}catch(e){if(location.hash==='#motion-off')document.documentElement.setAttribute('data-motion','off')}</script>
+<svg class="defs" aria-hidden="true" focusable="false">
+  <symbol id="i-pen" viewBox="0 0 32 32"><path d="M21.5 4.5l6 6L13 25l-7 1.5L7.5 19.5z"/><path d="M18.5 7.5l6 6"/><path d="M3 29.5c2.5-1.6 4.5.8 7-.8s4.5.8 7-.8 4.5.8 7-.8"/></symbol>
+  <symbol id="i-ego" viewBox="0 0 32 32"><rect x="5" y="4.5" width="22" height="6.5" rx="1.5"/><rect x="5" y="12.75" width="22" height="6.5" rx="1.5"/><rect x="5" y="21" width="22" height="6.5" rx="1.5"/><path d="M9.5 7.75h.01M9.5 16h.01M9.5 24.25h.01" stroke-width="2.6"/><path d="M15 7.75h7M15 16h7M15 24.25h7"/></symbol>
+  <symbol id="i-queue" viewBox="0 0 32 32"><circle cx="7" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><circle cx="25" cy="9" r="3"/><path d="M3 19c0-2.5 1.8-4 4-4s4 1.5 4 4M12 19c0-2.5 1.8-4 4-4s4 1.5 4 4M21 19c0-2.5 1.8-4 4-4s4 1.5 4 4"/><path d="M4 26.5h22M22 23l4 3.5-4 3.5"/></symbol>
+  <symbol id="i-wifi" viewBox="0 0 32 32"><path d="M4 12.5a17 17 0 0 1 24 0"/><path d="M8.2 16.8a11 11 0 0 1 15.6 0"/><path d="M12.4 21.1a5 5 0 0 1 7.2 0"/><path d="M16 25.5h.01" stroke-width="3"/></symbol>
+  <symbol id="i-api" viewBox="0 0 32 32"><path d="M11 5c-3 0-4 1.5-4 4v3.5c0 2-1 3.5-3 3.5 2 0 3 1.5 3 3.5V23c0 2.5 1 4 4 4"/><path d="M21 5c3 0 4 1.5 4 4v3.5c0 2 1 3.5 3 3.5-2 0-3 1.5-3 3.5V23c0 2.5-1 4-4 4"/><path d="M13.5 12.5a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.1 1-1.1 1.8v.8M16 21h.01" stroke-width="1.8"/></symbol>
+  <symbol id="i-crown" viewBox="0 0 32 32"><path d="M5 23L3.5 9.5l7 5.5L16 6l5.5 9 7-5.5L27 23z"/><path d="M5 27.5h22"/><path d="M12 19.5h8"/></symbol>
+  <symbol id="rk-eng" viewBox="0 0 60 140"><path d="M14 86L3 114h11zM46 86l11 28H46z" fill="#FF2E7E" stroke="#2B0F20" stroke-width="2" stroke-linejoin="round"/><path d="M30 4C19 19 14 39 14 62v52h32V62c0-23-5-43-16-58z" fill="#FFFFFF" stroke="#2B0F20" stroke-width="2"/><path d="M30 5c-6 7-10 15-12.6 24h25.2C40 20 36 12 30 5z" fill="#FF2E7E"/><circle cx="30" cy="50" r="8" fill="#FFE3EE" stroke="#2B0F20" stroke-width="2"/><path d="M26 47a5 5 0 0 1 5-3" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/><path d="M14 82h32v7H14z" fill="#FF2E7E"/><text x="30" y="73" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8" font-weight="600" fill="#2B0F20">ENG-1</text><path d="M21 114h18l-3 10H24z" fill="#2B0F20"/></symbol>
+  <symbol id="rk-doc" viewBox="0 0 60 140"><path d="M14 86L3 114h11z" fill="#CBBEC5" stroke="#2B0F20" stroke-width="2" stroke-linejoin="round"/><path d="M46 86l7 12-3 16h-4z" fill="#CBBEC5" stroke="#2B0F20" stroke-width="2" stroke-linejoin="round"/><path d="M30 4C19 19 14 39 14 62v52h32V62c0-23-5-43-16-58z" fill="#FFFFFF" stroke="#2B0F20" stroke-width="2"/><path d="M30 5c-6 7-10 15-12.6 24h25.2C40 20 36 12 30 5z" fill="#CBBEC5"/><circle cx="30" cy="46" r="8" fill="#F1E8EC" stroke="#2B0F20" stroke-width="2"/><path d="M25 41l4 5-2 3 5 4" fill="none" stroke="#2B0F20" stroke-width="1.4" stroke-linecap="round"/><path d="M27 60h6v6h6v6h-6v6h-6v-6h-6v-6h6z" fill="#E5484D"/><g transform="rotate(-24 30 94)"><rect x="17" y="90" width="26" height="8" rx="4" fill="#F4C9AE" stroke="#2B0F20" stroke-width="1.2"/><path d="M28 92.5h.01M32 92.5h.01M28 95.5h.01M32 95.5h.01" stroke="#2B0F20" stroke-width="1.6" stroke-linecap="round"/></g><text x="30" y="109" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7" font-weight="600" fill="#2B0F20">DR-1</text><path d="M21 114h18l-3 10H24z" fill="#2B0F20"/></symbol>
+  <symbol id="brain" viewBox="0 0 64 52"><path d="M31 6C26 2 17 2 14 8 8 8 4 13 5 19c-4 3-5 10-1 14-2 6 2 12 8 12 2 5 10 7 15 3 2 2 4 2 4 2z"/><path d="M33 6c5-4 14-4 17 2 6 0 10 5 9 11 4 3 5 10 1 14 2 6-2 12-8 12-2 5-10 7-15 3-2 2-4 2-4 2z"/><path d="M14 18c4-2 8 2 6 7M9 32c4-2 8 1 8 5M22 40c0-4 4-6 6-4M50 18c-4-2-8 2-6 7M55 32c-4-2-8 1-8 5M42 40c0-4-4-6-6-4" fill="none"/></symbol>
+  <symbol id="astro" viewBox="0 0 60 92"><rect x="7" y="36" width="46" height="34" rx="11" fill="#CBBEC5"/><rect x="12" y="34" width="36" height="40" rx="13"/><rect x="15" y="68" width="12" height="22" rx="5.5"/><rect x="33" y="68" width="12" height="22" rx="5.5"/><rect x="41" y="40" width="10" height="26" rx="5" transform="rotate(-18 46 53)"/><circle cx="30" cy="21" r="18"/><rect x="16" y="13" width="28" height="16" rx="8" fill="#2B0F20" stroke="#FF4F93" stroke-width="1.6"/><path d="M21 17.5h8" stroke="#FFD0E3" stroke-width="2" stroke-linecap="round"/><rect x="22" y="44" width="16" height="9" rx="2" fill="#FF2E7E" opacity=".9"/></symbol>
+  <symbol id="bust-doc" viewBox="0 0 100 100"><circle cx="50" cy="36" r="19"/><path d="M8 100c2-24 18-38 42-38s40 14 42 38z"/><path d="M41 63l9 20 9-20" fill="none" stroke="#FFFFFF" stroke-width="2.5" opacity=".55"/><path d="M34 64c-3 16 7 24 16 24s19-8 16-24" fill="none" stroke="#FF6B8E" stroke-width="3"/><circle cx="50" cy="89" r="4" fill="#FF6B8E"/></symbol>
+  <symbol id="bust-eng" viewBox="0 0 100 100"><circle cx="50" cy="36" r="19"/><path d="M8 100c2-24 18-38 42-38s40 14 42 38z"/><circle cx="42.5" cy="35" r="6" fill="none" stroke="#FF7AB0" stroke-width="2.4"/><circle cx="57.5" cy="35" r="6" fill="none" stroke="#FF7AB0" stroke-width="2.4"/><path d="M48.5 35h3" fill="none" stroke="#FF7AB0" stroke-width="2.4"/><rect x="28" y="86" width="44" height="14" rx="2" fill="#2F4F70"/><path d="M30 86h40" stroke="#8FC4F0" stroke-width="1.5" opacity=".8"/></symbol>
+  <symbol id="stick-doc" viewBox="0 0 40 80"><circle cx="20" cy="10" r="7" stroke="none"/><path d="M20 17v31M20 25L7 11M20 25l13-14M20 48L10 74M20 48l10 26" fill="none"/><path d="M14.5 18c0 9 11 9 11 0" fill="none" stroke="#FF6B8E" stroke-width="2"/><circle cx="20" cy="27.5" r="2" fill="#FF6B8E" stroke="none"/></symbol>
+  <symbol id="stick-eng" viewBox="0 0 40 80"><circle cx="18" cy="10" r="7" stroke="none"/><path d="M18 17v31M18 25L9 42M18 25l9 10 2-6M18 48L11 74M18 48l7 26" fill="none"/><circle cx="15" cy="10" r="2.6" fill="none" stroke="#FF4F93" stroke-width="1.4"/><circle cx="21.5" cy="10" r="2.6" fill="none" stroke="#FF4F93" stroke-width="1.4"/><rect x="27" y="22" width="6" height="8" rx="1" fill="#FF4F93" stroke="none"/></symbol>
+  <symbol id="scr-a" viewBox="0 0 100 60"><path d="M6 40c8-20 14-20 16-6s8 16 14-4 10-16 14 4 10 16 16-6 14-10 18 8 8 8 12-6"/></symbol>
+  <symbol id="scr-b" viewBox="0 0 100 60"><path d="M6 30c4 16 12 16 16-4s8 24 16 14 6-18 14-12 4 20 12 16 6-24 16-20 2 20 14 16"/><path d="M30 50c14 4 34 4 50-2"/></symbol>
+  <symbol id="scr-c" viewBox="0 0 100 60"><path d="M8 38l10-16 6 18 10-22 6 24 12-18c6-6 10 16 18 12s6-16 16-10l8 8"/><path d="M28 12h.01M62 14h.01" stroke-width="5"/></symbol>
+</svg>
+<div class="vignette" aria-hidden="true"></div>
+<div class="rage" id="rage" aria-hidden="true"></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="cursor" id="cursor" aria-hidden="true"><span class="cursor-label" id="cursorLabel"></span></div>
+<div class="pre" id="pre" aria-hidden="true">
+  <div class="pre-in">
+    <svg class="pre-mark" viewBox="0 0 420 90"><text x="210" y="62" text-anchor="middle">MISSION CONTROL</text></svg>
+    <p class="pre-line"><span>Systems check</span><b id="preN">T-3</b></p>
+    <span class="pre-bar"><i></i></span>
+  </div>
+</div>
+<a class="skip" href="#main">Content pe jao</a>
+
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">EMC</span>
+      <span class="brand-text"><b>Engineer Mission Control</b><small>Ground control for doctors</small></span>
+    </a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#launch">Launch</a>
+      <a href="#why">Checklist</a>
+      <a href="#memes">Memes</a>
+      <a href="#bahas">Comms</a>
+      <a href="#packages">Rescue</a>
+    </nav>
+    <a class="btn btn-pink btn-sm nav-cta" href="#packages" data-magnetic>Rescue book karo</a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu kholo"><i></i><i></i></button>
+  </div>
+</header>
+<div class="menu" id="menu" hidden>
+  <nav class="menu-links" aria-label="Menu">
+    <a href="#launch">Launch</a>
+    <a href="#services">Services</a>
+    <a href="#why">Checklist</a>
+    <a href="#memes">Memes</a>
+    <a href="#bahas">Comms</a>
+    <a href="#packages">Rescue</a>
+    <a href="#appeal">Anomaly</a>
+  </nav>
+  <p class="menu-foot">Engineer Mission Control · Doctor-1 status: NO-GO</p>
+</div>
+
+<main id="main">
+  <section class="hero" id="top" aria-labelledby="heroTitle">
+    <div class="hero-in">
+      <p class="kicker hero-kicker"><span class="live-dot" aria-hidden="true"></span>Mission control · Live</p>
+      <h1 class="hero-title" id="heroTitle">
+        <span class="hl">Engineers are <em>mission control.</em></span>
+        <span class="hl">Doctors are the <em>failed spacecraft.</em></span>
+      </h1>
+      <p class="hero-sub">Houston, humare paas ek doctor hai.</p>
+      <div class="hero-status" aria-label="Mission status">
+        <span class="st st-go">Engineer-1 · GO</span>
+        <span class="st st-bad">Doctor-1 · NO-GO</span>
+        <span class="st st-clock">T+<b id="missionClock">00:00:00</b></span>
+      </div>
+      <div class="hero-cta">
+        <a class="btn btn-pink" href="#launch" data-magnetic>Launch dekho</a>
+        <button class="btn btn-doc" type="button" data-404 data-magnetic="-0.22">Why doctors are better</button>
+      </div>
+    </div>
+    <div class="hero-notes" aria-hidden="true"><span>Orbit 408 km · Incl. 51.6°</span><span>Telemetry: nominal (sirf engineers)</span></div>
+    <a class="scroll-cue" href="#proof"><span>Scroll karo</span><i aria-hidden="true"></i></a>
+  </section>
+
+  <section class="proof" id="proof" aria-label="Mission stats">
+    <div class="wrap">
+      <ul class="stats">
+        <li class="stat"><b class="stat-n" data-from="11" data-to="4">4</b><span class="stat-l">saal ki training</span><span class="stat-s">Doctor: 11</span></li>
+        <li class="stat"><b class="stat-n" data-from="0" data-to="100" data-suffix="%">100%</b><span class="stat-l">launches successful</span><span class="stat-s">Doctor: dekhte hain</span></li>
+        <li class="stat"><b class="stat-n" data-from="999" data-to="0">0</b><span class="stat-l">unreadable prescriptions</span><span class="stat-s">Doctor: ginti band</span></li>
+        <li class="stat stat-inf"><b class="stat-n"><span class="inf-8" aria-hidden="true">8</span><span class="inf-sym">∞</span></b><span class="stat-l">Ctrl+Z</span><span class="stat-s">Doctor: 0</span></li>
+      </ul>
+      <p class="kicker marquee-k">Mission partners: har hospital machine</p>
+    </div>
+    <div class="marquee">
+      <div class="mq"><div class="mq-track">
+        <span class="mq-g"><span>MRI</span><span>CT Scan</span><span>Ventilator</span><span>ECG</span><span>Pacemaker</span><span>X-Ray</span><span>Dialysis</span><span>Defibrillator</span></span>
+        <span class="mq-g" aria-hidden="true"><span>MRI</span><span>CT Scan</span><span>Ventilator</span><span>ECG</span><span>Pacemaker</span><span>X-Ray</span><span>Dialysis</span><span>Defibrillator</span></span>
+      </div></div>
+      <div class="mq mq-rev"><div class="mq-track">
+        <span class="mq-g"><span>Hospital WiFi</span><span>Billing software</span><span>Lift</span><span>AC</span><span>Generator</span><span>CCTV</span><span>Token display</span><span>Coffee machine</span></span>
+        <span class="mq-g" aria-hidden="true"><span>Hospital WiFi</span><span>Billing software</span><span>Lift</span><span>AC</span><span>Generator</span><span>CCTV</span><span>Token display</span><span>Coffee machine</span></span>
+      </div></div>
+    </div>
+  </section>
+
+  <section class="sec launch" id="launch" aria-labelledby="h-launch">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="kicker">Live launch</p>
+        <h2 class="sec-title" id="h-launch">Engineer ka spaceship chalta hai. Doctor ka <em>nahi.</em></h2>
+        <p class="sec-sub">Launch dabao. Dono saath udenge. Pahunchega sirf ek.</p>
+      </header>
+      <div class="pad" id="pad" data-state="ready">
+        <article class="bay bay-eng" aria-label="Engineer-1 telemetry">
+          <div class="bay-head"><span class="bay-name">ENGINEER-1</span><span class="tag tag-go" id="engStatus">GO</span></div>
+          <div class="bay-sky">
+            <ul class="scale" aria-hidden="true"><li>400 km</li><li>300</li><li>200</li><li>100</li><li>0</li></ul>
+            <svg class="traj" aria-hidden="true"><path class="traj-line" d=""/></svg>
+            <p class="orbit-ok">Orbit reached · 408 km</p>
+            <span class="tower" aria-hidden="true"></span>
+            <div class="ship" aria-hidden="true"><svg viewBox="0 0 60 140"><use href="#rk-eng"/></svg><span class="flame"></span></div>
+            <span class="ground" aria-hidden="true"></span>
+          </div>
+          <dl class="tele">
+            <div><dt>Altitude</dt><dd id="engAlt">0 km</dd></div>
+            <div><dt>Velocity</dt><dd id="engVel">0.0 km/s</dd></div>
+            <div><dt>Fuel</dt><dd id="engFuel">100%</dd></div>
+            <div><dt>Comms</dt><dd id="engComms">Clear</dd></div>
+          </dl>
+        </article>
+        <article class="bay bay-doc" aria-label="Doctor-1 telemetry">
+          <div class="bay-head"><span class="bay-name">DOCTOR-1</span><span class="tag tag-bad" id="docStatus">NO-GO</span></div>
+          <div class="bay-sky">
+            <ul class="scale" aria-hidden="true"><li>400 km</li><li>300</li><li>200</li><li>100</li><li>0</li></ul>
+            <svg class="traj" aria-hidden="true"><path class="traj-line" d=""/></svg>
+            <p class="fail-stamp">Mission failed</p>
+            <span class="tower" aria-hidden="true"></span>
+            <div class="ship" aria-hidden="true"><svg viewBox="0 0 60 140"><use href="#rk-doc"/></svg><span class="flame"></span><span class="puff p1"></span><span class="puff p2"></span><span class="puff p3"></span><span class="puff p4"></span></div>
+            <span class="crash" aria-hidden="true"></span>
+            <span class="ground" aria-hidden="true"></span>
+          </div>
+          <dl class="tele">
+            <div><dt>Altitude</dt><dd id="docAlt">0 m</dd></div>
+            <div><dt>Velocity</dt><dd id="docVel">0 m/s</dd></div>
+            <div><dt>Fuel</dt><dd id="docFuel">Pata nahi</dd></div>
+            <div><dt>Comms</dt><dd id="docComms">“Dekhte hain”</dd></div>
+          </dl>
+        </article>
+      </div>
+      <div class="pad-ctl">
+        <button class="btn btn-pink" id="launchBtn" type="button" data-magnetic>Launch</button>
+        <p class="countdown" id="countdown" aria-live="polite">T-00:03 · Standby</p>
+      </div>
+      <ol class="mlog" id="mlog" aria-label="Mission log">
+        <li><time>T-00:10</time>Engineer-1: all systems GO.</li>
+        <li class="bad"><time>T-00:10</time>Doctor-1: “Dekhte hain.”</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec" id="services" aria-labelledby="h-svc">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="kicker">Ground support</p>
+        <h2 class="sec-title" id="h-svc">Doctor ki problem. <em>Mission control</em> ka solution.</h2>
+      </header>
+      <ul class="svc-grid">
+        <li><button class="svc" type="button" aria-pressed="false" data-cursor="Palto"><span class="svc-tilt"><span class="svc-in">
+          <span class="svc-face svc-front"><svg class="svc-ic" aria-hidden="true"><use href="#i-pen"/></svg><span class="svc-t">Handwriting Decoder</span><span class="svc-d">Prescription ka signal clean kar dete hain.</span><span class="svc-hint" aria-hidden="true">Palat ke dekho ↻</span></span>
+          <span class="svc-face svc-back"><span class="svc-k">Doctor ka reaction</span><span class="svc-q">“Ye font mera nahi hai.”</span></span>
+        </span><span class="svc-glare" aria-hidden="true"></span></span></button></li>
+        <li><button class="svc" type="button" aria-pressed="false" data-cursor="Palto"><span class="svc-tilt"><span class="svc-in">
+          <span class="svc-face svc-front"><svg class="svc-ic" aria-hidden="true"><use href="#i-ego"/></svg><span class="svc-t">Ego Load Balancing</span><span class="svc-d">Ego ab teen servers pe chalega.</span><span class="svc-hint" aria-hidden="true">Palat ke dekho ↻</span></span>
+          <span class="svc-face svc-back"><span class="svc-k">Result</span><span class="svc-q">Teeno server crash ho gaye.</span></span>
+        </span><span class="svc-glare" aria-hidden="true"></span></span></button></li>
+        <li><button class="svc" type="button" aria-pressed="false" data-cursor="Palto"><span class="svc-tilt"><span class="svc-in">
+          <span class="svc-face svc-front"><svg class="svc-ic" aria-hidden="true"><use href="#i-queue"/></svg><span class="svc-t">OPD Trajectory Fix</span><span class="svc-d">Token 48 se seedha token 4.</span><span class="svc-hint" aria-hidden="true">Palat ke dekho ↻</span></span>
+          <span class="svc-face svc-back"><span class="svc-k">Doctor ka reaction</span><span class="svc-q">“Itni jaldi? Fees double.”</span></span>
+        </span><span class="svc-glare" aria-hidden="true"></span></span></button></li>
+        <li><button class="svc" type="button" aria-pressed="false" data-cursor="Palto"><span class="svc-tilt"><span class="svc-in">
+          <span class="svc-face svc-front"><svg class="svc-ic" aria-hidden="true"><use href="#i-wifi"/></svg><span class="svc-t">Comms Rescue</span><span class="svc-d">Hospital WiFi ko “admin123” se azaadi.</span><span class="svc-hint" aria-hidden="true">Palat ke dekho ↻</span></span>
+          <span class="svc-face svc-back"><span class="svc-k">Naya password</span><span class="svc-q">gashai123</span></span>
+        </span><span class="svc-glare" aria-hidden="true"></span></span></button></li>
+        <li><button class="svc" type="button" aria-pressed="false" data-cursor="Palto"><span class="svc-tilt"><span class="svc-in">
+          <span class="svc-face svc-front"><svg class="svc-ic" aria-hidden="true"><use href="#i-api"/></svg><span class="svc-t">Second Opinion API</span><span class="svc-d">“Dekhte hain” ka actual matlab.</span><span class="svc-hint" aria-hidden="true">Palat ke dekho ↻</span></span>
+          <span class="svc-face svc-back"><span class="svc-k">API response</span><span class="svc-q">404: matlab nahi mila</span></span>
+        </span><span class="svc-glare" aria-hidden="true"></span></span></button></li>
+        <li><button class="svc" type="button" aria-pressed="false" data-cursor="Palto"><span class="svc-tilt"><span class="svc-in">
+          <span class="svc-face svc-front"><svg class="svc-ic" aria-hidden="true"><use href="#i-crown"/></svg><span class="svc-t">God Mode Uninstall</span><span class="svc-d">Ab aap bhi insaan ho. Welcome.</span><span class="svc-hint" aria-hidden="true">Palat ke dekho ↻</span></span>
+          <span class="svc-face svc-back"><span class="svc-k">Status</span><span class="svc-q">Uninstall failed: ego in use.</span></span>
+        </span><span class="svc-glare" aria-hidden="true"></span></span></button></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="bigline" aria-hidden="true">
+    <p class="bl-row"><span>Mission control</span><i>✦</i><em>GO</em><i>✦</i><span>Telemetry</span><i>✦</i><em>Ctrl+Z</em><i>✦</i><span>Orbit</span><i>✦</i><em>Launch</em></p>
+    <p class="bl-row"><em>Houston</em><i>✦</i><span>No-go</span><i>✦</i><em>Gas hai</em><i>✦</i><span>Flameout</span><i>✦</i><em>Abort</em><i>✦</i><span>Dekhte hain</span></p>
+  </div>
+
+  <section class="sec why" id="why" aria-labelledby="h-why">
+    <div class="why-stage">
+      <div class="wrap why-in">
+        <header class="sec-head why-head">
+          <p class="kicker">Go / No-go poll</p>
+          <h2 class="sec-title" id="h-why">Engineers doctors se <em>superior</em> kyun hain</h2>
+        </header>
+        <div class="ring-wrap">
+          <ol class="ring" id="ring">
+            <li class="rc"><span class="rc-n">01</span><span class="rc-t">Ctrl + Z</span><span class="rc-d">Humare paas undo hai. Doctor ke paas sirf sorry.</span><span class="rc-poll"><b>ENG · GO</b><i>DR · NO-GO</i></span></li>
+            <li class="rc"><span class="rc-n">02</span><span class="rc-t">4 saal</span><span class="rc-d">Degree done. Doctor abhi bhi internship mein.</span><span class="rc-poll"><b>ENG · GO</b><i>DR · NO-GO</i></span></li>
+            <li class="rc"><span class="rc-n">03</span><span class="rc-t">Readable</span><span class="rc-d">Humara font Arial hai. Unka seismograph.</span><span class="rc-poll"><b>ENG · GO</b><i>DR · NO-GO</i></span></li>
+            <li class="rc"><span class="rc-n">04</span><span class="rc-t">Machines</span><span class="rc-d">MRI, ECG, ventilator. Sab humne banaye.</span><span class="rc-poll"><b>ENG · GO</b><i>DR · NO-GO</i></span></li>
+            <li class="rc"><span class="rc-n">05</span><span class="rc-t">WFH</span><span class="rc-d">Hum ghar se kaam karte hain. Doctor 36 ghante hospital mein.</span><span class="rc-poll"><b>ENG · GO</b><i>DR · NO-GO</i></span></li>
+            <li class="rc"><span class="rc-n">06</span><span class="rc-t">Root cause</span><span class="rc-d">Hum bug dhoondhte hain. Woh bolte hain “gas hai”.</span><span class="rc-poll"><b>ENG · GO</b><i>DR · NO-GO</i></span></li>
+          </ol>
+        </div>
+        <div class="ring-ui">
+          <p class="ring-count" aria-hidden="true"><b id="ringNow">01</b> / 06</p>
+          <div class="ring-dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
+          <button class="btn btn-doc btn-sm" type="button" data-404>Aur doctors better kyun hain?</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec memes" id="memes" aria-labelledby="h-memes">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="kicker">Meme portfolio</p>
+        <h2 class="sec-title" id="h-memes">Internet ke formats. <em>Engineer</em> ki zubaan.</h2>
+      </header>
+      <div class="mfilter" role="group" aria-label="Memes filter">
+        <button class="chip" type="button" aria-pressed="true" data-f="all">Sab <span>9</span></button>
+        <button class="chip" type="button" aria-pressed="false" data-f="classic">Classic <span>6</span></button>
+        <button class="chip" type="button" aria-pressed="false" data-f="desi">Desi <span>3</span></button>
+        <button class="chip" type="button" aria-pressed="false" data-f="play">Khelo <span>2</span></button>
+      </div>
+      <ul class="mgrid" id="mgrid">
+        <li class="meme" data-tags="classic">
+          <figure class="mcard">
+            <div class="mc m-drake">
+              <div class="dk-row dk-no"><span class="dk-pic" aria-hidden="true"><span class="dk-e">🙅‍♂️</span></span><p class="dk-t">4 ghante OPD line mein khade rehna</p></div>
+              <div class="dk-row dk-yes"><span class="dk-pic" aria-hidden="true"><span class="dk-e">😏</span><i>👉</i></span><p class="dk-t">Appointment app khud banana aur token #1 le lena</p></div>
+            </div>
+            <figcaption class="mfoot"><span class="mformat">Format: Nahi / Haan</span><button class="lol" type="button"><span aria-hidden="true">😂</span> <b>0</b><span class="sr"> baar hase</span></button></figcaption>
+          </figure>
+        </li>
+        <li class="meme" data-tags="classic">
+          <figure class="mcard">
+            <div class="mc m-nobody">
+              <p class="nb-l">Nobody:</p>
+              <p class="nb-l">Bilkul koi nahi:</p>
+              <p class="nb-l nb-who">Doctor ki handwriting:</p>
+              <svg class="nb-scribble" viewBox="0 0 320 90" aria-hidden="true"><path class="draw" d="M10 58c12-8 16-40 24-38s-4 42 6 42 12-28 20-26-2 26 10 24 10-40 20-38-14 44 0 42 8-18 18-20 4 22 16 18 6-46 16-44-14 54 2 50 10-22 22-20-6 18 8 16 10-32 20-30-16 36 2 34 12-14 22-12 0 12 12 8 10-28 18-26"/><path class="draw" d="M40 78c40 10 120 8 190-2s60-14 80-8"/></svg>
+              <p class="nb-cap">Chemist bhaiya: “Paracetamol hai.”</p>
+            </div>
+            <figcaption class="mfoot"><span class="mformat">Format: Nobody</span><button class="lol" type="button"><span aria-hidden="true">😂</span> <b>0</b><span class="sr"> baar hase</span></button></figcaption>
+          </figure>
+        </li>
+        <li class="meme" data-tags="classic">
+          <figure class="mcard">
+            <div class="mc m-brain">
+              <div class="br-row"><p>Doctor se poochna</p><span class="br-pic" aria-hidden="true"><svg viewBox="0 0 64 52"><use href="#brain"/></svg></span></div>
+              <div class="br-row"><p>Google se poochna</p><span class="br-pic" aria-hidden="true"><svg viewBox="0 0 64 52"><use href="#brain"/></svg></span></div>
+              <div class="br-row"><p>AI se poochna</p><span class="br-pic" aria-hidden="true"><svg viewBox="0 0 64 52"><use href="#brain"/></svg></span></div>
+              <div class="br-row"><p>AI banane wale engineer se poochna</p><span class="br-pic" aria-hidden="true"><svg viewBox="0 0 64 52"><use href="#brain"/></svg></span></div>
+            </div>
+            <figcaption class="mfoot"><span class="mformat">Format: Expanding brain</span><button class="lol" type="button"><span aria-hidden="true">😂</span> <b>0</b><span class="sr"> baar hase</span></button></figcaption>
+          </figure>
+        </li>
+        <li class="meme" data-tags="classic play">
+          <figure class="mcard">
+            <div class="mc m-buttons">
+              <div class="bt-panel">
+                <button class="bt bt-a" id="btCredit" type="button">Engineer ko credit do</button>
+                <button class="bt bt-b" id="btEgo" type="button">Ego bachao</button>
+              </div>
+              <div class="bt-guy" aria-hidden="true"><span class="bt-face">😰</span><i class="drop d1"></i><i class="drop d2"></i><i class="drop d3"></i></div>
+              <p class="bt-label">Doctor sahab, har roz</p>
+              <p class="bt-out" id="btOut" aria-live="polite">Credit wala button dabao. Agar dab sake.</p>
+            </div>
+            <figcaption class="mfoot"><span class="mformat">Format: Two buttons · Khelo</span><button class="lol" type="button"><span aria-hidden="true">😂</span> <b>0</b><span class="sr"> baar hase</span></button></figcaption>
+          </figure>
+        </li>
+        <li class="meme" data-tags="classic">
+          <figure class="mcard">
+            <div class="mc m-always">
+              <span class="al-stars" aria-hidden="true"></span>
+              <span class="al-planet" aria-hidden="true"><b>+</b></span>
+              <svg class="al-a2" viewBox="0 0 60 92" aria-hidden="true"><use href="#astro"/></svg>
+              <svg class="al-a1" viewBox="0 0 60 92" aria-hidden="true"><use href="#astro"/></svg>
+              <p class="al-t1">Wait, poora hospital engineering hai?</p>
+              <p class="al-t2">Always has been.</p>
+            </div>
+            <figcaption class="mfoot"><span class="mformat">Format: Always has been</span><button class="lol" type="button"><span aria-hidden="true">😂</span> <b>0</b><span class="sr"> baar hase</span></button></figcaption>
+          </figure>
+        </li>
+        <li class="meme" data-tags="desi">
+          <figure class="mcard">
+            <div class="mc m-deewaar">
+              <div class="dw-frame dw-1">
+                <span class="dw-who">Doctor</span>
+                <svg class="dw-fig" viewBox="0 0 100 100" aria-hidden="true"><use href="#bust-doc"/></svg>
+                <p class="dw-sub">Aaj mere paas MBBS hai, MD hai, white coat hai… tumhare paas kya hai?</p>
+              </div>
+              <div class="dw-frame dw-2">
+                <span class="dw-who">Engineer</span>
+                <svg class="dw-fig" viewBox="0 0 100 100" aria-hidden="true"><use href="#bust-eng"/></svg>
+                <p class="dw-sub"><span class="dw-type">Mere paas… Work From Home hai.</span></p>
+              </div>
+            </div>
+            <figcaption class="mfoot"><span class="mformat">Format: Deewaar dialogue</span><button class="lol" type="button"><span aria-hidden="true">😂</span> <b>0</b><span class="sr"> baar hase</span></button></figcaption>
+          </figure>
+        </li>
+        <li class="meme" data-tags="classic">
+          <figure class="mcard">
+            <div class="mc m-party">
+              <p class="pt-cap">Doctors ki party mein engineer:</p>
+              <div class="pt-scene" aria-hidden="true">
+                <span class="pt-ball"></span>
+                <svg class="pt-doc pd1" viewBox="0 0 40 80"><use href="#stick-doc"/></svg>
+                <svg class="pt-doc pd2" viewBox="0 0 40 80"><use href="#stick-doc"/></svg>
+                <svg class="pt-doc pd3" viewBox="0 0 40 80"><use href="#stick-doc"/></svg>
+                <svg class="pt-eng" viewBox="0 0 40 80"><use href="#stick-eng"/></svg>
+              </div>
+              <p class="pt-think">Inko nahi pata inki MRI maine theek ki hai.</p>
+            </div>
+            <figcaption class="mfoot"><span class="mformat">Format: They don't know</span><button class="lol" type="button"><span aria-hidden="true">😂</span> <b>0</b><span class="sr"> baar hase</span></button></figcaption>
+          </figure>
+        </li>
+        <li class="meme" data-tags="desi">
+          <figure class="mcard">
+            <div class="mc m-rel">
+              <div class="rl-row rl-1">
+                <p class="rl-q">Rishtedaar: “Beta, doctor ho?”</p>
+                <p class="rl-a">“Zara ghutna dekh lo.”</p>
+                <span class="rl-ic" aria-hidden="true">🦵</span>
+              </div>
+              <div class="rl-row rl-2">
+                <span class="rl-rain" aria-hidden="true"><i>📺</i><i>📶</i><i>🖨️</i><i>💻</i><i>📱</i><i>🔌</i></span>
+                <p class="rl-q">Rishtedaar: “Beta, engineer ho?”</p>
+                <p class="rl-a">“TV, fridge, WiFi, printer… aur padosi ka laptop bhi.”</p>
+              </div>
+            </div>
+            <figcaption class="mfoot"><span class="mformat">Format: Rishtedaar logic</span><button class="lol" type="button"><span aria-hidden="true">😂</span> <b>0</b><span class="sr"> baar hase</span></button></figcaption>
+          </figure>
+        </li>
+        <li class="meme" data-tags="desi play">
+          <figure class="mcard">
+            <div class="mc m-cap">
+              <div class="cp-head"><span>Select all squares with</span><b>Paracetamol</b><small>Doctor ki handwriting edition</small></div>
+              <div class="cp-grid" id="cpGrid" role="group" aria-label="Prescription ke 9 tukde">
+                <button class="cp-t" type="button" aria-pressed="false" aria-label="Tukda 1"><svg viewBox="0 0 100 60" aria-hidden="true"><use href="#scr-a"/></svg></button>
+                <button class="cp-t v2" type="button" aria-pressed="false" aria-label="Tukda 2"><svg viewBox="0 0 100 60" aria-hidden="true"><use href="#scr-b"/></svg></button>
+                <button class="cp-t" type="button" aria-pressed="false" aria-label="Tukda 3"><svg viewBox="0 0 100 60" aria-hidden="true"><use href="#scr-c"/></svg></button>
+                <button class="cp-t v3" type="button" aria-pressed="false" aria-label="Tukda 4"><svg viewBox="0 0 100 60" aria-hidden="true"><use href="#scr-b"/></svg></button>
+                <button class="cp-t v2" type="button" aria-pressed="false" aria-label="Tukda 5"><svg viewBox="0 0 100 60" aria-hidden="true"><use href="#scr-c"/></svg></button>
+                <button class="cp-t v3" type="button" aria-pressed="false" aria-label="Tukda 6"><svg viewBox="0 0 100 60" aria-hidden="true"><use href="#scr-a"/></svg></button>
+                <button class="cp-t v3" type="button" aria-pressed="false" aria-label="Tukda 7"><svg viewBox="0 0 100 60" aria-hidden="true"><use href="#scr-c"/></svg></button>
+                <button class="cp-t v2" type="button" aria-pressed="false" aria-label="Tukda 8"><svg viewBox="0 0 100 60" aria-hidden="true"><use href="#scr-a"/></svg></button>
+                <button class="cp-t" type="button" aria-pressed="false" aria-label="Tukda 9"><svg viewBox="0 0 100 60" aria-hidden="true"><use href="#scr-b"/></svg></button>
+              </div>
+              <div class="cp-foot"><p class="cp-msg" id="cpMsg" aria-live="polite">Jo tukde Paracetamol lagein, unhe chuno.</p><button class="cp-go" id="cpGo" type="button">Verify</button></div>
+            </div>
+            <figcaption class="mfoot"><span class="mformat">Format: CAPTCHA · Khelo</span><button class="lol" type="button"><span aria-hidden="true">😂</span> <b>0</b><span class="sr"> baar hase</span></button></figcaption>
+          </figure>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec" id="bahas" aria-labelledby="h-bahas">
+    <div class="wrap">
+      <header class="sec-head">
+        <p class="kicker">Comms · Doctor-1</p>
+        <h2 class="sec-title" id="h-bahas">Doctor-1 se <em>radio</em> contact.</h2>
+        <p class="sec-sub">5 taunts. Har taunt ke 3 jawab. Signal weak hai, ego strong.</p>
+      </header>
+      <div class="bahas">
+        <div class="chat">
+          <div class="chat-head">
+            <span class="chat-av" aria-hidden="true">Dr</span>
+            <span class="chat-who"><span class="chat-name">Doctor-1 · Dr. Sahab (MBBS, MD)</span><span class="chat-status" id="chatStatus">online</span></span>
+          </div>
+          <div class="chat-log" id="chatLog" role="log" aria-live="polite" aria-label="Doctor-1 ke saath chat"></div>
+          <div class="chat-replies" id="chatReplies" aria-label="Apna jawab chuno"></div>
+        </div>
+        <aside class="roast" aria-label="Roast meter">
+          <p class="kicker">Roast meter</p>
+          <p class="roast-score"><span id="roastNow">0</span><span class="roast-of">/ 15</span></p>
+          <div class="roast-bar" aria-hidden="true"><i id="roastBar"></i></div>
+          <p class="roast-round" id="roastRound">Round 1 / 5</p>
+          <p class="roast-rank">Rank: <strong id="roastRank">Fresher</strong></p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="packages" aria-labelledby="h-pkg">
+    <div class="wrap">
+      <header class="sec-head center">
+        <p class="kicker">Rescue packages</p>
+        <h2 class="sec-title" id="h-pkg">Doctor spacecraft ke liye <em>rescue</em> plans</h2>
+      </header>
+      <div class="pkg-top">
+        <div class="bill" data-bill="mo" role="group" aria-label="Billing">
+          <button class="bill-opt" type="button" aria-pressed="true" data-bill="mo">Mahine ka</button>
+          <button class="bill-opt" type="button" aria-pressed="false" data-bill="ego">Per ego</button>
+          <span class="bill-pill" aria-hidden="true"></span>
+        </div>
+      </div>
+      <div class="plans">
+        <article class="plan">
+          <h3 class="plan-name">Low Orbit</h3>
+          <p class="plan-price"><span class="cur">₹</span><span class="amt" data-mo="0" data-ego="0">0</span><span class="per" data-mo="/ mahina" data-ego="/ ego">/ mahina</span></p>
+          <ul class="plan-list"><li>Door se hans denge</li><li>Handwriting pe ek meme</li><li>Reply: “seen”</li></ul>
+          <button class="btn plan-cta" type="button" data-cta="basic">Free mein lo</button>
+        </article>
+        <article class="plan plan-hot">
+          <p class="plan-badge">Doctors ka favourite</p>
+          <h3 class="plan-name">Moon Mission</h3>
+          <p class="plan-price"><span class="cur">₹</span><span class="amt" data-mo="4999" data-ego="49999">4,999</span><span class="per" data-mo="/ mahina" data-ego="/ ego">/ mahina</span></p>
+          <ul class="plan-list"><li>Handwriting → Arial</li><li>WiFi password: gashai123</li><li>OPD queue algorithm</li><li>Ego ka monthly backup</li></ul>
+          <button class="btn btn-pink plan-cta" type="button" data-cta="gold">Moon book karo</button>
+        </article>
+        <article class="plan">
+          <h3 class="plan-name">Mars</h3>
+          <p class="plan-price"><span class="amt amt-word">Priceless</span></p>
+          <ul class="plan-list"><li>Engineer ko bhagwan maano</li><li>Saare “gas hai” delete</li><li>24×7 Ctrl+Z</li></ul>
+          <button class="btn plan-cta" type="button" data-cta="plat">Mars jao</button>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="appeal" aria-labelledby="h-app">
+    <div class="wrap appeal">
+      <div class="appeal-l">
+        <header class="sec-head">
+          <p class="kicker">Anomaly desk</p>
+          <h2 class="sec-title" id="h-app">Mission fail? <em>Report</em> file karo.</h2>
+          <p class="sec-sub">Apna argument likho. Mission control 0.2 second mein reject karega.</p>
+        </header>
+        <form class="appeal-form" id="appealForm" novalidate>
+          <label class="sr" for="appealText">Aapka argument</label>
+          <textarea id="appealText" name="appeal" rows="4" maxlength="220" placeholder="Jaise: Doctors zindagi bachate hain…"></textarea>
+          <div class="appeal-row"><span class="appeal-count" id="appealCount">0/220</span><button class="btn btn-pink" type="submit">Report file karo</button></div>
+        </form>
+      </div>
+      <div class="verdict" id="verdict" aria-live="polite">
+        <p class="verdict-k" id="verdictK">Pichli report · example</p>
+        <p class="verdict-q" id="verdictQ">“Doctors zindagi bachate hain.”</p>
+        <span class="stamp" aria-hidden="true">Rejected</span>
+        <p class="verdict-a" id="verdictA">Zindagi aap bachate ho. Ventilator hum banate hain. Credit split: 0–100.</p>
+        <p class="verdict-foot">Case no. EMC-404 · Flight director: Engineer · Jury: bhi Engineer</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" id="contact">
+  <div class="wrap">
+    <p class="foot-big" aria-hidden="true">Mission <em>Control</em></p>
+    <dl class="tblock">
+      <div><dt>Mission</dt><dd>Engineer vs Doctor</dd></div>
+      <div><dt>Flight director</dt><dd>Engineer</dd></div>
+      <div><dt>CAPCOM</dt><dd>Engineer</dd></div>
+      <div><dt>Doctor-1</dt><dd>NO-GO</dd></div>
+      <div><dt>Log no.</dt><dd>EMC-2026-404</dd></div>
+      <div><dt>Orbit</dt><dd>408 km</dd></div>
+      <div><dt>Rev.</dt><dd>G</dd></div>
+      <div><dt>Sheet</dt><dd>1 of 1</dd></div>
+    </dl>
+    <div class="foot-row">
+      <p class="foot-note">Satire hai. Doctors, aap bhi great ho. Bas handwriting…</p>
+      <div class="foot-btns">
+        <button class="btn btn-sm" id="motionToggle" type="button">Animations band karo</button>
+        <a class="btn btn-sm" href="#top" data-magnetic>Upar chalo ↑</a>
+      </div>
+    </div>
+    <p class="foot-build" id="buildTag">Build v10</p>
+  </div>
+</footer>
+
+<aside class="monitor" id="monitor" data-level="0" aria-label="Doctor-1 ka blood pressure monitor">
+  <div class="mon-top">
+    <span class="mon-pt">Crew vitals · Doctor-1</span>
+    <span class="mon-btns">
+      <button class="mon-btn" id="unitBtn" type="button" aria-pressed="false">kPa karo</button>
+      <button class="mon-btn" id="minBtn" type="button" aria-expanded="true">Chhupao</button>
+    </span>
+  </div>
+  <canvas id="ecg" aria-hidden="true"></canvas>
+  <div class="mon-read">
+    <div class="mon-bp"><span class="mon-label">NIBP <span id="bpUnit">mmHg</span></span><span class="mon-val" id="bpVal">118/76</span></div>
+    <div class="mon-hr"><span class="mon-label">HR bpm</span><span class="mon-val" id="hrVal">72</span></div>
+  </div>
+  <div class="mon-side">
+    <span class="mon-status" id="bpStatus" aria-live="polite">Normal</span>
+    <p class="mon-note" id="bpNote">Aaram se. Abhi ke liye.</p>
+  </div>
+</aside>
+<div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+
+<dialog class="e404" id="e404" aria-labelledby="e404Title">
+  <div class="e404-box">
+    <p class="e404-k">Signal lost</p>
+    <p class="e404-code" aria-hidden="true">404</p>
+    <h2 class="e404-title" id="e404Title">Reason not found</h2>
+    <p class="e404-sub">Doctor sahab, mission control ne poora server chhaan maara. <strong>“Why doctors are better”</strong> naam ka ek bhi page nahi mila.</p>
+    <div class="e404-log" id="e404Log" aria-live="polite"></div>
+    <div class="e404-bar" aria-hidden="true"><i id="e404Bar"></i></div>
+    <div class="e404-actions">
+      <button class="btn btn-pink" type="button" id="e404Retry">Dobara dhoondho</button>
+      <button class="btn" type="button" id="e404Close">Wapas chalo</button>
+    </div>
+    <p class="e404-foot">Error code DR-404 · Complaint forward ho gayi: Chemist bhaiya</p>
+  </div>
+</dialog>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+/* Core: the doctor's BP model + bedside monitor, ECG trace, red rage edges, scroll progress and toasts.
+   Exposes window.Rage = { shown, poke, say, toast, reduce, level }. */
+(() => {
+  const $ = (s) => document.querySelector(s);
+  /* Animations are on for everyone (phones in Battery Saver report "reduce motion" too); the footer button
+     switches them off, stored as data-motion="off". */
+  const reduce = document.documentElement.getAttribute('data-motion') === 'off';
+  window.EMC_REDUCE = reduce;
+
+  /* Netlify's "Powered by Netlify" badge sits bottom-right; flag it so the monitor can make room. */
+  const badgeSeen = () => {
+    if (!document.getElementById('nl-badge-frame')) return false;
+    document.documentElement.classList.add('has-badge');
+    return true;
+  };
+  if (!badgeSeen() && 'MutationObserver' in window) {
+    const mo = new MutationObserver(() => { if (badgeSeen()) mo.disconnect(); });
+    mo.observe(document.body, { childList: true });
+    setTimeout(() => mo.disconnect(), 20000);
+  }
+
+  /* ---------- Toasts (work even without the monitor) ---------- */
+  const toastBox = $('#toasts');
+  function toast(text, ms = 3200) {
+    if (!toastBox) return;
+    const t = document.createElement('p');
+    t.className = 'toast';
+    t.textContent = text;
+    toastBox.append(t);
+    while (toastBox.children.length > 3) toastBox.firstElementChild.remove();
+    setTimeout(() => {
+      t.classList.add('out');
+      setTimeout(() => t.remove(), 450);
+    }, ms);
+  }
+
+  /* ---------- BP model (AHA categories) ---------- */
+  const LEVELS = [
+    { name: 'Normal', note: 'Aaram se. Abhi ke liye.' },
+    { name: 'Elevated', note: 'Thoda irritation detect hua.' },
+    { name: 'Stage 1 hypertension', note: 'Dimaag mein reply draft ho raha hai.' },
+    { name: 'Stage 2 hypertension', note: 'Family group pe type kar rahe ho.' },
+    { name: 'Hypertensive crisis', note: 'Doctor ko dikhao. Oh, wait.' },
+  ];
+  const TRACE = ['#E0006A', '#E07800', '#E07800', '#D92D35', '#D92D35'];
+  const MMHG_TO_KPA = 0.133322;
+  const shown = { sys: 118, dia: 76, hr: 72 };
+  const target = { sys: 118, dia: 76, hr: 72 };
+  let scrollMax = 0, bonus = 0, si = false, siPoked = false, noteHoldUntil = 0, lvl = -1, lastBp = '', lastHr = '';
+
+  const mon = $('#monitor'), bpVal = $('#bpVal'), hrVal = $('#hrVal'), bpUnit = $('#bpUnit');
+  const statusEl = $('#bpStatus'), noteEl = $('#bpNote');
+  const rageEl = $('#rage');
+  let rageOp = -1;
+  const heat = () => Math.min(1, Math.max(0, (shown.sys - 128) / 70));
+  function setRage(op) {
+    if (!rageEl || Math.abs(op - rageOp) < 0.004) return;
+    rageOp = op;
+    rageEl.style.opacity = op.toFixed(3);
+  }
+  const levelOf = (s, d) => (s > 180 || d > 120 ? 4 : s >= 140 || d >= 90 ? 3 : s >= 130 || d >= 80 ? 2 : s >= 120 ? 1 : 0);
+
+  function render() {
+    if (!mon) return;
+    const s = Math.round(shown.sys), d = Math.round(shown.dia), h = String(Math.round(shown.hr));
+    const bp = si ? `${(s * MMHG_TO_KPA).toFixed(1)}/${(d * MMHG_TO_KPA).toFixed(1)}` : `${s}/${d}`;
+    if (bp !== lastBp) { bpVal.textContent = bp; lastBp = bp; }
+    if (h !== lastHr) { hrVal.textContent = h; lastHr = h; }
+    const L = levelOf(s, d);
+    if (L !== lvl) {
+      lvl = L;
+      mon.dataset.level = L;
+      statusEl.textContent = LEVELS[L].name;
+      if (performance.now() > noteHoldUntil) noteEl.textContent = LEVELS[L].note;
+    }
+  }
+  function retarget() {
+    const r = Math.min(120, scrollMax * 44 + bonus);
+    target.sys = Math.min(214, 118 + r);
+    target.dia = Math.min(134, 76 + r * 0.52);
+    target.hr = Math.min(170, 72 + r * 0.62);
+    if (reduce) { Object.assign(shown, target); render(); setRage(heat() * 0.55); }
+  }
+  function say(text, ms) {
+    if (!noteEl) return;
+    noteEl.textContent = text;
+    noteHoldUntil = performance.now() + ms;
+    setTimeout(() => {
+      if (performance.now() >= noteHoldUntil && lvl >= 0) noteEl.textContent = LEVELS[lvl].note;
+    }, ms + 20);
+  }
+  function poke(n) { bonus += n; retarget(); }
+  window.Rage = { shown, poke, say, toast, reduce, level: () => Math.max(0, lvl) };
+
+  /* ---------- Scroll progress + reading depth ---------- */
+  const progress = $('#progress');
+  let maxY = 1;
+  const measure = () => { maxY = Math.max(1, document.documentElement.scrollHeight - window.innerHeight); };
+  function onScroll() {
+    const f = Math.min(1, Math.max(0, window.scrollY / maxY));
+    if (progress) progress.style.transform = `scaleX(${f.toFixed(4)})`;
+    if (f > scrollMax) { scrollMax = f; retarget(); }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', () => { measure(); onScroll(); });
+  window.addEventListener('load', () => { measure(); onScroll(); });
+  setInterval(measure, 1500);
+  measure();
+  onScroll();
+  if (!mon) return;
+
+  $('#unitBtn').addEventListener('click', (e) => {
+    si = !si;
+    const b = e.currentTarget;
+    b.setAttribute('aria-pressed', String(si));
+    b.textContent = si ? 'mmHg karo' : 'kPa karo';
+    bpUnit.textContent = si ? 'kPa' : 'mmHg';
+    lastBp = '';
+    if (si && !siPoked) { siPoked = true; say('SI units dekh ke dard hua na?', 4000); poke(10); }
+    render();
+  });
+  $('#minBtn').addEventListener('click', (e) => {
+    const min = mon.classList.toggle('min');
+    e.currentTarget.textContent = min ? 'Dikhao' : 'Chhupao';
+    e.currentTarget.setAttribute('aria-expanded', String(!min));
+  });
+
+  /* ---------- ECG trace (gold, turning red as BP climbs) ---------- */
+  const cv = $('#ecg'), ctx = cv.getContext('2d');
+  const SPEED = 64;
+  let W = 0, H = 0, x = 0, lastY = null, phase = 0, amp = 1;
+  const g = (p, m, s) => Math.exp(-((p - m) ** 2) / (2 * s * s));
+  const wave = (p) => 0.12 * g(p, 0.16, 0.025) - 0.1 * g(p, 0.3, 0.008) + g(p, 0.335, 0.009) - 0.26 * g(p, 0.365, 0.01) + 0.3 * g(p, 0.6, 0.045);
+  const yOf = (v) => H * 0.72 - v * H * 0.58;
+  const traceColor = () => TRACE[Math.max(0, lvl)];
+  function sizeCanvas() {
+    const dpr = window.devicePixelRatio || 1;
+    W = cv.clientWidth; H = cv.clientHeight;
+    if (!W || !H) return;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    x = 0; lastY = null;
+    if (reduce) {
+      ctx.clearRect(0, 0, W, H);
+      ctx.strokeStyle = traceColor(); ctx.lineWidth = 1.6;
+      ctx.beginPath();
+      const beatPx = SPEED * 60 / 72;
+      for (let px = 0; px <= W; px += 0.5) { const y = yOf(wave((px / beatPx) % 1)); if (px === 0) ctx.moveTo(px, y); else ctx.lineTo(px, y); }
+      ctx.stroke();
+    }
+  }
+  function drawECG(dt) {
+    if (!W || !H) return;
+    const n = Math.max(1, Math.ceil(SPEED * dt * 2));
+    const sub = dt / n, beat = 60 / shown.hr;
+    ctx.strokeStyle = traceColor(); ctx.lineWidth = 1.6; ctx.lineJoin = 'round';
+    ctx.beginPath();
+    for (let i = 0; i < n; i++) {
+      phase += sub / beat;
+      if (phase >= 1) { phase -= 1; amp = lvl >= 3 ? 0.8 + Math.random() * 0.4 : 1; }
+      let nx = x + SPEED * sub;
+      if (nx > W) { ctx.stroke(); ctx.beginPath(); x = 0; nx = SPEED * sub; lastY = null; }
+      const noise = lvl >= 4 ? (Math.random() - 0.5) * 0.08 : 0;
+      const ny = yOf(wave(phase) * amp + noise);
+      ctx.clearRect(nx, 0, 14, H);
+      if (lastY !== null) { ctx.moveTo(x, lastY); ctx.lineTo(nx, ny); }
+      x = nx; lastY = ny;
+    }
+    ctx.stroke();
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(sizeCanvas).observe(cv); else window.addEventListener('resize', sizeCanvas);
+  sizeCanvas();
+
+  /* ---------- Main loop ---------- */
+  render();
+  if (reduce) { setRage(heat() * 0.55); return; }
+  let last = performance.now();
+  const frame = (now) => {
+    const dt = Math.min(0.05, (now - last) / 1000);
+    last = now;
+    const k = 1 - Math.pow(0.02, dt);
+    shown.sys += (target.sys - shown.sys) * k;
+    shown.dia += (target.dia - shown.dia) * k;
+    shown.hr += (target.hr - shown.hr) * k;
+    render();
+    drawECG(dt);
+    if (!W) phase = (phase + dt * shown.hr / 60) % 1;
+    setRage(heat() * (0.5 + 0.35 * Math.exp(-((phase - 0.36) ** 2) / 0.008)));
+    requestAnimationFrame(frame);
+  };
+  requestAnimationFrame(frame);
+})();
+</script>
+<script>
+/* Background 3D scene: low orbit around a pink planet. Engineer-1 cruises a clean orbit, nose first; Doctor-1
+   tumbles, sputters and leaks smoke under its dotted "planned" orbit. Scrolling flies the camera around the
+   planet. Doctor-1 gets worse as the BP climbs (window.Rage); Scene3D.burst() makes Engineer-1 roll. */
+(() => {
+  const cvs = document.getElementById('bg3d');
+  if (!cvs) return;
+  if (!window.THREE) { cvs.hidden = true; return; }
+  const T = window.THREE;
+  const R = window.Rage || {};
+  const reduce = typeof window.EMC_REDUCE === 'boolean' ? window.EMC_REDUCE : window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const lite = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 700;
+
+  let renderer;
+  try {
+    renderer = new T.WebGLRenderer({ canvas: cvs, alpha: true, antialias: !lite, powerPreference: 'high-performance' });
+  } catch (e) { cvs.hidden = true; return; }
+  renderer.setPixelRatio(Math.min(lite ? 1.25 : 1.75, window.devicePixelRatio || 1));
+  renderer.setClearColor(0xffffff, 0);
+
+  const scene = new T.Scene();
+  scene.fog = new T.Fog(0xfff6fa, 18, 56);
+  const camera = new T.PerspectiveCamera(45, 1, 0.1, 200);
+  scene.add(new T.HemisphereLight(0xffffff, 0xffc2da, 0.6));
+  const sun = new T.DirectionalLight(0xffffff, 0.6);
+  sun.position.set(8, 12, 10);
+  scene.add(sun);
+  const glow = new T.PointLight(0xff4f93, 1.1, 44);
+  glow.position.set(-9, 5, 7);
+  scene.add(glow);
+  const calm = new T.Color(0xff4f93), angry = new T.Color(0xff2a3a);
+
+  /* ---- Planet: soft pink bands, an atmosphere and a thin ring ---- */
+  const bands = document.createElement('canvas');
+  bands.width = 256; bands.height = 128;
+  const bx = bands.getContext('2d');
+  const bg = bx.createLinearGradient(0, 0, 0, 128);
+  bg.addColorStop(0, '#FFB3D1'); bg.addColorStop(0.5, '#FF6FA6'); bg.addColorStop(1, '#E0006A');
+  bx.fillStyle = bg; bx.fillRect(0, 0, 256, 128);
+  for (let i = 0; i < 10; i++) { bx.fillStyle = `rgba(150,0,70,${(0.06 + Math.random() * 0.1).toFixed(3)})`; bx.fillRect(0, Math.random() * 128, 256, 3 + Math.random() * 9); }
+  for (let i = 0; i < 16; i++) { bx.fillStyle = 'rgba(255,255,255,.28)'; bx.beginPath(); bx.ellipse(Math.random() * 256, Math.random() * 128, 4 + Math.random() * 12, 2 + Math.random() * 4, 0, 0, Math.PI * 2); bx.fill(); }
+  const planet = new T.Mesh(new T.SphereGeometry(4.5, lite ? 36 : 56, lite ? 24 : 40), new T.MeshStandardMaterial({ map: new T.CanvasTexture(bands), roughness: 0.85, metalness: 0 }));
+  scene.add(planet);
+  scene.add(new T.Mesh(new T.SphereGeometry(5, 40, 28), new T.MeshBasicMaterial({ color: 0xff7ab0, transparent: true, opacity: 0.2, side: T.BackSide, depthWrite: false })));
+  const pRing = new T.Mesh(new T.RingGeometry(5.4, 6.4, 128), new T.MeshBasicMaterial({ color: 0xff4f93, transparent: true, opacity: 0.3, side: T.DoubleSide, depthWrite: false }));
+  pRing.rotation.x = Math.PI / 2.3;
+  scene.add(pRing);
+
+  /* ---- Orbits: Engineer-1's is a clean line; Doctor-1's "planned" orbit is dotted ---- */
+  const TILT_E = 0.34, TILT_D = -0.2, RAD_E = 8, RAD_D = 6.9;
+  const orbitPos = (t, r, a, out) => out.set(r * Math.cos(t), -r * Math.sin(t) * Math.sin(a), r * Math.sin(t) * Math.cos(a));
+  const orbitE = new T.Mesh(new T.TorusGeometry(RAD_E, 0.022, 6, 240), new T.MeshBasicMaterial({ color: 0xff2e7e, transparent: true, opacity: 0.45 }));
+  orbitE.rotation.x = Math.PI / 2 + TILT_E;
+  scene.add(orbitE);
+  const dots = new Float32Array(180 * 3), tmp = new T.Vector3();
+  for (let i = 0; i < 180; i++) { orbitPos((i / 180) * Math.PI * 2, RAD_D, TILT_D, tmp); dots.set([tmp.x, tmp.y, tmp.z], i * 3); }
+  const dotGeo = new T.BufferGeometry();
+  dotGeo.setAttribute('position', new T.BufferAttribute(dots, 3));
+  scene.add(new T.Points(dotGeo, new T.PointsMaterial({ color: 0xb08a9c, size: 0.09, transparent: true, opacity: 0.8 })));
+
+  /* ---- Spacecraft built from primitives, nose along +Y ---- */
+  function makeShip(doc) {
+    const g = new T.Group();
+    const white = new T.MeshStandardMaterial({ color: doc ? 0xe6dce1 : 0xfff0f6, roughness: 0.35, metalness: 0.15 });
+    const accent = new T.MeshStandardMaterial({ color: doc ? 0x8a7f86 : 0xff2e7e, roughness: 0.4, metalness: 0.1 });
+    const dark = new T.MeshStandardMaterial({ color: 0x2b0f20, roughness: 0.3 });
+    const parts = [
+      [new T.CylinderGeometry(0.34, 0.38, 1.5, 20), white, 0],
+      [new T.ConeGeometry(0.34, 0.72, 20), accent, 1.11],
+      [new T.CylinderGeometry(0.392, 0.392, 0.14, 20), accent, -0.38],
+      [new T.CylinderGeometry(0.2, 0.28, 0.24, 16), dark, -0.87],
+    ];
+    parts.forEach(([geo, mat, y]) => { const m = new T.Mesh(geo, mat); m.position.y = y; g.add(m); });
+    const win = new T.Mesh(new T.CircleGeometry(0.12, 18), dark);
+    win.position.set(0, 0.36, 0.352);
+    g.add(win);
+    for (let k = 0; k < 3; k++) {
+      const a = (k / 3) * Math.PI * 2;
+      const f = new T.Mesh(new T.BoxGeometry(0.05, 0.56, 0.42), accent);
+      f.position.set(Math.sin(a) * 0.44, -0.56, Math.cos(a) * 0.44);
+      f.rotation.y = a;
+      if (doc && k === 1) { f.rotation.z = 0.55; f.position.y = -0.46; }
+      g.add(f);
+    }
+    if (doc) {
+      const red = new T.MeshBasicMaterial({ color: 0xe5484d });
+      const c1 = new T.Mesh(new T.BoxGeometry(0.26, 0.08, 0.02), red), c2 = new T.Mesh(new T.BoxGeometry(0.08, 0.26, 0.02), red);
+      c1.position.set(0, -0.02, 0.385);
+      c2.position.copy(c1.position);
+      g.add(c1, c2);
+    }
+    const flame = new T.Mesh(new T.ConeGeometry(0.2, 0.9, 14, 1, true), new T.MeshBasicMaterial({ color: doc ? 0xff9a6b : 0xff4f93, transparent: true, opacity: 0.85, depthWrite: false }));
+    flame.rotation.x = Math.PI;
+    flame.position.y = -1.42;
+    const core = new T.Mesh(new T.ConeGeometry(0.1, 0.5, 10, 1, true), new T.MeshBasicMaterial({ color: 0xfff0f6, transparent: true, opacity: 0.95, depthWrite: false }));
+    core.rotation.x = Math.PI;
+    core.position.y = -1.22;
+    g.add(flame, core);
+    g.scale.setScalar(doc ? 1.45 : 1.6);
+    scene.add(g);
+    return { g, flame, core };
+  }
+  const eng = makeShip(false), doc = makeShip(true);
+
+  /* ---- Doctor-1's smoke ---- */
+  const PUFFS = lite ? 22 : 40, puffGeo = new T.SphereGeometry(0.2, 8, 6), puffs = [];
+  for (let i = 0; i < PUFFS; i++) {
+    const m = new T.Mesh(puffGeo, new T.MeshBasicMaterial({ color: 0x9c8892, transparent: true, opacity: 0, depthWrite: false }));
+    m.visible = false;
+    m.userData = { life: 0, v: new T.Vector3() };
+    scene.add(m);
+    puffs.push(m);
+  }
+  let puffI = 0, puffAcc = 0;
+  const nozzle = new T.Vector3(0, -1.05, 0), nz = new T.Vector3();
+  function emit(n) {
+    doc.g.updateMatrixWorld();
+    for (let k = 0; k < n; k++) {
+      const m = puffs[puffI++ % PUFFS];
+      m.position.copy(nz.copy(nozzle).applyMatrix4(doc.g.matrixWorld));
+      m.userData.life = 1;
+      m.userData.v.set((Math.random() - 0.5) * 0.7, (Math.random() - 0.2) * 0.5, (Math.random() - 0.5) * 0.7);
+      m.scale.setScalar(1);
+      m.visible = true;
+    }
+  }
+
+  /* ---- Pink dust in the distance ---- */
+  const sN = lite ? 260 : 520, sp = new Float32Array(sN * 3);
+  for (let i = 0; i < sN; i++) {
+    const r = 24 + Math.random() * 26, th = Math.random() * Math.PI * 2, ph = Math.acos(2 * Math.random() - 1);
+    sp.set([r * Math.sin(ph) * Math.cos(th), r * Math.cos(ph), r * Math.sin(ph) * Math.sin(th)], i * 3);
+  }
+  const starGeo = new T.BufferGeometry();
+  starGeo.setAttribute('position', new T.BufferAttribute(sp, 3));
+  const stars = new T.Points(starGeo, new T.PointsMaterial({ color: 0xff7ab0, size: 0.13, transparent: true, opacity: 0.55, depthWrite: false, fog: false }));
+  scene.add(stars);
+
+  /* ---- Camera rig ---- */
+  let W = 0, Hh = 0, wide = true, maxY = 1;
+  const measure = () => { maxY = Math.max(1, document.documentElement.scrollHeight - window.innerHeight); };
+  function resize() {
+    W = window.innerWidth; Hh = window.innerHeight; wide = W >= 900;
+    measure();
+    renderer.setSize(W, Hh, false);
+    camera.aspect = W / Hh;
+    camera.updateProjectionMatrix();
+    if (reduce) frame(0);
+  }
+  window.addEventListener('resize', resize);
+  let pTarget = 0, pCur = 0, mx = 0, my = 0, mxS = 0, myS = 0;
+  const readScroll = () => { pTarget = Math.min(1, Math.max(0, window.scrollY / maxY)); };
+  window.addEventListener('scroll', readScroll, { passive: true });
+  window.addEventListener('load', () => { measure(); readScroll(); });
+  setInterval(measure, 1500);
+  window.addEventListener('pointermove', (e) => {
+    mx = (e.clientX / window.innerWidth) * 2 - 1;
+    my = (e.clientY / window.innerHeight) * 2 - 1;
+  }, { passive: true });
+
+  let time = 0, tE = 0.4, tD = 2.2, roll = 0, rollV = 0, boost = 0, jolt = 0, nextSputter = 4, sputter = 0;
+  const UP = new T.Vector3(0, 1, 0), a = new T.Vector3(), b = new T.Vector3(), dir = new T.Vector3(), qa = new T.Quaternion(), qb = new T.Quaternion();
+  window.Scene3D = { burst: (n) => { const k = n || 6; boost = Math.min(14, boost + k); rollV += k * 0.9; jolt = 1; if (reduce) frame(0); } };
+
+  function frame(dt) {
+    const lvl = typeof R.level === 'function' ? R.level() : 0;
+    const k = reduce ? 1 : 1 - Math.pow(0.02, dt);
+    pCur += (pTarget - pCur) * k;
+    mxS += (mx - mxS) * k; myS += (my - myS) * k;
+    boost *= Math.pow(0.3, dt);
+    time += dt;
+
+    /* Engineer-1: smooth orbit, nose along the path, a barrel roll on bursts */
+    tE += dt * (0.2 + boost * 0.04);
+    orbitPos(tE, RAD_E, TILT_E, a); orbitPos(tE + 0.02, RAD_E, TILT_E, b);
+    eng.g.position.copy(a);
+    dir.subVectors(b, a).normalize();
+    roll += rollV * dt; rollV *= Math.pow(0.25, dt);
+    qa.setFromUnitVectors(UP, dir);
+    qb.setFromAxisAngle(dir, roll);
+    eng.g.quaternion.copy(qb).multiply(qa);
+    const fe = 0.9 + Math.random() * 0.25;
+    eng.flame.scale.set(1, fe, 1); eng.core.scale.set(1, fe, 1);
+
+    /* Doctor-1: wobbly decaying orbit, tumbling, sputtering, smoking */
+    if (!reduce && time > nextSputter) { sputter = 1.3; nextSputter = time + Math.max(2.5, 5 + Math.random() * 5 - lvl); }
+    sputter = Math.max(0, sputter - dt);
+    jolt = Math.max(0, jolt - dt * 1.5);
+    tD += dt * (0.09 + lvl * 0.012);
+    orbitPos(tD, RAD_D + Math.sin(time * 0.7) * 0.25, TILT_D, a);
+    a.y += Math.sin(time * 1.3) * 0.35 - (sputter > 0 ? 0.6 : 0) + Math.sin(time * 40) * 0.04 * jolt;
+    doc.g.position.lerp(a, reduce ? 1 : 1 - Math.pow(0.05, dt));
+    doc.g.rotation.x += dt * (0.5 + lvl * 0.25 + jolt * 3);
+    doc.g.rotation.z += dt * (0.35 + lvl * 0.2);
+    const on = sputter <= 0 && Math.random() > 0.15 + lvl * 0.05;
+    doc.flame.visible = on; doc.core.visible = on;
+    const fd = 0.5 + Math.random() * 0.8;
+    doc.flame.scale.set(1, fd, 1); doc.core.scale.set(1, fd, 1);
+    if (!reduce) {
+      puffAcc += dt * ((sputter > 0 ? 16 : 4 + lvl * 3) + jolt * 20);
+      const n = Math.floor(puffAcc);
+      if (n) { puffAcc -= n; emit(Math.min(n, 6)); }
+      for (const m of puffs) {
+        if (!m.visible) continue;
+        const d = m.userData;
+        d.life -= dt / 1.7;
+        if (d.life <= 0) { m.visible = false; continue; }
+        m.position.addScaledVector(d.v, dt);
+        m.scale.setScalar(1 + (1 - d.life) * 4);
+        m.material.opacity = 0.5 * d.life;
+      }
+      planet.rotation.y += dt * 0.04;
+      pRing.rotation.z += dt * 0.02;
+      stars.rotation.y -= dt * 0.006;
+    }
+    glow.color.copy(calm).lerp(angry, Math.min(1, lvl / 4));
+    glow.intensity = 1 + lvl * 0.35;
+
+    /* Camera: scroll flies around the planet; the planet sits right of the text on wide screens */
+    const theta = 0.5 + pCur * 2.4, phi = 0.3 + pCur * 0.25;
+    const dist = (wide ? 22 : 28) - Math.sin(pCur * Math.PI) * 4;
+    camera.position.set(Math.cos(theta) * Math.cos(phi) * dist, Math.sin(phi) * dist + 1, Math.sin(theta) * Math.cos(phi) * dist);
+    camera.lookAt(0, wide ? 2.4 : 3.2, 0);
+    camera.translateX((wide ? -6.5 : -1) + mxS * 0.8);
+    camera.translateY(-myS * 0.6);
+    if (lvl >= 4 && !reduce) { camera.position.x += (Math.random() - 0.5) * 0.05; camera.position.y += (Math.random() - 0.5) * 0.05; }
+
+    renderer.render(scene, camera);
+  }
+
+  resize();
+  readScroll();
+  if (reduce) { frame(0); return; }
+  let last = performance.now(), running = true;
+  const loop = (now) => {
+    const dt = Math.min(0.05, (now - last) / 1000);
+    last = now;
+    if (running) frame(dt);
+    requestAnimationFrame(loop);
+  };
+  document.addEventListener('visibilitychange', () => { running = !document.hidden; last = performance.now(); });
+  requestAnimationFrame(loop);
+})();
+</script>
+<script>
+/* Features: mobile menu, service flips, meme filters + laughs, the two-buttons dodge, the prescription CAPTCHA,
+   the Deewaar typewriter, scribble draw lengths, packages toggle + buttons, the appeal desk and the "gas" easter egg. */
+(() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const R = window.Rage || {};
+  const poke = R.poke || (() => {}), say = R.say || (() => {}), toast = R.toast || (() => {});
+  const reduce = typeof window.EMC_REDUCE === 'boolean' ? window.EMC_REDUCE : window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const burst = (n) => { if (window.Scene3D) window.Scene3D.burst(n); };
+  const shake = (node) => { if (!node || reduce) return; node.classList.remove('shake'); void node.offsetWidth; node.classList.add('shake'); };
+  document.addEventListener('animationend', (e) => { if (e.animationName === 'shake-x') e.target.classList.remove('shake'); });
+
+  /* ---------- Mobile menu ---------- */
+  const menu = $('#menu'), menuBtn = $('#menuBtn');
+  let menuOpen = false;
+  function setMenu(open) {
+    if (!menu || !menuBtn || open === menuOpen) return;
+    menuOpen = open;
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? 'Menu band karo' : 'Menu kholo');
+    document.documentElement.classList.toggle('menu-open', open);
+    if (open) {
+      menu.hidden = false;
+      requestAnimationFrame(() => requestAnimationFrame(() => menu.classList.add('open')));
+      const first = $('a', menu);
+      if (first) setTimeout(() => first.focus({ preventScroll: true }), 60);
+    } else {
+      menu.classList.remove('open');
+      setTimeout(() => { if (!menuOpen) menu.hidden = true; }, reduce ? 0 : 700);
+    }
+  }
+  if (menu && menuBtn) {
+    menuBtn.addEventListener('click', () => setMenu(!menuOpen));
+    menu.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menuOpen) { setMenu(false); menuBtn.focus(); } });
+    const wide = window.matchMedia('(min-width: 961px)');
+    if (wide.addEventListener) wide.addEventListener('change', () => { if (wide.matches) setMenu(false); });
+  }
+
+  /* ---------- Services: tap to flip ---------- */
+  $$('.svc').forEach((b) => b.addEventListener('click', () => {
+    const on = b.getAttribute('aria-pressed') !== 'true';
+    b.setAttribute('aria-pressed', String(on));
+    if (on) { poke(1.2); burst(2); }
+  }));
+
+  /* ---------- Memes: filters, pause off-screen, laughs, draw lengths ---------- */
+  const chips = $$('.chip'), memes = $$('.meme');
+  chips.forEach((c) => c.addEventListener('click', () => {
+    const f = c.dataset.f;
+    chips.forEach((x) => x.setAttribute('aria-pressed', String(x === c)));
+    let k = 0;
+    memes.forEach((m) => {
+      const show = f === 'all' || (m.dataset.tags || '').split(' ').includes(f);
+      m.classList.toggle('gone', !show);
+      if (show && !reduce) { m.classList.remove('pop'); void m.offsetWidth; m.style.setProperty('--pd', ((k++ % 3) * 0.07).toFixed(2) + 's'); m.classList.add('pop'); }
+    });
+    window.dispatchEvent(new CustomEvent('memes:filter'));
+  }));
+  memes.forEach((m) => m.addEventListener('animationend', (e) => { if (e.animationName === 'pop') m.classList.remove('pop'); }));
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle('off', !e.isIntersecting)), { rootMargin: '150px 0px' });
+    memes.forEach((m) => io.observe(m));
+  }
+  let laughs = 0;
+  const LAUGH = { 5: 'Haso haso. Doctor sahab ka BP bhi has raha hai.', 12: 'Itna mat haso. Ventilator bhi humne hi banaya hai.', 25: 'Ab tum official meme reviewer ho.' };
+  $$('.lol').forEach((b) => b.addEventListener('click', () => {
+    const n = $('b', b);
+    n.textContent = String(Number(n.textContent) + 1);
+    laughs += 1;
+    if (!reduce) {
+      const p = document.createElement('span');
+      p.className = 'plus'; p.textContent = '+1'; p.setAttribute('aria-hidden', 'true');
+      b.append(p);
+      setTimeout(() => p.remove(), 850);
+    }
+    poke(0.8); burst(1);
+    if (LAUGH[laughs]) toast(LAUGH[laughs]);
+  }));
+  $$('.draw').forEach((p) => { try { p.style.setProperty('--len', Math.ceil(p.getTotalLength()) + 'px'); } catch (e) { /* keeps a solid line */ } });
+
+  /* Two buttons: the credit button runs away until it gets tired */
+  const btA = $('#btCredit'), btB = $('#btEgo'), btOut = $('#btOut');
+  if (btA && btB && btOut) {
+    const box = btA.closest('.mc'), START = btOut.textContent;
+    const DODGE = ['Haath kaanp gaya.', 'Ego ne rok liya.', 'Engineer ko credit? Kabhi nahi.', 'Ye button bhi engineer ne banaya hai…', 'Bas ek baar aur bhaag lo…'];
+    let dodges = 0, tired = false, busy = false;
+    const dodge = () => {
+      if (tired || busy) return;
+      dodges += 1;
+      if (dodges > DODGE.length) { tired = true; btA.style.transform = ''; btOut.textContent = 'Button thak gaya. Ab daba do.'; return; }
+      const bw = btA.offsetWidth, bh = btA.offsetHeight, cw = box.clientWidth, ch = box.clientHeight;
+      const nx = 8 + Math.random() * Math.max(0, cw - bw - 16), ny = 8 + Math.random() * Math.max(0, ch * 0.62 - bh - 8);
+      btA.style.transform = `translate(${Math.round(nx - btA.offsetLeft)}px, ${Math.round(ny - btA.offsetTop)}px)`;
+      btOut.textContent = DODGE[dodges - 1];
+      poke(0.8);
+    };
+    btA.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') dodge(); });
+    btA.addEventListener('click', () => {
+      if (!tired) { dodge(); return; }
+      if (busy) return;
+      busy = true;
+      btA.classList.remove('won'); void btA.offsetWidth; btA.classList.add('won');
+      btOut.textContent = 'Credit de diya! Doctor sahab ka BP: 220.';
+      toast('Doctor ne engineer ko credit diya. History ban gayi.');
+      poke(10); burst(10);
+      setTimeout(() => { busy = false; tired = false; dodges = 0; btOut.textContent = START; }, 4500);
+    });
+    btB.addEventListener('click', () => { btOut.textContent = 'Ego bach gaya. BP nahi bacha.'; poke(3); burst(3); });
+  }
+
+  /* Deewaar: type the engineer's reply when the meme comes into view */
+  const tw = $('.dw-type');
+  if (tw && !reduce && 'IntersectionObserver' in window) {
+    const full = tw.textContent;
+    const o = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      o.disconnect();
+      tw.textContent = '';
+      tw.classList.add('typing');
+      let i = 0;
+      const step = () => {
+        i += 1;
+        tw.textContent = full.slice(0, i);
+        if (i < full.length) setTimeout(step, full[i - 1] === '…' ? 480 : 55);
+        else setTimeout(() => tw.classList.remove('typing'), 1400);
+      };
+      setTimeout(step, 700);
+    }, { threshold: 0.55 });
+    o.observe(tw.closest('.meme') || tw);
+  }
+
+  /* Prescription CAPTCHA */
+  const cpGrid = $('#cpGrid'), cpGo = $('#cpGo'), cpMsg = $('#cpMsg');
+  if (cpGrid && cpGo && cpMsg) {
+    const tiles = $$('.cp-t', cpGrid), card = cpGo.closest('.m-cap'), START = cpMsg.textContent;
+    const MSG = ['Galat. Woh “Pantop” tha. Ya “Pune”.', 'Phir galat. Chemist bhaiya se poocho.', 'Koi insaan ye nahi padh sakta. Verified: aap insaan ho ✓'];
+    let tries = 0, done = false;
+    const setMsg = (t, cls) => { cpMsg.textContent = t; cpMsg.className = 'cp-msg' + (cls ? ' ' + cls : ''); };
+    const clear = () => tiles.forEach((t) => t.setAttribute('aria-pressed', 'false'));
+    tiles.forEach((t) => t.addEventListener('click', () => { if (!done) t.setAttribute('aria-pressed', String(t.getAttribute('aria-pressed') !== 'true')); }));
+    cpGo.addEventListener('click', () => {
+      if (done) { done = false; tries = 0; clear(); cpGo.textContent = 'Verify'; setMsg(START); return; }
+      if (!tiles.some((t) => t.getAttribute('aria-pressed') === 'true')) { setMsg('Pehle koi tukda toh chuno.', 'bad'); shake(card); return; }
+      tries += 1;
+      if (tries >= MSG.length) {
+        done = true;
+        setMsg(MSG[MSG.length - 1], 'good');
+        cpGo.textContent = 'Phir se';
+        toast('Insaan verified: doctor ki handwriting koi nahi padh sakta.');
+        poke(4); burst(5);
+      } else { setMsg(MSG[tries - 1], 'bad'); shake(card); clear(); poke(2); }
+    });
+  }
+
+  /* ---------- Packages: billing toggle + plan buttons ---------- */
+  const bill = $('.bill');
+  if (bill) {
+    const opts = $$('.bill-opt', bill);
+    const swap = (node, text) => {
+      if (reduce) { node.textContent = text; return; }
+      node.classList.add('out');
+      setTimeout(() => { node.textContent = text; node.classList.remove('out'); }, 220);
+    };
+    opts.forEach((o) => o.addEventListener('click', () => {
+      const mode = o.dataset.bill;
+      if (bill.dataset.bill === mode) return;
+      bill.dataset.bill = mode;
+      opts.forEach((x) => x.setAttribute('aria-pressed', String(x === o)));
+      $$('.plan-price [data-mo]').forEach((node) => {
+        const v = node.dataset[mode];
+        swap(node, node.classList.contains('amt') ? Number(v).toLocaleString('en-IN') : v);
+      });
+      if (mode === 'ego') say('Per ego pricing? Bill infinite aayega.', 2600);
+      poke(1.5);
+    }));
+  }
+  $$('[data-cta]').forEach((b) => b.addEventListener('click', () => {
+    const k = b.dataset.cta;
+    if (k === 'basic') { toast('Booked. Engineer aapko “seen” karke chhod dega.'); poke(2); burst(2); }
+    else if (k === 'gold') {
+      if (b.dataset.busy) return;
+      b.dataset.busy = '1';
+      const label = b.textContent;
+      b.textContent = 'Processing…';
+      setTimeout(() => {
+        b.textContent = 'Declined: CVV doctor ne likha tha';
+        shake(b.closest('.plan')); poke(5); burst(4);
+        setTimeout(() => { b.textContent = label; delete b.dataset.busy; }, 2600);
+      }, 1300);
+    } else if (k === 'plat' && window.E404) {
+      window.E404.open({
+        title: 'Mars not found',
+        sub: 'Mars sirf unke liye hai jo engineer ko bhagwan maante hain. Aap toh khud ko maante ho.',
+        log: [['$ GET /plans/mars', 'l-in'], ['404 Not Found', 'l-bad'], ['$ SELECT humility FROM doctors;', 'l-in'], ['NULL', 'l-bad']],
+      });
+    }
+  }));
+
+  /* ---------- Appeal desk ---------- */
+  const form = $('#appealForm'), ta = $('#appealText'), cnt = $('#appealCount');
+  const vd = $('#verdict'), vk = $('#verdictK'), vq = $('#verdictQ'), va = $('#verdictA');
+  const RULES = [
+    [/zindagi|life|jaan|bacha/i, 'Zindagi aap bachate ho. Ventilator hum banate hain. Credit split: 0–100.'],
+    [/neet|mbbs|padhai|saal|exam|study|degree/i, '11 saal padhai? Humne 4 saal mein woh app banaya jisme aapki attendance lagti hai.'],
+    [/paisa|paise|salary|fees|money|lpa|package|income/i, 'Aapki fees ₹500. Humara package 40 LPA. Calculator bhi humara hai.'],
+    [/bhagwan|bhagvan|god/i, 'Bhagwan ne body banayi, documentation nahi di. Woh kaam bhi hum karte hain.'],
+    [/handwriting|likh|prescription|parchi/i, 'Handwriting pe bahas? Pehle ye appeal Arial mein likh ke dikhao.'],
+    [/shaadi|rishta|marriage|izzat|respect/i, 'Rishta aunty bhi ab pehle poochti hain ki remote job hai ya nahi.'],
+    [/\bai\b|machine|computer|robot|software/i, 'Machine ki baat? Woh toh humari hai. Aap bas usse on karte ho.'],
+  ];
+  const FALLBACK = ['Appeal received. Status: “gas hai”. Closed.', 'Interesting point. Ab isko readable font mein bhejo.', 'Third umpire bhi engineer hai. OUT.', 'Aapka argument 404 ho gaya.', 'Noted. Engineer ne “seen” kar diya.'];
+  let fb = 0;
+  if (form && ta && vd && vk && vq && va) {
+    ta.addEventListener('input', () => { if (cnt) cnt.textContent = ta.value.length + '/220'; });
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const v = ta.value.trim();
+      if (!v) { shake(form); ta.focus(); toast('Khaali appeal? Bilkul doctor ki parchi jaisi.'); return; }
+      const hit = RULES.find(([re]) => re.test(v));
+      vk.textContent = 'Aapki appeal · abhi abhi';
+      vq.textContent = '“' + v + '”';
+      va.textContent = hit ? hit[1] : FALLBACK[fb++ % FALLBACK.length];
+      vd.classList.remove('slam'); void vd.offsetWidth;
+      if (!reduce) vd.classList.add('slam');
+      poke(4); burst(5);
+      say('Appeal reject hui. BP accept hua.', 2600);
+      ta.value = '';
+      if (cnt) cnt.textContent = '0/220';
+    });
+  }
+
+  /* ---------- Motion switch in the footer (animations are on unless a visitor switches them off) ---------- */
+  const BUILD = 'v10 · 24 Nov 2026';
+  function setMotion(v) {
+    let saved = false;
+    try { localStorage.setItem('emc-motion', v); saved = localStorage.getItem('emc-motion') === v; } catch (e) { /* storage blocked */ }
+    try {
+      if (!saved && v === 'off') location.hash = 'motion-off';
+      else if (v === 'on' && location.hash === '#motion-off') history.replaceState(null, '', location.pathname + location.search);
+    } catch (e) { /* keep going */ }
+    location.reload();
+  }
+  const motionBtn = $('#motionToggle');
+  if (motionBtn) {
+    motionBtn.textContent = reduce ? 'Animations chalu karo' : 'Animations band karo';
+    motionBtn.addEventListener('click', () => setMotion(reduce ? 'on' : 'off'));
+  }
+  const buildEl = $('#buildTag');
+  if (buildEl) buildEl.textContent = 'Build ' + BUILD;
+
+  /* ---------- #debug readout: what this phone actually supports (screenshot it and send it over) ---------- */
+  if (location.hash === '#debug') {
+    const box = document.createElement('pre');
+    box.className = 'debug-box';
+    box.textContent = 'Checking…';
+    document.body.append(box);
+    let gl = false;
+    try { const c = document.createElement('canvas'); gl = !!(c.getContext('webgl') || c.getContext('experimental-webgl')); } catch (e) { gl = false; }
+    let store = 'ok';
+    try { localStorage.setItem('emc-probe', '1'); localStorage.removeItem('emc-probe'); } catch (e) { store = 'blocked'; }
+    let frames = 0;
+    const t0 = performance.now();
+    const show = () => {
+      const dot = $('.live-dot'), cvs = $('#bg3d');
+      box.textContent = [
+        'Engineer Mission Control · build ' + BUILD,
+        'Animations: ' + (reduce ? 'OFF (footer switch)' : 'ON'),
+        'Phone asks reduce motion: ' + (window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'yes' : 'no'),
+        'GSAP: ' + (window.gsap ? 'yes' : 'NO') + ' · ScrollTrigger: ' + (window.ScrollTrigger ? 'yes' : 'NO') + ' · three.js: ' + (window.THREE ? 'yes' : 'NO'),
+        'WebGL: ' + (gl ? 'yes' : 'NO') + ' · 3D background: ' + (cvs && !cvs.hidden ? 'on' : 'off'),
+        'Frames in 1s: ' + frames + ' · CSS pulse: ' + (dot ? getComputedStyle(dot).animationDuration : '-'),
+        'Screen: ' + window.innerWidth + '×' + window.innerHeight + ' · page height ' + document.documentElement.scrollHeight,
+        'Inside a frame: ' + (window.self !== window.top ? 'yes' : 'no') + ' · storage: ' + store,
+        navigator.userAgent,
+      ].join('\n');
+    };
+    const count = () => { frames += 1; if (performance.now() - t0 < 1000) requestAnimationFrame(count); else show(); };
+    requestAnimationFrame(count);
+    setTimeout(show, 2500);
+  }
+
+  /* ---------- Mission clock in the hero (T+ since you opened the page) ---------- */
+  const clock = $('#missionClock');
+  if (clock) {
+    const t0 = Date.now(), two = (n) => String(n).padStart(2, '0');
+    const tick = () => {
+      const s = Math.floor((Date.now() - t0) / 1000);
+      clock.textContent = two(Math.floor(s / 3600)) + ':' + two(Math.floor(s / 60) % 60) + ':' + two(s % 60);
+    };
+    tick();
+    setInterval(tick, 1000);
+  }
+
+  /* ---------- Easter egg: type "gas" anywhere outside a text box ---------- */
+  let keys = '';
+  document.addEventListener('keydown', (e) => {
+    if (!e.key || e.key.length !== 1 || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.target.closest && e.target.closest('input, textarea, select, [contenteditable]')) return;
+    keys = (keys + e.key.toLowerCase()).slice(-3);
+    if (keys === 'gas') { keys = ''; toast('“Gas hai.” Doctor sahab ka favourite diagnosis unlock hua.'); poke(3); burst(6); }
+  });
+})();
+</script>
+<script>
+/* Play: the 404 behind "Why doctors are better" (and the Platinum plan), plus the live bahas where the doctor
+   taunts and you pick the comeback. Uses window.Rage (core.js) and window.Scene3D (scene.js) when they exist. */
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const R = window.Rage || {};
+  const poke = R.poke || (() => {}), say = R.say || (() => {});
+  const reduce = typeof window.EMC_REDUCE === 'boolean' ? window.EMC_REDUCE : !!R.reduce;
+  const burst = (n) => { if (window.Scene3D) window.Scene3D.burst(n); };
+  const wait = (ms) => new Promise((res) => setTimeout(res, reduce ? 0 : ms));
+  const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+  const shuffle = (a) => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+
+  /* ---------- 404 ---------- */
+  const dlg = $('#e404'), log = $('#e404Log'), bar = $('#e404Bar'), retry = $('#e404Retry');
+  const titleEl = $('#e404Title'), subEl = dlg ? dlg.querySelector('.e404-sub') : null;
+  const DEFAULT = titleEl && subEl ? { title: titleEl.textContent, sub: subEl.innerHTML } : null;
+  const DEFAULT_LOG = [['$ GET /why-doctors-are-better', 'l-in'], ['404 Not Found', 'l-bad'],
+    ["$ SELECT reason FROM doctors WHERE better_than = 'engineer';", 'l-in'], ['0 rows returned (0.0001 sec)', 'l-bad']];
+  const RETRIES = [
+    'Google pe search kiya. Sirf "gas hai" ke results aaye.',
+    'Chemist bhaiya se poocha. Bole: "ye toh main bhi nahi padh sakta."',
+    'Fufaji ke WhatsApp group mein dhoondha. Wahan bhi nahi mila.',
+    'AI se poocha. AI bhi engineer ne banaya hai.',
+    'Bas karo. Ab server ka BP bhi badh gaya hai.',
+  ];
+  let tries = 0, run = 0, savedTitle = document.title, lines = DEFAULT_LOG, isOpen = false;
+  const logLine = (text, cls) => log.append(el('p', cls || '', text));
+  function resetBar() {
+    bar.parentElement.classList.remove('fail');
+    bar.style.transition = 'none';
+    bar.style.width = '0%';
+    void bar.offsetWidth;
+    bar.style.transition = '';
+  }
+  async function intro(token) {
+    log.replaceChildren();
+    for (const [t, c] of lines) { if (token !== run) return; logLine(t, c); await wait(420); }
+  }
+  /* Runs once per close, whether it came from our button, a backdrop click or the Escape key. */
+  function onClose() {
+    if (!isOpen) return;
+    isOpen = false;
+    run += 1;
+    document.title = savedTitle;
+  }
+  function close404() {
+    onClose();
+    if (typeof dlg.close === 'function') { if (dlg.open) dlg.close(); }
+    else dlg.removeAttribute('open');
+  }
+  function open404(opts) {
+    const o = opts && opts.title ? opts : null;
+    if (DEFAULT) {
+      titleEl.textContent = o ? o.title : DEFAULT.title;
+      if (o) subEl.textContent = o.sub; else subEl.innerHTML = DEFAULT.sub;
+    }
+    lines = o && o.log ? o.log : DEFAULT_LOG;
+    tries = 0; run += 1;
+    retry.disabled = false; retry.textContent = 'Dobara dhoondho';
+    resetBar();
+    if (!isOpen) savedTitle = document.title;
+    isOpen = true;
+    if (typeof dlg.showModal === 'function') { if (!dlg.open) dlg.showModal(); } else dlg.setAttribute('open', '');
+    document.title = '404 Not Found';
+    intro(run);
+    poke(8); burst(6);
+    say('404: Reason not found. BP mil gaya.', 3500);
+  }
+  if (dlg && log && bar && retry) {
+    document.querySelectorAll('[data-404]').forEach((b) => b.addEventListener('click', () => open404()));
+    $('#e404Close').addEventListener('click', close404);
+    dlg.addEventListener('close', () => { if (!dlg.open) onClose(); });
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) close404(); });
+    retry.addEventListener('click', async () => {
+      const token = ++run;
+      retry.disabled = true;
+      resetBar();
+      bar.style.width = '99%';
+      log.replaceChildren();
+      logLine(`$ retry --attempt ${tries + 2}`, 'l-in');
+      logLine('Dhoondh rahe hain…');
+      await wait(1500);
+      if (token !== run) return;
+      bar.parentElement.classList.add('fail');
+      logLine('404 phir se.', 'l-bad');
+      logLine(RETRIES[tries % RETRIES.length]);
+      tries += 1;
+      poke(5); burst(4);
+      retry.disabled = false;
+      retry.textContent = tries >= RETRIES.length ? 'Ek baar aur?' : 'Dobara dhoondho';
+      retry.focus({ preventScroll: true });
+    });
+    window.E404 = { open: open404 };
+  }
+
+  /* ---------- Live bahas: the doctor taunts, you pick the comeback ---------- */
+  const ROUNDS = [
+    { d: 'Hum log zindagi bachate hain. Tum log kya karte ho?', o: [
+      ['Wo ventilator banate hain jis se aap zindagi bachate ho.', 3, 'Ventilator chalana bhi skill hai, okay?'],
+      ['Aapke hospital ka WiFi theek karte hain. Free mein.', 2, 'WiFi ka password bhi tum logon ne "admin123" rakha hai.'],
+      ['Hum bhi bolte hain "band karke on karo." Same as Crocin.', 1, 'Crocin ka mazaak mat udao.'] ] },
+    { d: 'MBBS saadhe paanch saal ka hota hai. Tumhara B.Tech toh 4 saal ka timepass hai.', o: [
+      ['4 saal mein degree, 5 mein senior engineer. Aap tab tak internship mein.', 3, 'Internship mein 36 ghante ki shift hoti hai, pata bhi hai?'],
+      ['Usi timepass mein humne attendance ka proxy app bana diya tha.', 2, 'Proxy lagana achievement nahi hai.'],
+      ['Aur saadhe paanch saal baad bhi handwriting nahi sudhri.', 3, 'Handwriting pe personal mat ho.'] ] },
+    { d: 'Tumhara code crash ho toh restart. Humara patient crash ho toh?', o: [
+      ['Toh aap humara banaya defibrillator uthate ho.', 3, 'Wo… haan theek hai. Par chalate hum hain!'],
+      ['Isiliye hum backup rakhte hain. Aap usse "second opinion" bolte ho.', 2, 'Second opinion bhi doctor hi deta hai!'],
+      ['Hum crash se pehle testing karte hain. Aap "dekhte hain" bolte ho.', 3, 'Tests toh hum bhi karwate hain. Bahut saare.'] ] },
+    { d: 'Shaadi ke rishton mein doctor ki demand zyada hai.', o: [
+      ['Rishta aunty bolti hain: "ladka doctor hai, par ghar pe kabhi milta nahi."', 3, 'Busy hain kyunki duniya bacha rahe hain!'],
+      ['Haan, aur shaadi ki video ka drone humne udaya tha.', 1, 'Drone wale ki payment toh humne ki thi.'],
+      ['Demand zyada hai kyunki supply 11 saal baad aati hai.', 3, 'Ye… ye low blow tha.'] ] },
+    { d: 'Doctor ko bhagwan ka roop maana jaata hai.', o: [
+      ['Bhagwan ne body banayi, debugging aapko de di, documentation kisi ko nahi.', 3, '…'],
+      ['Bhagwan bhi OTA update bhejte toh body version 2.0 hoti.', 2, 'Body ko update nahi, exercise chahiye.'],
+      ['Aur engineer ko? "Beta, zara printer dekh lo."', 1, 'Haha. Haan, pehle printer dekh lo.'] ] },
+  ];
+  const MAX = ROUNDS.length * 3;
+  const RANKS = [[14, 'CTO (Chief Taunt Officer)'], [11, 'Tech Lead'], [8, 'SDE-1'], [4, 'Intern'], [0, 'Fresher']];
+  const HITS = ['Ye wala dil pe laga.', 'Seedha ego pe hit.', 'BP spike detect hua.'];
+  const rankOf = (s) => RANKS.find(([min]) => s >= min)[1];
+  const chatLog = $('#chatLog'), replies = $('#chatReplies'), status = $('#chatStatus');
+  const rNow = $('#roastNow'), rBar = $('#roastBar'), rRound = $('#roastRound'), rRank = $('#roastRank');
+  if (!chatLog || !replies || !status || !rNow || !rBar || !rRound || !rRank) return;
+  let round = 0, score = 0, chatRun = 0;
+  function setStatus(text, cls) { status.textContent = text; status.className = 'chat-status' + (cls ? ' ' + cls : ''); }
+  function meter() { rNow.textContent = String(score); rBar.style.width = ((score / MAX) * 100).toFixed(1) + '%'; rRank.textContent = rankOf(score); }
+  function addMsg(who, text) {
+    const m = el('p', 'msg msg-' + who, text);
+    if (who === 'eng') { const t = el('span', 'tick', '✓✓'); t.setAttribute('aria-hidden', 'true'); m.append(t); }
+    chatLog.append(m);
+    chatLog.scrollTop = chatLog.scrollHeight;
+    return m;
+  }
+  async function docSays(text, token) {
+    setStatus('typing…', 'typing');
+    const dots = el('div', 'msg msg-doc msg-typing');
+    dots.setAttribute('aria-hidden', 'true');
+    dots.append(el('span'), el('span'), el('span'));
+    chatLog.append(dots);
+    chatLog.scrollTop = chatLog.scrollHeight;
+    await wait(650 + Math.min(1000, text.length * 16));
+    dots.remove();
+    if (token !== chatRun) return false;
+    setStatus('online');
+    addMsg('doc', text);
+    return true;
+  }
+  function showOptions(focus) {
+    const btns = shuffle(ROUNDS[round].o.slice()).map((o) => {
+      const b = el('button', 'reply', o[0]);
+      b.type = 'button';
+      b.addEventListener('click', () => answer(o));
+      return b;
+    });
+    replies.replaceChildren(...btns);
+    if (focus) btns[0].focus({ preventScroll: true });
+  }
+  async function finish(token, focus) {
+    await wait(700);
+    if (token !== chatRun) return;
+    addMsg('sys', 'Dr. Sahab ne chat chhod di');
+    setStatus('last seen abhi abhi', 'gone');
+    addMsg('sys', `Roast score ${score}/${MAX} · Rank: ${rankOf(score)}`);
+    rRound.textContent = 'Bahas khatam';
+    poke(10); burst(10);
+    say('Doctor sahab offline ho gaye. BP online hai.', 3500);
+    const again = el('button', 'btn btn-sm', 'Phir se bahas karo');
+    again.type = 'button';
+    again.addEventListener('click', () => begin(true));
+    replies.replaceChildren(again);
+    if (focus) again.focus({ preventScroll: true });
+  }
+  async function answer(o) {
+    const token = chatRun;
+    const focus = replies.contains(document.activeElement);
+    replies.querySelectorAll('button').forEach((b) => { b.disabled = true; });
+    const mine = addMsg('eng', o[0]);
+    score += o[1];
+    meter();
+    poke(o[1] * 2.5); burst(o[1] + 1);
+    if (o[1] === 3) say(HITS[round % HITS.length], 2200);
+    await wait(550);
+    if (token !== chatRun) return;
+    mine.querySelector('.tick').classList.add('read');
+    replies.replaceChildren();
+    if (!(await docSays(o[2], token))) return;
+    round += 1;
+    if (round >= ROUNDS.length) { finish(token, focus); return; }
+    rRound.textContent = `Round ${round + 1} / ${ROUNDS.length}`;
+    await wait(500);
+    if (token !== chatRun) return;
+    if (await docSays(ROUNDS[round].d, token)) showOptions(focus);
+  }
+  function prime() {
+    chatRun += 1; round = 0; score = 0; meter();
+    rRound.textContent = `Round 1 / ${ROUNDS.length}`;
+    setStatus('online');
+    chatLog.replaceChildren();
+    replies.replaceChildren();
+    addMsg('sys', 'Aaj');
+    addMsg('doc', 'Mission control? Mera spacecraft bilkul theek hai. Bas thoda dhuaan aa raha hai.');
+    return chatRun;
+  }
+  async function begin(focus) {
+    const token = prime();
+    await wait(400);
+    if (token !== chatRun) return;
+    if (await docSays(ROUNDS[0].d, token)) showOptions(focus);
+  }
+  prime();
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(([en]) => { if (!en.isIntersecting) return; io.disconnect(); begin(false); }, { threshold: 0.4 });
+    io.observe(chatLog.closest('.chat'));
+  } else begin(false);
+})();
+</script>
+<script>
+/* Launch: Engineer-1 vs Doctor-1. A countdown, then Engineer-1 flies a clean gravity turn to orbit while
+   Doctor-1 coughs, flames out and tips over. GSAP drives positions and telemetry; CSS draws flames and smoke.
+   Without GSAP, or with reduced motion, the button simply shows the final result. */
+(() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const pad = $('#pad');
+  if (!pad) return;
+  const R = window.Rage || {};
+  const poke = R.poke || (() => {}), say = R.say || (() => {}), toast = R.toast || (() => {});
+  const reduce = typeof window.EMC_REDUCE === 'boolean' ? window.EMC_REDUCE : window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const G = window.gsap;
+  const animated = !!G && !reduce;
+  const burst = (n) => { if (window.Scene3D) window.Scene3D.burst(n); };
+  const btn = $('#launchBtn'), cd = $('#countdown'), log = $('#mlog');
+  const bay = (k) => {
+    const b = $('.bay-' + k, pad);
+    return { bay: b, ship: $('.ship', b), sky: $('.bay-sky', b), svg: $('.traj', b), line: $('.traj-line', b) };
+  };
+  const E = Object.assign(bay('eng'), { tag: $('#engStatus'), alt: $('#engAlt'), vel: $('#engVel'), fuel: $('#engFuel'), comms: $('#engComms') });
+  const D = Object.assign(bay('doc'), { tag: $('#docStatus'), alt: $('#docAlt'), vel: $('#docVel'), fuel: $('#docFuel'), comms: $('#docComms') });
+  const tele = [E.alt, E.vel, E.fuel, E.comms, D.alt, D.vel, D.fuel, D.comms];
+  if (!btn || !cd || !log || !E.ship || !D.ship || tele.some((n) => !n)) return;
+  const START = { log: log.innerHTML, cd: cd.textContent, tele: tele.map((n) => n.textContent) };
+  let tl = null, ran = false, geo = null;
+
+  const setTag = (el, text, cls) => { el.textContent = text; el.className = 'tag ' + cls; };
+  const setVal = (el, text, cls) => { el.textContent = text; el.className = cls || ''; };
+  function line(t, text, bad) {
+    const li = document.createElement('li');
+    if (bad) li.className = 'bad';
+    const tm = document.createElement('time');
+    tm.textContent = t;
+    li.append(tm, document.createTextNode(text));
+    log.append(li);
+    log.scrollTop = log.scrollHeight;
+  }
+
+  /* Engineer-1's gravity turn and Doctor-1's short hop, in pixels of each display */
+  function measure() {
+    const W = E.sky.clientWidth, H = E.sky.clientHeight, g = H - 40;
+    const pos = (p) => ({ x: W * 0.5 + W * 0.3 * Math.pow(p, 2.2), y: g - (g + 170) * Math.pow(p, 1.25) });
+    const pts = [];
+    for (let i = 0; i <= 48; i++) { const q = pos(i / 48); pts.push(q.x.toFixed(1) + ' ' + q.y.toFixed(1)); }
+    E.svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    E.line.setAttribute('d', 'M' + pts.join(' L'));
+    const len = E.line.getTotalLength();
+    E.line.style.strokeDasharray = String(len);
+    E.line.style.strokeDashoffset = String(len);
+    const Wd = D.sky.clientWidth, Hd = D.sky.clientHeight, gd = Hd - 40, cx = Wd / 2;
+    D.svg.setAttribute('viewBox', `0 0 ${Wd} ${Hd}`);
+    D.line.setAttribute('d', `M${cx} ${gd} C${cx} ${gd - 96}, ${cx + 26} ${gd - 104}, ${cx + 34} ${gd}`);
+    return { W, g, pos, len };
+  }
+  function setEng(p) {
+    const a = geo.pos(p), b = geo.pos(Math.min(1, p + 0.01));
+    const ang = Math.atan2(b.x - a.x, a.y - b.y) * 180 / Math.PI;
+    G.set(E.ship, { x: a.x - geo.W / 2, y: a.y - geo.g, rotation: p < 0.004 ? 0 : ang });
+    E.line.style.strokeDashoffset = String(geo.len * (1 - p));
+    E.alt.textContent = Math.round(408 * Math.pow(p, 1.25)) + ' km';
+    E.vel.textContent = (7.8 * p).toFixed(1) + ' km/s';
+    E.fuel.textContent = Math.round(100 - 39 * p) + '%';
+  }
+
+  function reset() {
+    if (tl) { tl.kill(); tl = null; }
+    if (G) G.set([E.ship, D.ship], { clearProps: 'transform' });
+    pad.dataset.state = 'ready';
+    pad.classList.remove('static');
+    E.bay.classList.remove('orbit');
+    D.bay.classList.remove('flameout', 'failed');
+    setTag(E.tag, 'GO', 'tag-go');
+    setTag(D.tag, 'NO-GO', 'tag-bad');
+    tele.forEach((n, i) => setVal(n, START.tele[i]));
+    log.innerHTML = START.log;
+    cd.textContent = START.cd;
+    cd.classList.remove('hot');
+    btn.textContent = 'Launch';
+    btn.disabled = false;
+    if (geo) E.line.style.strokeDashoffset = String(geo.len);
+    ran = false;
+  }
+
+  const LOG = [
+    ['T-00:03', 'Countdown shuru. Sab systems check.'],
+    ['T-00:02', 'Doctor-1: fuel check… “gas hai”.', true],
+    ['T-00:01', 'Engineer-1: ignition sequence start.'],
+    ['T+00:00', 'Liftoff! Dono ek saath.'],
+    ['T+00:01', 'Doctor-1: engine cough. “Gas hai.”', true],
+    ['T+00:01', 'Engineer-1: max Q passed. Ctrl+S ho gaya.'],
+    ['T+00:02', 'Doctor-1: fuel mix prescription se bana tha. Koi padh nahi paaya.', true],
+    ['T+00:02', 'Doctor-1: flameout. Second opinion requested.', true],
+    ['T+00:03', 'Doctor-1: MISSION FAILED. Root cause: “dekhte hain”.', true],
+    ['T+00:04', 'Engineer-1: orbit reached. 408 km. Chai break.'],
+    ['T+00:05', 'Houston: “Humare paas ek doctor hai.”'],
+  ];
+  function finish() {
+    tl = null;
+    ran = true;
+    pad.dataset.state = 'done';
+    cd.textContent = 'Mission complete · 1 / 2';
+    cd.classList.remove('hot');
+    setVal(D.alt, '0 m');
+    setVal(D.vel, '0 m/s');
+    btn.textContent = 'Phir launch karo';
+    btn.disabled = false;
+  }
+  function crash() {
+    D.bay.classList.add('failed');
+    setTag(D.tag, 'Failed', 'tag-dead');
+    setVal(D.comms, 'Lost', 'bad');
+    poke(8); burst(8);
+    say('Doctor-1 crash ho gaya. BP orbit mein.', 3200);
+  }
+  function orbit() {
+    E.bay.classList.add('orbit');
+    setTag(E.tag, 'In orbit', 'tag-done');
+    setVal(E.comms, 'Chai break', 'good');
+  }
+
+  /* Reduced motion or no GSAP: show the outcome straight away */
+  function finalState() {
+    geo = measure();
+    pad.classList.add('static');
+    D.bay.classList.add('flameout');
+    E.line.style.strokeDashoffset = '0';
+    setVal(E.alt, '408 km'); setVal(E.vel, '7.8 km/s'); setVal(E.fuel, '61%');
+    setVal(D.fuel, 'Gas hai', 'bad');
+    log.innerHTML = START.log;
+    LOG.forEach(([t, text, bad]) => line(t, text, bad));
+    orbit(); crash(); finish();
+  }
+
+  function launch() {
+    if (tl) return;
+    geo = measure();
+    pad.dataset.state = 'countdown';
+    btn.disabled = true;
+    log.innerHTML = START.log;
+    cd.classList.add('hot');
+    const T0 = 2.4, st = { p: 0 };
+    let lastAlt = 0, lastT = 0;
+    const L = (i) => () => line(LOG[i][0], LOG[i][1], LOG[i][2]);
+    tl = G.timeline({ onComplete: finish });
+    tl.call(() => { cd.textContent = 'T-00:03'; L(0)(); }, null, 0)
+      .call(() => { cd.textContent = 'T-00:02'; L(1)(); setVal(D.fuel, 'Gas hai', 'bad'); }, null, 0.8)
+      .call(() => { cd.textContent = 'T-00:01'; L(2)(); }, null, 1.6)
+      .call(() => {
+        cd.textContent = 'T+00:00 · Liftoff';
+        pad.dataset.state = 'launch';
+        setTag(E.tag, 'Ascent', 'tag-go');
+        setTag(D.tag, 'Ascent?', 'tag-bad');
+        L(3)(); burst(4);
+      }, null, T0)
+      .to(st, { p: 1, duration: 4.2, ease: 'power2.in', onUpdate: () => setEng(st.p) }, T0)
+      .to(D.ship, {
+        keyframes: [
+          { x: 0, y: -10, rotation: -3, duration: 0.35, ease: 'power1.out' },
+          { x: 5, y: -46, rotation: 6, duration: 0.7, ease: 'sine.inOut' },
+          { x: 2, y: -64, rotation: -9, duration: 0.5, ease: 'sine.inOut' },
+          { x: 12, y: -58, rotation: 18, duration: 0.45, ease: 'sine.inOut' },
+          { x: 24, y: -22, rotation: 52, duration: 0.6, ease: 'power2.in' },
+          { x: 30, y: 0, rotation: 86, duration: 0.3, ease: 'power3.in' },
+          { x: 31, y: -7, rotation: 90, duration: 0.15, ease: 'power1.out' },
+          { x: 30, y: 0, rotation: 92, duration: 0.25, ease: 'bounce.out' },
+        ],
+        onUpdate() {
+          const now = performance.now();
+          const alt = Math.max(0, (-G.getProperty(D.ship, 'y') / 64) * 12);
+          if (lastT) {
+            const v = Math.round((alt - lastAlt) / Math.max(0.016, (now - lastT) / 1000));
+            D.vel.textContent = (v > 0 ? '+' : '') + v + ' m/s';
+          }
+          lastAlt = alt; lastT = now;
+          D.alt.textContent = alt.toFixed(1) + ' m';
+        },
+      }, T0)
+      .call(L(4), null, T0 + 0.7)
+      .call(L(5), null, T0 + 1.3)
+      .call(L(6), null, T0 + 1.6)
+      .call(() => { D.bay.classList.add('flameout'); setTag(D.tag, 'Flameout', 'tag-bad'); setVal(D.comms, 'Signal weak', 'bad'); L(7)(); }, null, T0 + 2.0)
+      .call(() => { crash(); L(8)(); }, null, T0 + 2.9)
+      .call(() => { orbit(); L(9)(); }, null, T0 + 4.2)
+      .call(() => { L(10)(); toast('Engineer-1 orbit mein. Doctor-1 “dekhte hain” mein.'); }, null, T0 + 4.9);
+  }
+
+  btn.addEventListener('click', () => {
+    if (tl) return;
+    if (!animated) { if (ran) reset(); else finalState(); return; }
+    if (ran) reset();
+    launch();
+  });
+  window.addEventListener('resize', () => {
+    if (tl || !ran) return;
+    geo = measure();
+    E.line.style.strokeDashoffset = '0';
+  });
+  /* Launch once on its own the first time the pad comes into view */
+  if (animated && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      io.disconnect();
+      setTimeout(() => { if (!tl && !ran) launch(); }, 400);
+    }, { threshold: 0.45 });
+    io.observe(pad);
+  }
+})();
+</script>
+<script>
+/* Motion: preloader, hero intro, split-text reveals, scroll-scrubbed 3D (services, the pinned ring, memes, packages,
+   big lines, hero and footer), counters, marquee speed, nav behaviour, scrollspy, smooth anchors, cursor ring,
+   magnetic buttons, card tilt, hero spotlight and click sparks.
+   Without GSAP, or with reduced motion, the page stays complete and static. */
+(() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const R = window.Rage || {};
+  const poke = R.poke || (() => {}), say = R.say || (() => {});
+  const reduce = typeof window.EMC_REDUCE === 'boolean' ? window.EMC_REDUCE : window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const G = window.gsap, ST = window.ScrollTrigger;
+  const anim = !!(G && ST) && !reduce;
+  const late = performance.now() > 3300;
+  if (anim) { G.registerPlugin(ST); ST.config({ ignoreMobileResize: true }); }
+
+  /* ---------- Split text into words (and the hero into letters) ---------- */
+  function split(el, letters) {
+    const label = el.textContent.replace(/\s+/g, ' ').trim();
+    const walk = (node, chars) => {
+      [...node.childNodes].forEach((n) => {
+        if (n.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach((p) => {
+            if (!p) return;
+            if (/^\s+$/.test(p)) { frag.append(' '); return; }
+            const w = document.createElement('span'); w.className = 'w';
+            const wi = document.createElement('span'); wi.className = 'wi';
+            if (chars) [...p].forEach((ch) => { const c = document.createElement('span'); c.className = 'c'; c.textContent = ch; wi.append(c); });
+            else wi.textContent = p;
+            w.append(wi); frag.append(w);
+          });
+          n.replaceWith(frag);
+        } else if (n.nodeType === 1) walk(n, chars && n.tagName !== 'EM');
+      });
+    };
+    walk(el, letters);
+    if (letters) {
+      const sr = document.createElement('span'); sr.className = 'sr'; sr.textContent = label;
+      const vis = document.createElement('span'); vis.setAttribute('aria-hidden', 'true');
+      vis.append(...el.childNodes);
+      el.append(sr, vis);
+    }
+    el.classList.add('split');
+  }
+
+  /* ---------- Preloader, then the hero intro ---------- */
+  const pre = $('#pre');
+  const heroTitle = $('.hero-title');
+  if (anim && heroTitle && !late) split(heroTitle, true);
+  function heroIntro() {
+    if (!anim) return;
+    G.timeline({ defaults: { ease: 'expo.out' } })
+      .from('.nav-in > *', { y: -24, autoAlpha: 0, duration: 0.9, stagger: 0.07 }, 0)
+      .from('.hero-kicker', { y: 18, autoAlpha: 0, duration: 0.9 }, 0.1)
+      .from('.hero-title .c', { yPercent: 70, rotateX: -100, autoAlpha: 0, transformPerspective: 600, transformOrigin: '50% 100%', duration: 1.15, stagger: 0.018 }, 0.2)
+      .from('.hero-title em .wi', { scale: 1.5, autoAlpha: 0, filter: 'blur(14px)', duration: 1.3, stagger: 0.18, clearProps: 'filter' }, 0.55)
+      .from('.hero-sub', { y: 26, autoAlpha: 0, duration: 1 }, 0.75)
+      .from('.hero-status > *', { y: 16, autoAlpha: 0, duration: 0.8, stagger: 0.08 }, 0.8)
+      .from('.hero-cta > *', { y: 26, autoAlpha: 0, duration: 0.9, stagger: 0.1 }, 0.85)
+      .from('.hero-notes span, .scroll-cue', { autoAlpha: 0, duration: 1.2, stagger: 0.1 }, 1.1);
+  }
+  let introStarted = false;
+  const startIntro = () => { if (introStarted) return; introStarted = true; heroIntro(); };
+  if (!pre) { if (!late) startIntro(); }
+  else if (!anim || late) pre.remove();
+  else {
+    const preN = $('#preN');
+    const tick = () => {
+      const q = Math.min(1, performance.now() / 1250);
+      if (preN) preN.textContent = q < 1 ? 'T-' + (3 - Math.min(2, Math.floor(q * 3))) : 'LIFTOFF';
+      if (q < 1) { requestAnimationFrame(tick); return; }
+      if (getComputedStyle(pre).visibility === 'hidden') { pre.remove(); return; }
+      pre.classList.add('done');
+      setTimeout(startIntro, 260);
+      setTimeout(() => pre.remove(), 1000);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  /* ---------- Scroll-driven reveals and 3D ---------- */
+  if (anim) {
+    const once = (trigger, start) => ({ trigger, start: start || 'top 88%', once: true });
+
+    G.set('.hero-in', { transformPerspective: 1200, transformOrigin: '50% 0%' });
+    G.to('.hero-in', { yPercent: -14, rotateX: 14, autoAlpha: 0.15, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+    $$('.sec-title').forEach((h) => {
+      split(h, false);
+      G.from($$('.wi', h), { yPercent: 115, rotate: 3, duration: 1.15, ease: 'expo.out', stagger: 0.055, scrollTrigger: once(h) });
+    });
+    $$('.sec-head .kicker, .sec-sub, .mfilter, .pkg-top, .marquee-k').forEach((el) => {
+      G.from(el, { y: 22, autoAlpha: 0, duration: 1, ease: 'expo.out', scrollTrigger: once(el, 'top 92%') });
+    });
+
+    G.from('.stat', { y: 40, autoAlpha: 0, duration: 1, ease: 'expo.out', stagger: 0.1, scrollTrigger: once('.stats') });
+    $$('.stat-n[data-to]').forEach((el) => {
+      const o = { v: Number(el.dataset.from) }, to = Number(el.dataset.to), suf = el.dataset.suffix || '';
+      const fmt = () => { el.textContent = Math.round(o.v).toLocaleString('en-IN') + suf; };
+      fmt();
+      G.to(o, { v: to, duration: 2, ease: 'power3.out', onUpdate: fmt, scrollTrigger: once(el, 'top 92%') });
+    });
+    const inf = $('.stat-inf .stat-n');
+    if (inf) {
+      const e8 = $('.inf-8', inf), sym = $('.inf-sym', inf);
+      G.set(e8, { autoAlpha: 1 });
+      G.set(sym, { autoAlpha: 0 });
+      G.timeline({ delay: 0.5, scrollTrigger: once(inf, 'top 92%') })
+        .to(e8, { rotate: 90, duration: 1.3, ease: 'expo.inOut' })
+        .to(e8, { autoAlpha: 0, duration: 0.35 }, '-=0.2')
+        .to(sym, { autoAlpha: 1, duration: 0.45 }, '<');
+    }
+
+    $$('.svc').forEach((s, i) => {
+      G.set(s, { transformPerspective: 1000 });
+      G.fromTo(s, { rotateY: i % 2 ? 32 : -32, rotateX: 18, z: -240, y: 80, autoAlpha: 0.15 },
+        { rotateY: 0, rotateX: 0, z: 0, y: 0, autoAlpha: 1, ease: 'power2.out', scrollTrigger: { trigger: s, start: 'top 98%', end: 'top 62%', scrub: 1 } });
+    });
+
+    const rows = $$('.bl-row');
+    if (rows.length) {
+      const bl = { trigger: '.bigline', start: 'top bottom', end: 'bottom top', scrub: 0.5 };
+      G.fromTo(rows[0], { xPercent: 0 }, { xPercent: -22, ease: 'none', scrollTrigger: bl });
+      if (rows[1]) G.fromTo(rows[1], { xPercent: -22 }, { xPercent: 0, ease: 'none', scrollTrigger: { ...bl } });
+    }
+
+    /* The pinned ring: "Engineers doctors se superior kyun hain" */
+    const ring = $('#ring'), stage = $('.why-stage');
+    if (ring && stage) {
+      const cards = $$('.rc', ring), N = cards.length, step = 360 / N;
+      const dots = $$('.ring-dots i'), now = $('#ringNow');
+      const LINES = ['', 'Undo button pe ego hurt hua.', '4 saal wala point dil pe laga.', 'Seismograph bola. BP +10.', 'Machines wala sach kadwa hai.', 'WFH sun ke jealousy detect hui.', '“Gas hai” pe pakde gaye.'];
+      const seen = new Set([0]);
+      let front = -1;
+      cards.forEach((c, i) => c.style.setProperty('--i', String(i)));
+      const size = () => {
+        const cw = Math.round(Math.min(330, Math.max(230, window.innerWidth * 0.24)));
+        const ch = Math.round(Math.min(270, Math.max(196, window.innerHeight * 0.3)));
+        ring.style.setProperty('--cw', cw + 'px');
+        ring.style.setProperty('--ch', ch + 'px');
+        ring.style.setProperty('--R', Math.round(cw / 2 / Math.tan(Math.PI / N) + 36) + 'px');
+      };
+      const setFront = (idx) => {
+        if (idx === front) return;
+        front = idx;
+        cards.forEach((c, i) => c.classList.toggle('front', i === idx));
+        dots.forEach((d, i) => d.classList.toggle('on', i === idx));
+        if (now) now.textContent = String(idx + 1).padStart(2, '0');
+        if (!seen.has(idx)) { seen.add(idx); poke(2.2); if (LINES[idx]) say(LINES[idx], 2200); }
+      };
+      size();
+      ring.style.setProperty('--a', '0deg');
+      ring.style.setProperty('--tilt', '8deg');
+      ring.classList.add('is-3d');
+      setFront(0);
+      ST.addEventListener('refreshInit', size);
+      G.to(ring, {
+        '--a': -(N - 1) * step + 'deg', '--tilt': '-6deg', ease: 'none',
+        scrollTrigger: { trigger: stage, pin: true, start: 'top top', end: () => '+=' + Math.round(window.innerHeight * (N - 1) * (window.innerWidth < 700 ? 0.45 : 0.7)), scrub: 1, invalidateOnRefresh: true },
+        onUpdate() { setFront(Math.round(this.progress() * (N - 1))); },
+      });
+    }
+
+    $$('.meme').forEach((m) => {
+      G.set(m, { transformPerspective: 1100, transformOrigin: '50% 100%' });
+      G.fromTo(m, { rotateX: 26, y: 100, autoAlpha: 0.2 }, { rotateX: 0, y: 0, autoAlpha: 1, ease: 'power2.out', scrollTrigger: { trigger: m, start: 'top 100%', end: 'top 70%', scrub: 0.8 } });
+    });
+    window.addEventListener('memes:filter', () => ST.refresh());
+
+    G.set('.bay', { transformPerspective: 1000 });
+    G.from('.bay', { y: 60, rotateX: 14, autoAlpha: 0, duration: 1.1, ease: 'expo.out', stagger: 0.12, scrollTrigger: once('.pad', 'top 88%') });
+    G.from('.pad-ctl, .mlog', { y: 30, autoAlpha: 0, duration: 0.9, ease: 'expo.out', stagger: 0.1, scrollTrigger: once('.pad-ctl', 'top 95%') });
+    G.from('.chat, .roast', { y: 60, autoAlpha: 0, duration: 1.1, ease: 'expo.out', stagger: 0.12, scrollTrigger: once('.bahas', 'top 85%') });
+    G.set('.plan', { transformPerspective: 1000 });
+    G.from('.plan', { y: 70, rotateX: 16, autoAlpha: 0, duration: 1.1, ease: 'expo.out', stagger: 0.12, scrollTrigger: once('.plans', 'top 85%') });
+    G.from('.appeal-form, .verdict', { y: 50, autoAlpha: 0, duration: 1.1, ease: 'expo.out', stagger: 0.15, scrollTrigger: once('.appeal', 'top 80%') });
+    G.fromTo('.foot-big', { yPercent: 35, scale: 0.92, autoAlpha: 0.2 }, { yPercent: 0, scale: 1, autoAlpha: 1, ease: 'power2.out', scrollTrigger: { trigger: '.foot', start: 'top 95%', end: 'top 35%', scrub: 1 } });
+    G.from('.tblock div', { y: 16, autoAlpha: 0, duration: 0.7, stagger: 0.05, ease: 'power2.out', scrollTrigger: once('.tblock', 'top 92%') });
+
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => ST.refresh());
+    window.addEventListener('load', () => ST.refresh());
+  }
+
+  /* ---------- Marquee: speeds up with scroll and follows its direction ---------- */
+  if (!reduce) {
+    const anims = $$('.mq-track').map((t) => (t.getAnimations ? t.getAnimations()[0] : null)).filter(Boolean);
+    if (anims.length) {
+      let lastY = window.scrollY, delta = 0, dir = 1, rate = 1;
+      window.addEventListener('scroll', () => { const y = window.scrollY; delta += y - lastY; lastY = y; }, { passive: true });
+      const step = () => {
+        if (Math.abs(delta) > 2) dir = delta > 0 ? 1 : -1;
+        const goal = dir * (1 + Math.min(6, Math.abs(delta) * 0.12));
+        rate += (goal - rate) * 0.08;
+        delta = 0;
+        anims.forEach((a) => { if (Math.abs(a.playbackRate - rate) > 0.01) a.playbackRate = rate; });
+        requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+  }
+
+  /* ---------- Nav: solid after the top, hides on the way down, scrollspy ---------- */
+  const nav = $('#nav');
+  if (nav) {
+    let lastNY = window.scrollY;
+    const onNav = () => {
+      const y = window.scrollY;
+      nav.classList.toggle('solid', y > 30);
+      if (Math.abs(y - lastNY) > 6) { nav.classList.toggle('hide', y > lastNY && y > 480); lastNY = y; }
+    };
+    window.addEventListener('scroll', onNav, { passive: true });
+    nav.addEventListener('focusin', () => nav.classList.remove('hide'));
+    onNav();
+  }
+  const links = $$('.nav-links a');
+  if (links.length && 'IntersectionObserver' in window) {
+    const byId = new Map(links.map((a) => [a.getAttribute('href').slice(1), a]));
+    const spy = new IntersectionObserver((es) => {
+      es.forEach((e) => { if (e.isIntersecting) links.forEach((a) => a.classList.toggle('on', a === byId.get(e.target.id))); });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    ['top', ...byId.keys(), 'appeal'].forEach((id) => { const s = document.getElementById(id); if (s) spy.observe(s); });
+  }
+
+  /* ---------- Smooth in-page links ---------- */
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a || e.defaultPrevented) return;
+    const id = a.getAttribute('href').slice(1);
+    const t = id && document.getElementById(id);
+    if (!t) return;
+    e.preventDefault();
+    const offset = id === 'why' || !nav ? 0 : nav.offsetHeight - 1;
+    const y = id === 'top' ? 0 : Math.max(0, t.getBoundingClientRect().top + window.scrollY - offset);
+    window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+    if (!t.hasAttribute('tabindex')) t.setAttribute('tabindex', '-1');
+    t.focus({ preventScroll: true });
+  });
+
+  /* ---------- Pointer niceties (mouse only) ---------- */
+  if (fine && !reduce) {
+    const cur = $('#cursor'), lab = $('#cursorLabel');
+    if (cur && lab) {
+      let tx = -100, ty = -100, cx = -100, cy = -100, on = false;
+      window.addEventListener('pointermove', (e) => {
+        if (e.pointerType !== 'mouse') return;
+        tx = e.clientX; ty = e.clientY;
+        if (!on) { on = true; cx = tx; cy = ty; cur.classList.add('on'); }
+      }, { passive: true });
+      document.documentElement.addEventListener('mouseleave', () => { on = false; cur.classList.remove('on'); });
+      document.addEventListener('pointerover', (e) => {
+        const t = e.target;
+        if (!t || !t.closest) return;
+        const lb = t.closest('[data-cursor]'), act = t.closest('a, button, label, .chip'), txt = t.closest('textarea, input');
+        cur.classList.toggle('big', !!lb);
+        cur.classList.toggle('hover', !lb && !!act);
+        cur.classList.toggle('text', !!txt);
+        lab.textContent = lb ? lb.dataset.cursor : '';
+      });
+      window.addEventListener('pointerdown', () => cur.classList.add('down'));
+      window.addEventListener('pointerup', () => cur.classList.remove('down'));
+      const loop = () => {
+        cx += (tx - cx) * 0.22; cy += (ty - cy) * 0.22;
+        cur.style.transform = `translate3d(${cx.toFixed(1)}px,${cy.toFixed(1)}px,0)`;
+        requestAnimationFrame(loop);
+      };
+      requestAnimationFrame(loop);
+    }
+
+    if (G) $$('[data-magnetic]').forEach((el) => {
+      const s = parseFloat(el.dataset.magnetic) || 0.3;
+      const xTo = G.quickTo(el, 'x', { duration: 0.6, ease: 'elastic.out(1, 0.45)' });
+      const yTo = G.quickTo(el, 'y', { duration: 0.6, ease: 'elastic.out(1, 0.45)' });
+      el.addEventListener('pointermove', (e) => {
+        const r = el.getBoundingClientRect();
+        xTo((e.clientX - (r.left + r.width / 2)) * s);
+        yTo((e.clientY - (r.top + r.height / 2)) * s);
+      });
+      el.addEventListener('pointerleave', () => { xTo(0); yTo(0); });
+    });
+
+    $$('.svc').forEach((el) => {
+      const tilt = $('.svc-tilt', el);
+      if (!tilt) return;
+      el.addEventListener('pointermove', (e) => {
+        const r = el.getBoundingClientRect(), px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+        el.classList.add('tilting');
+        tilt.style.setProperty('--ry', ((px - 0.5) * 18).toFixed(2) + 'deg');
+        tilt.style.setProperty('--rx', ((0.5 - py) * 14).toFixed(2) + 'deg');
+        tilt.style.setProperty('--gx', (px * 100).toFixed(1) + '%');
+        tilt.style.setProperty('--gy', (py * 100).toFixed(1) + '%');
+      });
+      el.addEventListener('pointerleave', () => {
+        el.classList.remove('tilting');
+        tilt.style.setProperty('--rx', '0deg');
+        tilt.style.setProperty('--ry', '0deg');
+      });
+    });
+
+    const heroEl = $('.hero');
+    if (heroEl) heroEl.addEventListener('pointermove', (e) => {
+      const r = heroEl.getBoundingClientRect();
+      heroEl.style.setProperty('--sx', Math.round(e.clientX - r.left) + 'px');
+      heroEl.style.setProperty('--sy', Math.round(e.clientY - r.top) + 'px');
+    });
+  }
+
+  /* Click sparks: any mouse click, or a tap on a button or link */
+  if (!reduce) document.addEventListener('pointerdown', (e) => {
+    if (e.pointerType !== 'mouse' && !(e.target.closest && e.target.closest('button, a'))) return;
+    const s = document.createElement('span');
+    s.className = 'spark';
+    s.style.left = e.clientX + 'px';
+    s.style.top = e.clientY + 'px';
+    for (let k = 0; k < 8; k++) { const i = document.createElement('i'); i.style.setProperty('--a', k * 45 + 'deg'); s.append(i); }
+    document.body.append(s);
+    setTimeout(() => s.remove(), 650);
+  }, { passive: true });
+})();
+</script>
+
+</body>
+</html>
