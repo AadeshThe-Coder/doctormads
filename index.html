@@ -267,7 +267,11 @@ main{position:relative;z-index:5}
 .svc[aria-pressed="true"] .svc-in{transform:rotateY(180deg)}
 .svc-face{grid-area:1/1;display:flex;flex-direction:column;gap:12px;padding:26px 24px 22px;border:1px solid var(--line-2);border-radius:16px;
   background:#FFFFFF;box-shadow:0 14px 40px rgba(212,0,94,.07);-webkit-backface-visibility:hidden;backface-visibility:hidden;transition:border-color .3s,box-shadow .3s}
-.svc-back{transform:rotateY(180deg);justify-content:center;border-color:var(--line-3);background:linear-gradient(160deg,#FFF0F6,#FFE3EE)}
+/* The faces sit 1px apart in depth so their edges never fight, and once a flip settles the face pointing
+   away is hidden outright (features.js adds .settled), so no hairline of it can show around the other. */
+.svc-front{transform:translateZ(1px)}
+.svc-back{transform:rotateY(180deg) translateZ(1px);justify-content:center;border-color:var(--line-3);background:linear-gradient(160deg,#FFF0F6,#FFE3EE)}
+.svc.settled[aria-pressed="false"] .svc-back,.svc.settled[aria-pressed="true"] .svc-front{visibility:hidden}
 @media (hover: hover){ .svc:hover .svc-face{border-color:var(--line-3);box-shadow:var(--shadow)} .svc:hover .svc-hint{color:var(--pink-lo)} }
 .svc-ic{width:42px;height:42px;padding:8px;border-radius:12px;background:var(--pink-50);fill:none;stroke:var(--pink-lo);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .svc-t{margin-top:auto;font:700 clamp(1.05rem,1.6vw,1.3rem)/1.2 var(--f-display);letter-spacing:-.02em;color:var(--ink)}
@@ -275,7 +279,7 @@ main{position:relative;z-index:5}
 .svc-hint{margin-top:4px;font:600 11px/1 var(--f-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim);transition:color .3s}
 .svc-k{font:600 11px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--pink-lo)}
 .svc-q{font:700 clamp(1.15rem,1.8vw,1.5rem)/1.25 var(--f-display);letter-spacing:-.02em;color:var(--ink);overflow-wrap:anywhere}
-.svc-glare{position:absolute;inset:0;border-radius:16px;pointer-events:none;opacity:0;transition:opacity .3s;
+.svc-glare{position:absolute;inset:0;border-radius:16px;pointer-events:none;opacity:0;transform:translateZ(2px);transition:opacity .3s;
   background:radial-gradient(420px circle at var(--gx,50%) var(--gy,50%),rgba(255,46,126,.12),transparent 45%)}
 .svc.tilting .svc-glare{opacity:1}
 
@@ -1827,12 +1831,20 @@ main{position:relative;z-index:5}
     if (wide.addEventListener) wide.addEventListener('change', () => { if (wide.matches) setMenu(false); });
   }
 
-  /* ---------- Services: tap to flip ---------- */
-  $$('.svc').forEach((b) => b.addEventListener('click', () => {
-    const on = b.getAttribute('aria-pressed') !== 'true';
-    b.setAttribute('aria-pressed', String(on));
-    if (on) { poke(1.2); burst(2); }
-  }));
+  /* ---------- Services: tap to flip. While a card turns both faces render; once it settles, the face
+     pointing away is hidden (.settled) so its edge can't show as a hairline. ---------- */
+  $$('.svc').forEach((b) => {
+    const inner = $('.svc-in', b);
+    b.classList.add('settled');
+    if (inner) inner.addEventListener('transitionend', (e) => { if (e.target === inner && e.propertyName === 'transform') b.classList.add('settled'); });
+    b.addEventListener('click', () => {
+      const on = b.getAttribute('aria-pressed') !== 'true';
+      b.classList.remove('settled');
+      b.setAttribute('aria-pressed', String(on));
+      if (!inner || reduce) b.classList.add('settled');
+      if (on) { poke(1.2); burst(2); }
+    });
+  });
 
   /* ---------- Memes: filters, pause off-screen, laughs, draw lengths ---------- */
   const chips = $$('.chip'), memes = $$('.meme');
